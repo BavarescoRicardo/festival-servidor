@@ -15,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 
 @RestController
-@RequestMapping("/api/evento")
+@RequestMapping("/api/evento/auth")
 @RequiredArgsConstructor
 public class UsuarioController {
 
