@@ -6,6 +6,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.seguranca.AuthenticationRequest;
+import api.nxmu.festival.seguranca.AuthenticationResponse;
+import api.nxmu.festival.seguranca.AuthenticationService;
+import api.nxmu.festival.seguranca.RegisterRequest;
 import lombok.RequiredArgsConstructor;
 
 import org.springframework.http.ResponseEntity;
@@ -14,6 +18,22 @@ import org.springframework.http.ResponseEntity;
 @RequestMapping("/api/evento")
 @RequiredArgsConstructor
 public class UsuarioController {
+
+    private final AuthenticationService service;
+
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(
+        @RequestBody RegisterRequest request
+    ) {
+      return ResponseEntity.ok(service.register(request));
+    }
+    @PostMapping("/authenticate")
+    public ResponseEntity<AuthenticationResponse> authenticate(
+        @RequestBody AuthenticationRequest request
+    ) {
+      return ResponseEntity.ok(service.authenticate(request));
+    }
+    
 
     @RequestMapping(value = "/testaapi", method =  RequestMethod.GET)
 	public ResponseEntity<?> testeApi()
@@ -25,19 +45,4 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());
         }               
 	}
-
-    // @PostMapping("/register")
-    // public ResponseEntity<AuthenticationResponse> register (
-    //     @RequestBody RegisterRequest request        
-    // ){
-
-    // }
-
-    // @PostMapping("/authenticate")
-    // public ResponseEntity<AuthenticationResponse> register (
-    //     @RequestBody AuthenticateRequest request        
-    // ){
-
-    // }
-
 }
