@@ -23,7 +23,7 @@ public class AuthenticationService {
         .conta(request.getConta())
         .nome(request.getNome())
         .email(request.getEmail())
-        .senha(passwordEncoder.encode(request.getPassword()))
+        .senha(passwordEncoder.encode(request.getSenha()))
         .role(Role.USER)
         .build();
     repository.save(user);
