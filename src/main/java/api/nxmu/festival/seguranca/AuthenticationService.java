@@ -23,7 +23,7 @@ public class AuthenticationService {
         .nomeArtistico(request.getNomeArtistico())
         .nomeResponsavel(request.getNomeResponsavel())
         .email(request.getEmail())
-        .senha(passwordEncoder.encode(request.getSenha()))
+        .senha(passwordEncoder.encode("asd"))
         .role(Role.USER)
         .build();
     repository.save(user);
