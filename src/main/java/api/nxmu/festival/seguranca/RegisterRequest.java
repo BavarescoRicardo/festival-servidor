@@ -11,9 +11,24 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class RegisterRequest {
 
-  // ajustar para modelo de inscricao -- isso eh um dto
-  private String conta;
-  private String nome;
-  private String email;
-  private String senha;
+      private String nomeArtistico;
+      private String nomeResponsavel;
+      private String genero;
+      private String senha;
+      private String nascimento;
+      private String documentorg;
+      private String email;
+      private String necessidade;
+      private String descrinescessidade;
+      private String endereco;
+      private String cidade;
+      private String estado;
+      private String cep;
+      private String telefone;
+      private String musica;
+      private String gravacao;
+      private String tom;
+      private String categoria;
+      private String participante;
+
 }

@@ -16,71 +16,37 @@ import jakarta.persistence.Id;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 @Data
 @Builder
 @AllArgsConstructor
 @Entity
+@Getter
+@Setter
 public class Usuario implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
-    private String conta;
-    private String nome;
-    private String email;
+    private String nomeArtistico;
+    private String nomeResponsavel;
+    private String genero;
     private String senha;
-
-    public Usuario(Integer id, String conta, String nome, String email, String senha) {
-        this.id = id;
-        this.conta = conta;
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
+    private String nascimento;
+    private String documentorg;
+    private String email;
+    private String necessidade;
+    private String descrinescessidade;
+    private String musica;
+    private String gravacao;
+    private String tom;
+    private String categoria;
+    private String participante;
 
     public Usuario() {
 
-    }
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getConta() {
-        return conta;
-    }
-
-    public void setConta(String conta) {
-        this.conta = conta;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getSenha() {
-        return senha;
-    }
-
-    public void setSenha(String senha) {
-        this.senha = senha;
     }
 
     @Enumerated(EnumType.STRING)

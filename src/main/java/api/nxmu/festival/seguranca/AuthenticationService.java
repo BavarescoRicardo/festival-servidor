@@ -20,8 +20,8 @@ public class AuthenticationService {
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Usuario.builder()
-        .conta(request.getConta())
-        .nome(request.getNome())
+        .nomeArtistico(request.getNomeArtistico())
+        .nomeResponsavel(request.getNomeResponsavel())
         .email(request.getEmail())
         .senha(passwordEncoder.encode(request.getSenha()))
         .role(Role.USER)
