@@ -7,12 +7,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
 import api.nxmu.festival.seguranca.AuthenticationService;
 import api.nxmu.festival.seguranca.RegisterRequest;
+import api.nxmu.festival.servicos.ParticipanteServices;
 import lombok.RequiredArgsConstructor;
+import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 
 @RestController
@@ -21,7 +25,10 @@ import org.springframework.http.ResponseEntity;
 @CrossOrigin
 public class UsuarioController {
 
+    @Autowired
     private final AuthenticationService service;
+    @Autowired
+    private final ParticipanteServices participanteService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -48,4 +55,9 @@ public class UsuarioController {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());
         }               
 	}
+
+    @RequestMapping(value = "/participantes", method =  RequestMethod.GET)
+    public List<Participante> GetArtigoFiltrado(){
+        return participanteService.encontrar();
+    }    
 }
