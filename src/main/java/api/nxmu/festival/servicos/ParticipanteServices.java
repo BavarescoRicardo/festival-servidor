@@ -30,5 +30,15 @@ public class ParticipanteServices {
 
     public List<Participante> encontrar(){
         return participanteDB.findAll();
-    }    
+    }
+
+    public boolean salvar(Participante participante){
+        try {
+            this.participanteDB.save(participante);    
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+    
 }

@@ -57,7 +57,19 @@ public class UsuarioController {
 	}
 
     @RequestMapping(value = "/participantes", method =  RequestMethod.GET)
-    public List<Participante> GetArtigoFiltrado(){
+    public List<Participante> getParticipantes(){
         return participanteService.encontrar();
     }    
+
+    @RequestMapping(value = "/salvaparticipante", method =  RequestMethod.POST)
+	public boolean salvarParticipante(@RequestBody Participante participante)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno erraado no false
+        try {
+            return participanteService.salvar(participante);
+        } catch (Exception e) {
+            return false;
+        }               
+	}
+
 }
