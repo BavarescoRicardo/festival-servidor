@@ -1,9 +1,11 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.repositorio.ParticipanteRepositorio;
 
@@ -28,13 +30,34 @@ public class ParticipanteServices {
     //     }
     // }
 
-    public List<Participante> encontrar(){
-        return participanteDB.findAll();
+    public List<ParticipanteDto> encontrar(){
+        List<ParticipanteDto> listaDto = new ArrayList<ParticipanteDto>();
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Participante participante: participanteDB.findAll()) {
+            listaDto.add(new ParticipanteDto(
+                participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
+                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
+                participante.getEndereco(), participante.getCidade(), participante.getEstado(), participante.getCep(), participante.getTelefone(), 
+                participante.getMusica(), participante.getGravacao(), participante.getTom(), participante.getOpcao_categoria(), 
+                participante.getOpcao_participante())
+            );
+        }
+
+        return listaDto;
     }
 
-    public boolean salvar(Participante participante){
+    public boolean salvar(ParticipanteDto participante){
         try {
-            this.participanteDB.save(participante);    
+            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            Participante p = new Participante(
+                participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
+                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
+                participante.getEndereco(), participante.getCidade(), participante.getEstado(), participante.getCep(), participante.getTelefone(), 
+                participante.getMusica(), participante.getGravacao(), participante.getTom(), participante.getOpcao_categoria(), 
+                participante.getOpcao_participante());
+
+            this.participanteDB.save(p);    
         } catch (Exception e) {
             return false;
         }

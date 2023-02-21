@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
@@ -57,12 +58,12 @@ public class UsuarioController {
 	}
 
     @RequestMapping(value = "/participantes", method =  RequestMethod.GET)
-    public List<Participante> getParticipantes(){
+    public List<ParticipanteDto> getParticipantes(){
         return participanteService.encontrar();
     }    
 
     @RequestMapping(value = "/salvaparticipante", method =  RequestMethod.POST)
-	public boolean salvarParticipante(@RequestBody Participante participante)
+	public boolean salvarParticipante(@RequestBody ParticipanteDto participante)
     {
         //  envolver metodo em try catch retorno certo no tr retorno erraado no false
         try {
