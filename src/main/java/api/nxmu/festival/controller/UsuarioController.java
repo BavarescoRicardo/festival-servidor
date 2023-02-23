@@ -65,7 +65,7 @@ public class UsuarioController {
     @RequestMapping(value = "/salvaparticipante", method =  RequestMethod.POST)
 	public boolean salvarParticipante(@RequestBody ParticipanteDto participante)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno erraado no false
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
             return participanteService.salvar(participante);
         } catch (Exception e) {
