@@ -14,7 +14,7 @@ import api.nxmu.festival.servicos.ParticipanteServices;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/evento/auth")
+@RequestMapping("/api/evento/")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ParticipanteController {
