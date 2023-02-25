@@ -1,6 +1,6 @@
 package api.nxmu.festival.seguranca;
 
-import api.nxmu.festival.repositorio.UsuarioRepositorio;
+import api.nxmu.festival.repositorio.ContaRepositorio;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -15,11 +15,11 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 @Configuration
 public class ApplicationConfig {
     
-    public ApplicationConfig(UsuarioRepositorio repositorio) {
+    public ApplicationConfig(ContaRepositorio repositorio) {
         this.repositorio = repositorio;
 
     }
-    private final UsuarioRepositorio repositorio;
+    private final ContaRepositorio repositorio;
 
     @Bean
     public UserDetailsService userDetailsService() {

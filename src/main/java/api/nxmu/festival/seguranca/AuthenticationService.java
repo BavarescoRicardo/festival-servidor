@@ -5,25 +5,23 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import api.nxmu.festival.repositorio.UsuarioRepositorio;
+import api.nxmu.festival.repositorio.ContaRepositorio;
 import api.nxmu.festival.usuario.Role;
-import api.nxmu.festival.usuario.Usuario;
+import api.nxmu.festival.modelo.Conta;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-  private final UsuarioRepositorio repository;
+  private final ContaRepositorio repository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    var user = Usuario.builder()
-        .nomeArtistico(request.getNomeArtistico())
-        .nomeResponsavel(request.getNomeResponsavel())
+    var user = Conta.builder()
         .email(request.getEmail())
-        .senha(passwordEncoder.encode("asd"))
+        .senha(passwordEncoder.encode(request.getSenha()))
         .role(Role.USER)
         .build();
     repository.save(user);

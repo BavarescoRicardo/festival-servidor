@@ -8,7 +8,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ParticipanteDto;
-import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
 import api.nxmu.festival.seguranca.AuthenticationService;
