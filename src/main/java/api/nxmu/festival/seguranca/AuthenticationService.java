@@ -6,8 +6,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.repositorio.ContaRepositorio;
+import api.nxmu.festival.usuario.Usuario;
 import api.nxmu.festival.usuario.Role;
-import api.nxmu.festival.modelo.Conta;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -19,7 +19,7 @@ public class AuthenticationService {
   private final AuthenticationManager authenticationManager;
 
   public AuthenticationResponse register(RegisterRequest request) {
-    var user = Conta.builder()
+    var user = Usuario.builder()
         .email(request.getEmail())
         .senha(passwordEncoder.encode(request.getSenha()))
         .role(Role.USER)

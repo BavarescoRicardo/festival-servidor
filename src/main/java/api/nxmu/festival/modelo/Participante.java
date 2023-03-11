@@ -1,9 +1,13 @@
 package api.nxmu.festival.modelo;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -40,6 +44,10 @@ public class Participante {
     private long opcao_categoria;
     private long opcao_participante;
     private byte[] fotoPerfil;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
+    private List<Apresentacao> apresentacoes;
+        
     public Participante(long id, byte[] fotoPerfil) {
         this.id = id;
         this.fotoPerfil = fotoPerfil;
