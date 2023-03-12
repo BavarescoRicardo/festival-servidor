@@ -1,9 +1,12 @@
 package api.nxmu.festival.modelo;
 
 import jakarta.persistence.Entity;
+import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -23,9 +26,30 @@ public class Nota {
     private Long id;
     private double nota;
 
-    // 1 - 1 categoria 
-    // 1 - 1 participante
-    // 1 - 1 jurado
-    // 1 - 1 apresentacao
-    // 1 - 1 quesito
+    // ainda restam ligações fk    
+    // n - 1 categoria 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
+    // n - 1 participante
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "participante_id")
+    private Participante participante;
+
+    // n - 1 jurado
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "jurado_id")
+    private Jurado jurado;
+
+    // n - 1 apresentacao
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "apresentacao_id")
+    private Apresentacao apresentacao;
+
+    // n - 1 quesito
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "quesito_id")
+    private Quesito quesito;
+
 }

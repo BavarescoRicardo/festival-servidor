@@ -1,5 +1,7 @@
 package api.nxmu.festival.modelo;
 
+import java.util.List;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -7,6 +9,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -39,7 +42,10 @@ public class Apresentacao {
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
-    private Categoria categoria;     
+    private Categoria categoria;       
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "apresentacao")
+    private List<Nota> notas;     
 
     public Apresentacao(){
         
