@@ -28,11 +28,11 @@ public class EventoController {
     }    
 
     @RequestMapping(value = "/salvaevento", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody EventoDto participante)
+	public boolean salvarEvento(@RequestBody EventoDto evento)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return eventoService.salvar(participante);
+            return eventoService.salvar(evento);
         } catch (Exception e) {
             return false;
         }               
