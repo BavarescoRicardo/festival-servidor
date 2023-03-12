@@ -31,6 +31,7 @@ public class Evento {
     private Date dataInicial;
     private Date dataFinal;
     private String local;
+    private byte[] fotoEvento;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "evento")
     private List<Categoria> categorias;
