@@ -40,4 +40,11 @@ public class Evento {
     public Evento(){
 
     }
+
+    public Evento(String titulo, String descricao, Date dataInicial, Date dataFinal){
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
+    }
 }
