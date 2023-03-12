@@ -22,7 +22,7 @@ public class AuthenticationService {
     var user = Usuario.builder()
         .email(request.getEmail())
         .senha(passwordEncoder.encode(request.getSenha()))
-        .role(Role.USER)
+        .role(Role.MASTER)
         .build();
     repository.save(user);
     var jwtToken = jwtService.generateToken(user);
