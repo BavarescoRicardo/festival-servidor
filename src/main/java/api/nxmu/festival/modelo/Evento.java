@@ -30,6 +30,7 @@ public class Evento {
     private String descricao;
     private Date dataInicial;
     private Date dataFinal;
+    private String local;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "evento")
     private List<Categoria> categorias;
@@ -41,10 +42,11 @@ public class Evento {
 
     }
 
-    public Evento(String titulo, String descricao, Date dataInicial, Date dataFinal){
+    public Evento(String titulo, String descricao, Date dataInicial, Date dataFinal, String local){
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
+        this.local = local;
     }
 }

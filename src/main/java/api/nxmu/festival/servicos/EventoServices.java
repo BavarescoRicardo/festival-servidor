@@ -48,7 +48,7 @@ public class EventoServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Evento e = new Evento(
                 evento.getTitulo(), evento.getDescricao(), 
-                evento.getDataInicial(), evento.getDataFinal());
+                evento.getDataInicial(), evento.getDataFinal(), evento.getLocal());
 
             this.eventoDB.save(e);    
         } catch (Exception e) {

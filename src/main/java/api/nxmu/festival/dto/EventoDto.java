@@ -8,6 +8,7 @@ public class EventoDto {
     private String descricao;
     private Date dataInicial;
     private Date dataFinal;
+    private String local;
 
     public EventoDto(String titulo, String descricao, Date dataInicial, Date dataFinal) {
         this.titulo = titulo;
@@ -29,7 +30,7 @@ public class EventoDto {
     }
 
     public String getDescricao() {
-        return descricao;
+        return this.descricao;
     }
 
     public void setDescricao(String descricao) {
@@ -37,7 +38,7 @@ public class EventoDto {
     }
 
     public Date getDataInicial() {
-        return dataInicial;
+        return this.dataInicial;
     }
 
     public void setDataInicial(Date dataInicial) {
@@ -52,4 +53,11 @@ public class EventoDto {
         this.dataFinal = dataFinal;
     }
 
+    public String getLocal() {
+        return this.local;
+    }
+
+    public void setLocal(String local) {
+        this.local = local;
+    }    
 }
