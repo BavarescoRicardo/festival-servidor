@@ -5,7 +5,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import api.nxmu.festival.repositorio.ContaRepositorio;
+import api.nxmu.festival.repositorio.UsuarioRepositorio;
 import api.nxmu.festival.usuario.Usuario;
 import api.nxmu.festival.usuario.Role;
 import lombok.RequiredArgsConstructor;
@@ -13,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 @Service
 @RequiredArgsConstructor
 public class AuthenticationService {
-  private final ContaRepositorio repository;
+  private final UsuarioRepositorio repository;
   private final PasswordEncoder passwordEncoder;
   private final JwtService jwtService;
   private final AuthenticationManager authenticationManager;

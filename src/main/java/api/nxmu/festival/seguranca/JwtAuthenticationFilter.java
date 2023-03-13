@@ -2,6 +2,7 @@ package api.nxmu.festival.seguranca;
 
 import java.io.IOException;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.NonNull;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.*;
@@ -20,8 +21,9 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
-    private JwtService jwtService;
-    private UserDetailsService userDetailsService;    
+    @Autowired
+    private final JwtService jwtService;
+    private final UserDetailsService userDetailsService;    
 
     @Override
     protected void doFilterInternal(
@@ -38,7 +40,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
         jwtToken = authHeader.substring(7);    
         // Extrair email do JWT Token
+        userEmail = jwtService.extractUsername(jwtToken);
+        
         if (userEmail != null && SecurityContextHolder.getContext().getAuthentication() == null) {
+            // Carrega usuario pelo seu email
             UserDetails userDetails = this.userDetailsService.loadUserByUsername(userEmail);
             if (jwtService.isTokenValid(jwtToken, userDetails)) {
               UsernamePasswordAuthenticationToken authToken = new UsernamePasswordAuthenticationToken(

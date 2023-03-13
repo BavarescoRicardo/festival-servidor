@@ -1,6 +1,8 @@
 package api.nxmu.festival.seguranca;
 
-import api.nxmu.festival.repositorio.ContaRepositorio;
+import api.nxmu.festival.repositorio.UsuarioRepositorio;
+import lombok.RequiredArgsConstructor;
+
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -13,13 +15,10 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 @Configuration
+@RequiredArgsConstructor
 public class ApplicationConfig {
-    
-    public ApplicationConfig(ContaRepositorio repositorio) {
-        this.repositorio = repositorio;
 
-    }
-    private final ContaRepositorio repositorio;
+    private final UsuarioRepositorio repositorio;
 
     @Bean
     public UserDetailsService userDetailsService() {

@@ -5,7 +5,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 import api.nxmu.festival.usuario.Usuario;
 
-public interface ContaRepositorio extends JpaRepository<Usuario, Integer>{
+public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
  
     Optional<Usuario> findByEmail(String email);
 }
