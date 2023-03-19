@@ -1,6 +1,5 @@
 package api.nxmu.festival.modelo;
 
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -28,10 +27,10 @@ public class Jurado {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
-    private String titulo;
-    private String descricao;
-    private Date dataInicial;
-    private Date dataFinal;
+    private String nome;
+    private String contato;
+    private String documento;
+    private String observacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id")
@@ -40,6 +39,13 @@ public class Jurado {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jurado")
     private List<Nota> notas; 
     
+    public Jurado(String nome, String contato, String documento, String observacao) {
+        this.nome = nome;
+        this.contato = contato;
+        this.documento = documento;
+        this.observacao = observacao;
+    }
+
     public Jurado(){
         
     }

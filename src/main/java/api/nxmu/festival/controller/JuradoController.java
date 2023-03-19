@@ -9,26 +9,26 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.nxmu.festival.dto.EventoDto;
-import api.nxmu.festival.servicos.EventoServices;
+import api.nxmu.festival.dto.JuradoDto;
+import api.nxmu.festival.servicos.JuradoServices;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
-public class EventoController {
+public class JuradoController {
 
     @Autowired
-    private final EventoServices eventoService;
+    private final JuradoServices eventoService;
 
-    @RequestMapping(value = "/eventos", method =  RequestMethod.GET)
-    public List<EventoDto> getEventos(){
+    @RequestMapping(value = "/jurados", method =  RequestMethod.GET)
+    public List<JuradoDto> getEventos(){
         return eventoService.encontrar();
     }    
 
-    @RequestMapping(value = "/salvaevento", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody EventoDto evento)
+    @RequestMapping(value = "/salvajurado", method =  RequestMethod.POST)
+	public boolean salvarEvento(@RequestBody JuradoDto evento)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
