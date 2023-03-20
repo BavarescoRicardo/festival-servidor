@@ -29,7 +29,6 @@ public class Apresentacao {
     private Long id;
     private String musica;
     private String tom;
-    private String nomeartistico;
     private String gravacao;
     private int ordem;
     private int senha;
@@ -49,5 +48,25 @@ public class Apresentacao {
 
     public Apresentacao(){
         
+    }
+
+    public Apresentacao(String musica, String tom, String gravacao,
+    int individuos, Participante participante, Categoria categoria) {
+        this.musica = musica;
+        this.tom = tom;
+        this.gravacao = gravacao;
+        this.individuos = individuos;
+        this.participante = participante;
+        this.categoria = categoria;
+    }
+
+    public Apresentacao(String musica, String tom, String gravacao,
+    int individuos, long participante, long categoria) {
+        this.musica = musica;
+        this.tom = tom;
+        this.gravacao = gravacao;
+        this.individuos = individuos;
+      //  this.participante = participanteDB.findById(participante);
+      //  this.categoria = categoriaeDB.findById(categoria);
     }
 }
