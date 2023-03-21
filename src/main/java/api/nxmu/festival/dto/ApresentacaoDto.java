@@ -5,21 +5,23 @@ public class ApresentacaoDto {
     public ApresentacaoDto() {
     }
 
-    public ApresentacaoDto(String musica, String tom, String gravacao,
+    public ApresentacaoDto(String musica, String tom, String gravacao,  String autor,
     int individuos, int participante, int categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
+        this.autor = autor;
         this.individuos = individuos;
         this.participante = participante;
         this.categoria = categoria;
     }
 
-    public ApresentacaoDto(String musica, String tom, String gravacao, int ordem, int senha,
-            int individuos, int participante, int categoria) {
+    public ApresentacaoDto(String musica, String tom, String gravacao,  String autor,
+            int ordem, int senha, int individuos, int participante, int categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
+        this.autor = autor;
         this.ordem = ordem;
         this.senha = senha;
         this.individuos = individuos;
@@ -30,6 +32,8 @@ public class ApresentacaoDto {
     private String musica;
     private String tom;
     private String gravacao;
+    private String autor;
+
     private int ordem;
     private int senha;
     private int individuos;
@@ -58,6 +62,14 @@ public class ApresentacaoDto {
 
     public void setGravacao(String gravacao) {
         this.gravacao = gravacao;
+    }
+
+    public String getAutor() {
+        return autor;
+    }
+
+    public void setAutor(String autor) {
+        this.autor = autor;
     }
 
     public int getOrdem() {

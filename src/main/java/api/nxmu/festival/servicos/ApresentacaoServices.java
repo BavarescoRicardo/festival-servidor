@@ -22,7 +22,7 @@ public class ApresentacaoServices {
         for(Apresentacao apresentacao: apresentacaoDB.findAll()) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getMusica(), apresentacao.getTom(), 
-                apresentacao.getGravacao(), apresentacao.getIndividuos(), 
+                apresentacao.getAutor(), apresentacao.getGravacao(), apresentacao.getIndividuos(), 
                 1, 1));
         }
 
@@ -33,8 +33,8 @@ public class ApresentacaoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Apresentacao e = new Apresentacao(
-                apresentacaoDto.getMusica(), apresentacaoDto.getTom(), 
-                apresentacaoDto.getGravacao(), apresentacaoDto.getIndividuos(), 
+                apresentacaoDto.getMusica(), apresentacaoDto.getTom(), apresentacaoDto.getGravacao(), 
+                apresentacaoDto.getAutor(), apresentacaoDto.getIndividuos(), 
                 apresentacaoDto.getParticipante(), apresentacaoDto.getCategoria());
 
             this.apresentacaoDB.save(e);    

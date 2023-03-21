@@ -30,6 +30,7 @@ public class Apresentacao {
     private String musica;
     private String tom;
     private String gravacao;
+    private String autor;
     private int ordem;
     private int senha;
     private int individuos;
@@ -50,21 +51,23 @@ public class Apresentacao {
         
     }
 
-    public Apresentacao(String musica, String tom, String gravacao,
+    public Apresentacao(String musica, String tom, String gravacao, String autor,
     int individuos, Participante participante, Categoria categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
+        this.autor = autor;
         this.individuos = individuos;
         this.participante = participante;
         this.categoria = categoria;
     }
 
-    public Apresentacao(String musica, String tom, String gravacao,
+    public Apresentacao(String musica, String tom, String gravacao, String autor,
     int individuos, int participante, int categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
+        this.autor = autor;
         this.individuos = individuos;
       //  this.participante = participanteDB.findById(participante);
       //  this.categoria = categoriaeDB.findById(categoria);
