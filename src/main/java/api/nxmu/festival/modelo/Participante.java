@@ -26,7 +26,7 @@ public class Participante {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
     private String nomeArtistico;
     private String nomeResponsavel;
     private String genero;
@@ -43,8 +43,8 @@ public class Participante {
     private String musica;
     private String gravacao;
     private String tom;
-    private long opcao_categoria;
-    private long opcao_participante;
+    private Long opcao_categoria;
+    private Long opcao_participante;
     private byte[] fotoPerfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
@@ -57,14 +57,14 @@ public class Participante {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
     private List<Nota> notas;     
         
-    public Participante(long id, byte[] fotoPerfil) {
+    public Participante(Long id, byte[] fotoPerfil) {
         this.id = id;
         this.fotoPerfil = fotoPerfil;
     }
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
             String documentorg, String email, String necessidade, String descrinescessidade, String endereco,
             String cidade, String estado, String cep, String telefone, String musica, String gravacao, String tom,
-            long opcao_categoria, long opcao_participante) {
+            Long opcao_categoria, Long opcao_participante) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -86,10 +86,10 @@ public class Participante {
     }
     public Participante() {
     }
-    public long getId() {
+    public Long getId() {
         return id;
     }
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
     public String getNomeArtistico() {
@@ -188,16 +188,16 @@ public class Participante {
     public void setTom(String tom) {
         this.tom = tom;
     }
-    public long getOpcao_categoria() {
+    public Long getOpcao_categoria() {
         return opcao_categoria;
     }
-    public void setOpcao_categoria(long opcao_categoria) {
+    public void setOpcao_categoria(Long opcao_categoria) {
         this.opcao_categoria = opcao_categoria;
     }
-    public long getOpcao_participante() {
+    public Long getOpcao_participante() {
         return opcao_participante;
     }
-    public void setOpcao_participante(long opcao_participante) {
+    public void setOpcao_participante(Long opcao_participante) {
         this.opcao_participante = opcao_participante;
     }
     public byte[] getFotoPerfil() {

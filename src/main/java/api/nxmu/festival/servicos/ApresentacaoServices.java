@@ -15,21 +15,6 @@ public class ApresentacaoServices {
     @Autowired
     private ApresentacaoRepositorio apresentacaoDB;
 
-    // public void salvarFotoForm(MultipartFile img, Authentication auth) {
-    //     try {
-    //         UserDetails userd = (UserDetails)auth.getPrincipal();
-    //         Participante participante = participanteDB.findByNomeLogin(userd.getUsername());
-            
-    //         if(participante == null){
-    //             throw new Exception("Usuario não encontrado");
-    //         }
-    //         participanteDB.setFotoPerfil(img.getBytes());
-    //         this.participanteDB.save(participante);    
-    //     } catch (Exception e) {
-    //         return;
-    //     }
-    // }
-
     public List<ApresentacaoDto> encontrar(){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
         
@@ -38,7 +23,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getMusica(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getIndividuos(), 
-                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+                1, 1));
         }
 
         return listaDto;

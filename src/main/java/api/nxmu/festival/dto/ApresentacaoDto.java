@@ -2,18 +2,21 @@ package api.nxmu.festival.dto;
 
 public class ApresentacaoDto {
 
+    public ApresentacaoDto() {
+    }
+
     public ApresentacaoDto(String musica, String tom, String gravacao,
-    int individuos, long participante, long categoria) {
-    this.musica = musica;
-    this.tom = tom;
-    this.gravacao = gravacao;
-    this.individuos = individuos;
-    this.participante = participante;
-    this.categoria = categoria;
+    int individuos, int participante, int categoria) {
+        this.musica = musica;
+        this.tom = tom;
+        this.gravacao = gravacao;
+        this.individuos = individuos;
+        this.participante = participante;
+        this.categoria = categoria;
     }
 
     public ApresentacaoDto(String musica, String tom, String gravacao, int ordem, int senha,
-            int individuos, long participante, long categoria) {
+            int individuos, int participante, int categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
@@ -30,10 +33,8 @@ public class ApresentacaoDto {
     private int ordem;
     private int senha;
     private int individuos;
-
-    private long participante;
-
-    private long categoria;
+    private int participante;
+    private int categoria;
 
     public String getMusica() {
         return musica;
@@ -83,19 +84,19 @@ public class ApresentacaoDto {
         this.individuos = individuos;
     }
 
-    public long getParticipante() {
+    public int getParticipante() {
         return participante;
     }
 
-    public void setParticipante(long participante) {
+    public void setParticipante(int participante) {
         this.participante = participante;
     }
 
-    public long getCategoria() {
+    public int getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(long categoria) {
+    public void setCategoria(int categoria) {
         this.categoria = categoria;
     }       
        
