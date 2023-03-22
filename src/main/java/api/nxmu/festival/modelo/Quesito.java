@@ -10,11 +10,13 @@ import jakarta.persistence.Id;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
-import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
-@Data
+@ToString
+@EqualsAndHashCode
 @Builder
 @AllArgsConstructor
 @Entity
@@ -30,6 +32,11 @@ public class Quesito {
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quesito")
     private List<Nota> notas;
+
+    public Quesito(String descricao, double peso) {
+        this.descricao = descricao;
+        this.peso = peso;
+    }
 
     public Quesito() {
     }     
