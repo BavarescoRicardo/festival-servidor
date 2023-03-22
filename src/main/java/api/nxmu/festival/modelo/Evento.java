@@ -1,5 +1,6 @@
 package api.nxmu.festival.modelo;
 
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
@@ -50,4 +51,13 @@ public class Evento {
         this.dataFinal = dataFinal;
         this.local = local;
     }
+
+    @Override
+    public String toString() {
+        return "Evento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataInicial=" + dataInicial
+                + ", dataFinal=" + dataFinal + ", local=" + local + ", fotoEvento=" + Arrays.toString(fotoEvento)
+                + ", categorias=" + categorias + ", jurados=" + jurados + "]";
+    }
+
+    
 }

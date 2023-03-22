@@ -1,6 +1,7 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class ApresentacaoServices {
 
     @Autowired
     private ApresentacaoRepositorio apresentacaoDB;
+
+    public Optional<Apresentacao> encontrarPorId(Long id){        
+        return apresentacaoDB.findById(id);
+    }
 
     public List<ApresentacaoDto> encontrar(){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();

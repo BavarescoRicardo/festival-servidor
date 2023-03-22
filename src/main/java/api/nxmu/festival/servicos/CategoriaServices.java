@@ -1,34 +1,24 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.CategoriaDto;
 import api.nxmu.festival.modelo.Categoria;
 import api.nxmu.festival.repositorio.CategoriaRepositorio;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class CategoriaServices {
 
-    @Autowired
-    private CategoriaRepositorio categoriaDB;
+    private final CategoriaRepositorio categoriaDB;
 
-    // public void salvarFotoForm(MultipartFile img, Authentication auth) {
-    //     try {
-    //         UserDetails userd = (UserDetails)auth.getPrincipal();
-    //         Participante participante = participanteDB.findByNomeLogin(userd.getUsername());
-            
-    //         if(participante == null){
-    //             throw new Exception("Usuario não encontrado");
-    //         }
-    //         participanteDB.setFotoPerfil(img.getBytes());
-    //         this.participanteDB.save(participante);    
-    //     } catch (Exception e) {
-    //         return;
-    //     }
-    // }
+    public Optional<Categoria> encontrarPorId(Long id){        
+        return categoriaDB.findById(id);
+    }
 
     public List<CategoriaDto> encontrar(){
         List<CategoriaDto> listaDto = new ArrayList<CategoriaDto>();

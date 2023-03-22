@@ -29,6 +29,9 @@ public class Quesito {
     private double peso;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quesito")
-    private List<Nota> notas;     
+    private List<Nota> notas;
+
+    public Quesito() {
+    }     
     
 }

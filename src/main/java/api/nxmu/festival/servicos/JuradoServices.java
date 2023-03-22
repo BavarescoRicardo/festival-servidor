@@ -1,6 +1,7 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,20 +16,9 @@ public class JuradoServices {
     @Autowired
     private JuradoRepositorio juradoDB;
 
-    // public void salvarFotoForm(MultipartFile img, Authentication auth) {
-    //     try {
-    //         UserDetails userd = (UserDetails)auth.getPrincipal();
-    //         Participante participante = participanteDB.findByNomeLogin(userd.getUsername());
-            
-    //         if(participante == null){
-    //             throw new Exception("Usuario não encontrado");
-    //         }
-    //         participanteDB.setFotoPerfil(img.getBytes());
-    //         this.participanteDB.save(participante);    
-    //     } catch (Exception e) {
-    //         return;
-    //     }
-    // }
+    public Optional<Jurado> encontrarPorId(Long id){        
+        return juradoDB.findById(id);
+    }
 
     public List<JuradoDto> encontrar(){
         List<JuradoDto> listaDto = new ArrayList<JuradoDto>();
