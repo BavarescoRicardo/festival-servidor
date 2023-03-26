@@ -26,7 +26,7 @@ public class QuesitoServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Quesito quesito: quesitoDB.findAll()) {
             listaDto.add(new QuesitoDto(
-                quesito.getDescricao(), quesito.getPeso()));
+                quesito.getId(), quesito.getDescricao(), quesito.getPeso()));
         }
 
         return listaDto;

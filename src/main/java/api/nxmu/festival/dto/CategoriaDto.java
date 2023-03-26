@@ -4,12 +4,14 @@ import java.util.Date;
 
 public class CategoriaDto {
 
+    private Long codigo;
     private String titulo;
     private String descricao;
     private Date dataInicial;
     private Date dataFinal;
 
-    public CategoriaDto(String titulo, String descricao, Date dataInicial, Date dataFinal) {
+    public CategoriaDto(Long codigo, String titulo, String descricao, Date dataInicial, Date dataFinal) {
+        this.codigo = codigo;
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;
@@ -19,6 +21,14 @@ public class CategoriaDto {
     public CategoriaDto() {
         
     }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }    
 
     public String getTitulo() {
         return titulo;

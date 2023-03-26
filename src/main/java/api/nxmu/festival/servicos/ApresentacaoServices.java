@@ -38,7 +38,7 @@ public class ApresentacaoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Apresentacao e = new Apresentacao(
-                apresentacaoDto.getCodigo(), apresentacaoDto.getMusica(), apresentacaoDto.getTom(), apresentacaoDto.getGravacao(), 
+                apresentacaoDto.getMusica(), apresentacaoDto.getTom(), apresentacaoDto.getGravacao(), 
                 apresentacaoDto.getAutor(), apresentacaoDto.getIndividuos(), 
                 apresentacaoDto.getParticipante(), apresentacaoDto.getCategoria());
 

@@ -37,7 +37,7 @@ public class JuradoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Jurado e = new Jurado(
-                jurado.getCodigo(), jurado.getNome(), jurado.getContato(), 
+                jurado.getNome(), jurado.getContato(), 
                 jurado.getDocumento(), jurado.getObservacao());
 
             this.juradoDB.save(e);    

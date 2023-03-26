@@ -26,7 +26,7 @@ public class CategoriaServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Categoria categoria: categoriaDB.findAll()) {
             listaDto.add(new CategoriaDto(
-                categoria.getTitulo(), categoria.getDescricao(), 
+                categoria.getId(), categoria.getTitulo(), categoria.getDescricao(), 
                 categoria.getDataInicial(), categoria.getDataFinal()));
         }
 

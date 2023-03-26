@@ -41,8 +41,7 @@ public class Jurado {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jurado")
     private List<Nota> notas; 
     
-    public Jurado(Long id, String nome, String contato, String documento, String observacao) {
-        this.id = id;
+    public Jurado(String nome, String contato, String documento, String observacao) {
         this.nome = nome;
         this.contato = contato;
         this.documento = documento;

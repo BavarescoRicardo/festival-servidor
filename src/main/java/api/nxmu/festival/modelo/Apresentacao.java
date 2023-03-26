@@ -53,9 +53,8 @@ public class Apresentacao {
         
     }
 
-    public Apresentacao(Long id, String musica, String tom, String gravacao, String autor,
+    public Apresentacao(String musica, String tom, String gravacao, String autor,
     int individuos, Participante participante, Categoria categoria) {
-        this.id = id;
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
@@ -65,15 +64,12 @@ public class Apresentacao {
         this.categoria = categoria;
     }
 
-    public Apresentacao(Long id, String musica, String tom, String gravacao, String autor,
+    public Apresentacao(String musica, String tom, String gravacao, String autor,
     int individuos, int participante, int categoria) {
-        this.id = id;
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
         this.individuos = individuos;
-      //  this.participante = participanteDB.findById(participante);
-      //  this.categoria = categoriaeDB.findById(categoria);
     }
 }
