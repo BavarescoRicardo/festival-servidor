@@ -28,7 +28,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getTom(), 
                 apresentacao.getAutor(), apresentacao.getGravacao(), apresentacao.getIndividuos(), 
-                1, 1));
+                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
         }
 
         return listaDto;

@@ -6,7 +6,7 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String tom, String gravacao,  String autor,
-    int individuos, int participante, int categoria) {
+    int individuos, Long participante, Long categoria) {
         this.codigo = codigo;
         this.musica = musica;
         this.tom = tom;
@@ -18,7 +18,7 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String tom, String gravacao,  String autor,
-            int ordem, int senha, int individuos, int participante, int categoria) {
+            int ordem, int senha, int individuos, Long participante, Long categoria) {
         this.codigo = codigo;                
         this.musica = musica;
         this.tom = tom;
@@ -39,8 +39,8 @@ public class ApresentacaoDto {
     private int ordem;
     private int senha;
     private int individuos;
-    private int participante;
-    private int categoria;
+    private Long participante;
+    private Long categoria;
 
     public Long getCodigo() {
         return codigo;
@@ -106,19 +106,19 @@ public class ApresentacaoDto {
         this.individuos = individuos;
     }
 
-    public int getParticipante() {
-        return participante;
+    public Long getParticipante() {
+        return this.participante;
     }
 
-    public void setParticipante(int participante) {
+    public void setParticipante(Long participante) {
         this.participante = participante;
     }
 
-    public int getCategoria() {
+    public Long getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(int categoria) {
+    public void setCategoria(Long categoria) {
         this.categoria = categoria;
     }       
        

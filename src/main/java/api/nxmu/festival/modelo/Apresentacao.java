@@ -65,7 +65,7 @@ public class Apresentacao {
     }
 
     public Apresentacao(String musica, String tom, String gravacao, String autor,
-    int individuos, int participante, int categoria) {
+    int individuos, Long participante, Long categoria) {
         this.musica = musica;
         this.tom = tom;
         this.gravacao = gravacao;
