@@ -1,7 +1,6 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,8 +15,8 @@ public class QuesitoServices {
     @Autowired
     private QuesitoRepositorio quesitoDB;
 
-    public Optional<Quesito> encontrarPorId(Long id){        
-        return quesitoDB.findById(id);
+    public Quesito encontrarPorId(Long id){        
+        return quesitoDB.findById(id).get();
     }
 
     public List<QuesitoDto> encontrar(){

@@ -19,6 +19,7 @@ public class NotaServices {
     private final ParticipanteServices participanteServices;
     private final JuradoServices juradoServices;    
     private final ApresentacaoServices apresentacaoServices;
+    private final QuesitoServices quesitoServices;
     // QuesitoServices quesitoServices = new QuesitoServices();
 
     public Optional<Nota> encontrarPorId(Long id){        
@@ -33,7 +34,7 @@ public class NotaServices {
             listaDto.add(new NotaDto(
                 nota.getNota(), nota.getCategoria().getId(), 
                 nota.getParticipante().getId(), nota.getJurado().getId(), 
-                nota.getApresentacao().getId(), null));
+                nota.getApresentacao().getId(), nota.getQuesito().getId()));
         }
 
         return listaDto;
@@ -49,7 +50,7 @@ public class NotaServices {
                 .participante(participanteServices.encontrarPorId(notaDto.getParticipante()).get())
                 .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(null).build();
+                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito())).build();
             this.notaDB.save(e);    
         } catch (Exception e) {
             return false;
