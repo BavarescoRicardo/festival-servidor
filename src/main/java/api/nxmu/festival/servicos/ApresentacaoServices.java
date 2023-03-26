@@ -26,7 +26,7 @@ public class ApresentacaoServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Apresentacao apresentacao: apresentacaoDB.findAll()) {
             listaDto.add(new ApresentacaoDto(
-                apresentacao.getMusica(), apresentacao.getTom(), 
+                apresentacao.getId(), apresentacao.getMusica(), apresentacao.getTom(), 
                 apresentacao.getAutor(), apresentacao.getGravacao(), apresentacao.getIndividuos(), 
                 1, 1));
         }
@@ -38,7 +38,7 @@ public class ApresentacaoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Apresentacao e = new Apresentacao(
-                apresentacaoDto.getMusica(), apresentacaoDto.getTom(), apresentacaoDto.getGravacao(), 
+                apresentacaoDto.getCodigo(), apresentacaoDto.getMusica(), apresentacaoDto.getTom(), apresentacaoDto.getGravacao(), 
                 apresentacaoDto.getAutor(), apresentacaoDto.getIndividuos(), 
                 apresentacaoDto.getParticipante(), apresentacaoDto.getCategoria());
 

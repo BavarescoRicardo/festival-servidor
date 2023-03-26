@@ -2,12 +2,14 @@ package api.nxmu.festival.dto;
 
 public class JuradoDto {
 
+    private Long codigo;
     private String nome;
     private String contato;
     private String documento;
     private String observacao;
 
-    public JuradoDto(String nome, String contato, String documento, String observacao) {
+    public JuradoDto(Long codigo, String nome, String contato, String documento, String observacao) {
+        this.codigo = codigo;
         this.nome = nome;
         this.contato = contato;
         this.documento = documento;
@@ -17,6 +19,14 @@ public class JuradoDto {
     public JuradoDto() {
         
     }
+
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }    
 
     public String getNome() {
         return nome;

@@ -26,7 +26,7 @@ public class JuradoServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Jurado jurado: juradoDB.findAll()) {
             listaDto.add(new JuradoDto(
-                jurado.getNome(), jurado.getContato(), 
+                jurado.getId(), jurado.getNome(), jurado.getContato(), 
                 jurado.getDocumento(), jurado.getObservacao()));
         }
 
@@ -37,7 +37,7 @@ public class JuradoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Jurado e = new Jurado(
-                jurado.getNome(), jurado.getContato(), 
+                jurado.getCodigo(), jurado.getNome(), jurado.getContato(), 
                 jurado.getDocumento(), jurado.getObservacao());
 
             this.juradoDB.save(e);    
