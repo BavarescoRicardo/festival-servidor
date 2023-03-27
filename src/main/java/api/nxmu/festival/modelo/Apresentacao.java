@@ -30,6 +30,7 @@ public class Apresentacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String musica;
+    private String nomeartistico;
     private String tom;
     private String gravacao;
     private String autor;
@@ -53,9 +54,10 @@ public class Apresentacao {
         
     }
 
-    public Apresentacao(String musica, String tom, String gravacao, String autor,
+    public Apresentacao(String musica, String nomeartistico, String tom, String gravacao, String autor,
     int individuos, Participante participante, Categoria categoria) {
         this.musica = musica;
+        this.nomeartistico = nomeartistico;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
@@ -64,9 +66,10 @@ public class Apresentacao {
         this.categoria = categoria;
     }
 
-    public Apresentacao(String musica, String tom, String gravacao, String autor,
+    public Apresentacao(String musica, String nomeartistico, String tom, String gravacao, String autor,
     int individuos, Long participante, Long categoria) {
         this.musica = musica;
+        this.nomeartistico = nomeartistico;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
