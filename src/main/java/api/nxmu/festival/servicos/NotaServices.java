@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.NotaDto;
+import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.modelo.Nota;
 import api.nxmu.festival.repositorio.NotaRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -26,15 +27,15 @@ public class NotaServices {
         return notaDB.findById(id);
     }
 
-    public List<NotaDto> encontrar(){
-        List<NotaDto> listaDto = new ArrayList<NotaDto>();
+    public List<TabelaNotaDto> encontrar(){
+        List<TabelaNotaDto> listaDto = new ArrayList<TabelaNotaDto>();
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Nota nota: notaDB.findAll()) {
-            listaDto.add(new NotaDto(
-                nota.getNota(), nota.getCategoria().getId(), 
-                nota.getParticipante().getId(), nota.getJurado().getId(), 
-                nota.getApresentacao().getId(), nota.getQuesito().getId()));
+            listaDto.add(new TabelaNotaDto(
+                nota.getNota(), nota.getCategoria().getDescricao(), 
+                nota.getParticipante().getNomeArtistico(), nota.getJurado().getNome(), 
+                nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
 
         return listaDto;

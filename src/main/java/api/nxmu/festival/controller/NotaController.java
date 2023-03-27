@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.NotaDto;
+import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.servicos.NotaServices;
 import lombok.RequiredArgsConstructor;
 
@@ -23,7 +24,7 @@ public class NotaController {
     private final NotaServices notaService;
 
     @RequestMapping(value = "/notas", method =  RequestMethod.GET)
-    public List<NotaDto> getEventos(){
+    public List<TabelaNotaDto> getEventos(){
         return notaService.encontrar();
     }    
 
