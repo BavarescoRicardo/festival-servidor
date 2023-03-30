@@ -9,12 +9,17 @@ import org.springframework.stereotype.Service;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.repositorio.ClassificacaoRepositorio;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ClassificacaoServices {
 
     @Autowired
     private ClassificacaoRepositorio classificacaoDB;
+
+    private final CategoriaServices categoriaServices;
+    private final ApresentacaoServices apresentacaoServices;
 
     public Optional<Classificacao> encontrarPorId(Long id){        
         return classificacaoDB.findById(id);
@@ -27,7 +32,7 @@ public class ClassificacaoServices {
         for(Classificacao classificacao: classificacaoDB.findAll()) {
             listaDto.add(new ClassificacaoDto(
                 classificacao.getId(), classificacao.getNotafinal(),
-                classificacao.getCategoria(), classificacao.getApresentacao()));
+                classificacao.getCategoria().getId(), classificacao.getApresentacao().getId()));
         }
 
         return listaDto;
@@ -37,8 +42,9 @@ public class ClassificacaoServices {
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Classificacao e = new Classificacao(
-                classificacao.getNotafinal(), classificacao.getCategoria(), 
-                classificacao.getApresentacao());
+                classificacao.getNotafinal(), 
+                categoriaServices.encontrarPorId(classificacao.getCategoria()).get(), 
+                apresentacaoServices.encontrarPorId(classificacao.getApresentacao()).get());
 
             this.classificacaoDB.save(e);    
         } catch (Exception e) {
