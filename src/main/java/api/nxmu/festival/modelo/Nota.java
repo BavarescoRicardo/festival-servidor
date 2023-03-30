@@ -36,11 +36,6 @@ public class Nota {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    // n - 1 participante
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participante_id")
-    private Participante participante;
-
     // n - 1 jurado
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jurado_id")

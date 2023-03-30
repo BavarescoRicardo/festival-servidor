@@ -1,20 +1,39 @@
 package api.nxmu.festival.dto;
 
+import api.nxmu.festival.modelo.Apresentacao;
+import api.nxmu.festival.modelo.Categoria;
+
 public class ClassificacaoDto {
 
+    private Long codigo;
     private double notafinal;
-    private Long categoria;
-    private Long apresentacao;
+    private Categoria categoria;
+    private Apresentacao apresentacao;
     
     public ClassificacaoDto(){
         
     }
 
-    public ClassificacaoDto(double notafinal, Long categoria, Long apresentacao) {
+    public ClassificacaoDto(Long codigo, double notafinal, Categoria categoria, Apresentacao apresentacao) {
+        this.codigo = codigo;
         this.notafinal = notafinal;
         this.categoria = categoria;
         this.apresentacao = apresentacao;
     }
+
+    public ClassificacaoDto(double notafinal, Categoria categoria, Apresentacao apresentacao) {
+        this.notafinal = notafinal;
+        this.categoria = categoria;
+        this.apresentacao = apresentacao;
+    }
+    
+    public Long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(Long codigo) {
+        this.codigo = codigo;
+    }    
 
     public double getNotafinal() {
         return notafinal;
@@ -24,19 +43,19 @@ public class ClassificacaoDto {
         this.notafinal = notafinal;
     }
 
-    public Long getCategoria() {
+    public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Long categoria) {
+    public void setCategoria(Categoria categoria) {
         this.categoria = categoria;
     }
 
-    public Long getApresentacao() {
+    public Apresentacao getApresentacao() {
         return apresentacao;
     }
 
-    public void setApresentacao(Long apresentacao) {
+    public void setApresentacao(Apresentacao apresentacao) {
         this.apresentacao = apresentacao;
     }
 }

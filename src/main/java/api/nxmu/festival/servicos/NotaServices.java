@@ -17,7 +17,6 @@ public class NotaServices {
 
     private final NotaRepositorio notaDB;    
     private final CategoriaServices categoriaServices;
-    private final ParticipanteServices participanteServices;
     private final JuradoServices juradoServices;    
     private final ApresentacaoServices apresentacaoServices;
     private final QuesitoServices quesitoServices;
@@ -34,7 +33,7 @@ public class NotaServices {
         for(Nota nota: notaDB.findAll()) {
             listaDto.add(new TabelaNotaDto(
                 nota.getNota(), nota.getCategoria().getDescricao(), 
-                nota.getParticipante().getNomeArtistico(), nota.getJurado().getNome(), 
+                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
                 nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
 
@@ -48,7 +47,6 @@ public class NotaServices {
             Nota e =  Nota.builder()
                 .nota(notaDto.getNota())
                 .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .participante(participanteServices.encontrarPorId(notaDto.getParticipante()).get())
                 .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito())).build();

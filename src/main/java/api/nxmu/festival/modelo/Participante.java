@@ -7,8 +7,6 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -50,14 +48,7 @@ public class Participante {
     private byte[] fotoPerfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
-    private List<Apresentacao> apresentacoes;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id")
-    private Classificacao classificacao;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
-    private List<Nota> notas;     
+    private List<Apresentacao> apresentacoes;   
         
     public Participante(Long id, byte[] fotoPerfil) {
         this.id = id;

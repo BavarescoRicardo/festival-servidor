@@ -9,31 +9,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
-import api.nxmu.festival.dto.NotaDto;
-import api.nxmu.festival.dto.TabelaNotaDto;
-import api.nxmu.festival.servicos.NotaServices;
+import api.nxmu.festival.dto.ClassificacaoDto;
+import api.nxmu.festival.servicos.ClassificacaoServices;
 import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
-public class NotaController {
+public class ClassificacaoController {
 
     @Autowired
-    private final NotaServices notaService;
+    private final ClassificacaoServices classificacaoService;
 
-    @RequestMapping(value = "/notas", method =  RequestMethod.GET)
-    public List<TabelaNotaDto> getNotas(){
-        return notaService.encontrar();
+    @RequestMapping(value = "/classificacoes", method =  RequestMethod.GET)
+    public List<ClassificacaoDto> getClassificacoes(){
+        return classificacaoService.encontrar();
     }    
 
-    @RequestMapping(value = "/salvanota", method =  RequestMethod.POST)
-	public boolean salvarNota(@RequestBody NotaDto nota)
+    @RequestMapping(value = "/salvaclassificacao", method =  RequestMethod.POST)
+	public boolean salvarEvento(@RequestBody ClassificacaoDto classificacao)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return notaService.salvar(nota);
+            return classificacaoService.salvar(classificacao);
         } catch (Exception e) {
             return false;
         }               

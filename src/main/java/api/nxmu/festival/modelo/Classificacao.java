@@ -1,6 +1,5 @@
 package api.nxmu.festival.modelo;
 
-import java.util.List;
 
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -10,7 +9,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -39,15 +37,17 @@ public class Classificacao {
     @JoinColumn(name = "participante_id")
     private Categoria categoria;
 
-    // n - n participante
-    @OneToMany(fetch = FetchType.LAZY)
-    private List<Participante> participante;
-
     // 1 - 1 apresentacao
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "apresentacao_id", referencedColumnName = "id")
     private Apresentacao apresentacao;
     
+    public Classificacao(double notafinal, Categoria categoria, Apresentacao apresentacao) {
+        this.notafinal = notafinal;
+        this.categoria = categoria;
+        this.apresentacao = apresentacao;
+    }
+
     public Classificacao(){
         
     }

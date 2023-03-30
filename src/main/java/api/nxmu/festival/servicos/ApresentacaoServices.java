@@ -15,10 +15,7 @@ import lombok.RequiredArgsConstructor;
 public class ApresentacaoServices {
 
     private final ApresentacaoRepositorio apresentacaoDB;
-
     private final CategoriaServices categoriaServices;
-    private final ParticipanteServices participanteServices;
-
 
     public Optional<Apresentacao> encontrarPorId(Long id){        
         return apresentacaoDB.findById(id);
@@ -32,7 +29,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getId()));
         }
 
         return listaDto;
@@ -48,7 +45,6 @@ public class ApresentacaoServices {
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
                 .individuos(apresentacaoDto.getIndividuos())
-                .participante(participanteServices.encontrarPorId(apresentacaoDto.getParticipante()).get())
                 .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
             this.apresentacaoDB.save(apresentacao);    
