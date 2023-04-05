@@ -16,6 +16,7 @@ import lombok.RequiredArgsConstructor;
 public class NotaServices {
 
     private final NotaRepositorio notaDB;    
+
     private final CategoriaServices categoriaServices;
     private final JuradoServices juradoServices;    
     private final ApresentacaoServices apresentacaoServices;
@@ -55,6 +56,11 @@ public class NotaServices {
             return false;
         }
         return true;
-    }
+    }   
     
+    public List<Nota> encontrarPorApresentacao(long codigoApresentacao){        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        return  notaDB.findAllByApresentacao(codigoApresentacao);
+    }    
 }

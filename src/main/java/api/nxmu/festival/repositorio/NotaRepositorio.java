@@ -1,7 +1,13 @@
 package api.nxmu.festival.repositorio;
 import api.nxmu.festival.modelo.Nota;
-import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface NotaRepositorio extends JpaRepository<Nota, Long>{
- 
+import java.util.List;
+
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+public interface NotaRepositorio extends JpaRepository<Nota, Long>{ 
+
+    @Query("select u from Nota u where u.apresentacao.id = ?1")
+    List<Nota> findAllByApresentacao(Long codigo);
 }

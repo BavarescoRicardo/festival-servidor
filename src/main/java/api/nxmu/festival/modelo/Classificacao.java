@@ -34,7 +34,7 @@ public class Classificacao {
     // ainda restam ligações fk
     // n - 1 categoria
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participante_id")
+    @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     // 1 - 1 apresentacao

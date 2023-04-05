@@ -38,4 +38,16 @@ public class ClassificacaoController {
         }               
 	}
 
+    @RequestMapping(value = "/calcularmedia", method =  RequestMethod.POST)
+	public boolean calcMedia(@RequestBody int codApresentacao)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            classificacaoService.calcularNotaFinal(codApresentacao);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }               
+	}
+
 }
