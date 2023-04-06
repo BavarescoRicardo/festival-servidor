@@ -44,7 +44,7 @@ public class ClassificacaoController {
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            classificacaoService.calcularClassificacao(notaFinalDto.getApresentacao(), notaFinalDto.getJurado());
+            classificacaoService.calcularClassificacao(notaFinalDto.getApresentacao());
             return true;
         } catch (Exception e) {
             return false;
