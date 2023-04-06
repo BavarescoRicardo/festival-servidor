@@ -8,6 +8,6 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface NotaRepositorio extends JpaRepository<Nota, Long>{ 
 
-    @Query("select u from Nota u where u.apresentacao.id = ?1")
-    List<Nota> findAllByApresentacao(Long codigo);
+    @Query("select u from Nota u where u.apresentacao.id = ?1 and u.jurado.id = ?2")
+    List<Nota> findAllByApresentacaoJurado(Long codigoApresentacao, Long codigoJurado);
 }

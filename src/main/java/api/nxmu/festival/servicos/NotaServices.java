@@ -8,6 +8,8 @@ import org.springframework.stereotype.Service;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.modelo.Nota;
+import api.nxmu.festival.modelo.NotaFinal;
+import api.nxmu.festival.repositorio.NotaFinalRepositorio;
 import api.nxmu.festival.repositorio.NotaRepositorio;
 import lombok.RequiredArgsConstructor;
 
@@ -16,12 +18,13 @@ import lombok.RequiredArgsConstructor;
 public class NotaServices {
 
     private final NotaRepositorio notaDB;    
+    private final NotaFinalRepositorio notaFinalDB;    
 
     private final CategoriaServices categoriaServices;
     private final JuradoServices juradoServices;    
     private final ApresentacaoServices apresentacaoServices;
     private final QuesitoServices quesitoServices;
-    // QuesitoServices quesitoServices = new QuesitoServices();
+    private final NotaFinalServices notaFinalServices;
 
     public Optional<Nota> encontrarPorId(Long id){        
         return notaDB.findById(id);
@@ -58,9 +61,41 @@ public class NotaServices {
         return true;
     }   
     
-    public List<Nota> encontrarPorApresentacao(long codigoApresentacao){        
+    public List<Nota> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         
-        // Converte a lista de objetos da entidade em objetos dto para transferencia
-        return  notaDB.findAllByApresentacao(codigoApresentacao);
+        return  notaDB.findAllByApresentacaoJurado(codigoApresentacao, codigoJurado);
     }    
+
+    public void calcularNotaFinal(long codigoApresentacao, long codigoJurado){
+
+            // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
+            if (notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).size() > 0)
+                return;
+
+            // Retornar lista de notas pertencentes a apresentação
+        List<Nota> notasApresentacao = encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado);
+        if(!(notasApresentacao.size() > 0))
+            return;
+
+            // Itera por todas as notas pertencentes a mesma apresentacao   --- não diferencia jurados nem quesitos
+        // Realiza cálculo da média final da nota
+        double media = 0;
+        for (Nota nota : notasApresentacao) {
+            media  += nota.getNota();        
+        }
+
+        media = (media / notasApresentacao.size());
+
+        // Após media calcula monta o objeto nota final
+        NotaFinal notaFinal = NotaFinal.builder()
+        .notaFinal(media)   
+        .categoria(notasApresentacao.get(0).getCategoria()) 
+        .jurado(notasApresentacao.get(0).getJurado())    
+        .apresentacao(notasApresentacao.get(0).getApresentacao())
+        .build();
+
+        notaFinalDB.save(notaFinal);
+
+    }    
+
 }

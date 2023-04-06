@@ -60,42 +60,42 @@ public class ClassificacaoServices {
         return true;
     }
 
-    public void calcularNotaFinal(long codigoApresentacao){
-        // Recebe o identificador código da apresentação e transforma optional em objeto apresentacao
-    Apresentacao apresentacao = apresentacaoServices.encontrarPorId(codigoApresentacao).get();
-    System.out.println(apresentacao.getMusica());
-        // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
-    // System.out.println(encontrarPorApresentacao(apresentacao.getId()));
-        //return;
+    public void calcularClassificacao(long codigoApresentacao, long codigoJurado){
+            // Recebe o identificador código da apresentação e transforma optional em objeto apresentacao
+        Apresentacao apresentacao = apresentacaoServices.encontrarPorId(codigoApresentacao).get();
+        System.out.println(apresentacao.getMusica());
+            // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
+        // System.out.println(encontrarPorApresentacao(apresentacao.getId()));
+            //return;
 
-        // Retornar lista de notas pertencentes a apresentação
-    List<Nota> notasApresentacao = notaServices.encontrarPorApresentacao(apresentacao.getId());
-    if(!(notasApresentacao.size() > 0))
-        return;
+            // Retornar lista de notas pertencentes a apresentação
+        List<Nota> notasApresentacao = notaServices.encontrarPorApresentacaoeJurado(apresentacao.getId(), 1);
+        if(!(notasApresentacao.size() > 0))
+            return;
 
-        // Itera por todas as notas pertencentes a mesma apresentacao   --- não diferencia jurados nem quesitos
-    // Realiza cálculo da média final da nota
-    double media = 0;
-    for (Nota nota : notasApresentacao) {
-        media  += nota.getNota();        
+            // Itera por todas as notas pertencentes a mesma apresentacao   --- não diferencia jurados nem quesitos
+        // Realiza cálculo da média final da nota
+        double media = 0;
+        for (Nota nota : notasApresentacao) {
+            media  += nota.getNota();        
+        }
+
+        media = (media / notasApresentacao.size());
+        System.out.println(media);
+
+        // Adicionar condição para desconsider jurados que der nota mais alta e também o que der a nota mais baixa
+        // O resultado do  calculo é a média de notas de todos os jurados e de todos os quesitos Ex..
+            
+            // -- for jurado 1 -- n
+                // -- for quesito 1 -- n 
+                    // sum += notaQuesito
+                // -- fim for quesitos
+                // -- resultado sum dividido por numero de quesitos
+
+            // -- fim for jurados
+
+            // -- resultado sum dividido por numero de jurados
+        // -- resultado final sera a média de notas da apresentação
     }
-
-    media = (media / notasApresentacao.size());
-    System.out.println(media);
-
-    // Adicionar condição para desconsider jurados que der nota mais alta e também o que der a nota mais baixa
-    // O resultado do  calculo é a média de notas de todos os jurados e de todos os quesitos Ex..
-        
-        // -- for jurado 1 -- n
-            // -- for quesito 1 -- n 
-                // sum += notaQuesito
-            // -- fim for quesitos
-            // -- resultado sum dividido por numero de quesitos
-
-        // -- fim for jurados
-
-        // -- resultado sum dividido por numero de jurados
-    // -- resultado final sera a média de notas da apresentação
-}
     
 }

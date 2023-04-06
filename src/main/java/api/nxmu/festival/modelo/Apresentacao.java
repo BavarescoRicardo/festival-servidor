@@ -48,7 +48,10 @@ public class Apresentacao {
     private Categoria categoria;       
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "apresentacao")
-    private List<Nota> notas;     
+    private List<Nota> notas; 
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "apresentacao")
+    private List<NotaFinal> notasfinais;            
 
     public Apresentacao(){
         

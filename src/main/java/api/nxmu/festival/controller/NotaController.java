@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.NotaDto;
+import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.servicos.NotaServices;
 import lombok.RequiredArgsConstructor;
@@ -38,5 +39,17 @@ public class NotaController {
             return false;
         }               
 	}
+
+    @RequestMapping(value = "/calcularnotafinal", method =  RequestMethod.POST)
+	public boolean calcMedia(@RequestBody NotaFinalDto notaFinalDto)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            notaService.calcularNotaFinal(notaFinalDto.getApresentacao(), notaFinalDto.getJurado());
+            return true;
+        } catch (Exception e) {
+            return false;
+        }               
+	}    
 
 }

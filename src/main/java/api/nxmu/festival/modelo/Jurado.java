@@ -39,7 +39,10 @@ public class Jurado {
     private Evento evento;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jurado")
-    private List<Nota> notas; 
+    private List<Nota> notas;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "jurado")
+    private List<NotaFinal> notasfinais;            
     
     public Jurado(String nome, String contato, String documento, String observacao) {
         this.nome = nome;
