@@ -27,6 +27,10 @@ public class NotaFinalServices {
 
     public List<NotaFinal> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         return  notaFinalDB.findAllByApresentacaoJurado(codigoApresentacao, codigoJurado);
-    }    
+    }
+    
+    public List<NotaFinal> encontrarPorCategoria(long codigoCategoria){        
+        return  notaFinalDB.findAllByCategoria(codigoCategoria);
+    }     
 
 }

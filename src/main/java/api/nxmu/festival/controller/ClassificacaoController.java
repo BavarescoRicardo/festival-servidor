@@ -9,8 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.dto.CalculoClassificaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
-import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.servicos.ClassificacaoServices;
 import lombok.RequiredArgsConstructor;
 
@@ -40,11 +40,11 @@ public class ClassificacaoController {
 	}
 
     @RequestMapping(value = "/calcularclassificacao", method =  RequestMethod.POST)
-	public boolean calcMedia(@RequestBody NotaFinalDto notaFinalDto)
+	public boolean calcMedia(@RequestBody CalculoClassificaoDto calculoClassificaoDto)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            classificacaoService.calcularClassificacao(notaFinalDto.getApresentacao());
+            classificacaoService.calcularClassificacao(calculoClassificaoDto.getCategoria());
             return true;
         } catch (Exception e) {
             return false;

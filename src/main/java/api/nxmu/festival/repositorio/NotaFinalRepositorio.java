@@ -12,5 +12,8 @@ public interface NotaFinalRepositorio extends JpaRepository<NotaFinal, Long>{
     List<NotaFinal> findAllByApresentacao(Long codigoApresentacao); 
     
     @Query("select u from NotaFinal u where u.apresentacao.id = ?1 and u.jurado.id = ?2")
-    List<NotaFinal> findAllByApresentacaoJurado(Long codigoApresentacao, Long codigoJurado);    
+    List<NotaFinal> findAllByApresentacaoJurado(Long codigoApresentacao, Long codigoJurado);
+    
+    @Query("select u from NotaFinal u where u.categoria.id = ?1")
+    List<NotaFinal> findAllByCategoria(Long codigoCategoria);     
 }

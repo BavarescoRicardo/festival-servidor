@@ -59,7 +59,7 @@ public class ClassificacaoServices {
         return true;
     }
 
-    public void calcularClassificacao(long codigoApresentacao){
+    public void calcularClassificacao(long codigoCategoria){
             // Recebe o identificador código da apresentação e transforma optional em objeto apresentacao
 
             // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
@@ -67,7 +67,7 @@ public class ClassificacaoServices {
             //return;
 
             // Retornar lista de notas pertencentes a apresentação
-        List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorApresentacao(codigoApresentacao);
+        List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorCategoria(codigoCategoria);
         if(!(notasApresentacao.size() > 0))
             return;
 
@@ -89,7 +89,8 @@ public class ClassificacaoServices {
         .apresentacao(notasApresentacao.get(0).getApresentacao())
         .build();
 
-        classificacaoDB.save(classificacao);        
+        // classificacaoDB.save(classificacao); 
+        System.out.println(classificacao);       
 
     }
     
