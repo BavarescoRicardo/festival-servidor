@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.CalculoClassificaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
+import api.nxmu.festival.dto.ClassificacaoListaDto;
 import api.nxmu.festival.servicos.ClassificacaoServices;
 import lombok.RequiredArgsConstructor;
 
@@ -24,7 +25,7 @@ public class ClassificacaoController {
     private final ClassificacaoServices classificacaoService;
 
     @RequestMapping(value = "/classificacoes", method =  RequestMethod.GET)
-    public List<ClassificacaoDto> getClassificacoes(){
+    public List<ClassificacaoListaDto> getClassificacoes(){
         return classificacaoService.encontrar();
     }    
 

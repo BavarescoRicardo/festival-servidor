@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
+import api.nxmu.festival.dto.ClassificacaoListaDto;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.ClassificacaoRepositorio;
@@ -32,14 +33,14 @@ public class ClassificacaoServices {
         return classificacaoDB.findByIdApresentacao(id);
     }
 
-    public List<ClassificacaoDto> encontrar(){
-        List<ClassificacaoDto> listaDto = new ArrayList<ClassificacaoDto>();
+    public List<ClassificacaoListaDto> encontrar(){
+        List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: classificacaoDB.findAll()) {
-            listaDto.add(new ClassificacaoDto(
+            listaDto.add(new ClassificacaoListaDto(
                 classificacao.getId(), classificacao.getNotafinal(),
-                classificacao.getCategoria().getId(), classificacao.getApresentacao().getId()));
+                classificacao.getCategoria().getDescricao(), classificacao.getApresentacao().getMusica()));
         }
 
         return listaDto;
