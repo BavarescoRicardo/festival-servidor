@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
@@ -67,30 +68,34 @@ public class ClassificacaoServices {
             //return;
 
             // Retornar lista de notas pertencentes a apresentação
-        List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorCategoria(codigoCategoria);
-        if(!(notasApresentacao.size() > 0))
+        List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrar();
+        if(!(apresentacoes.size() > 0))
             return;
 
-            // Itera por todas as notas pertencentes a mesma apresentacao   --- não diferencia jurados nem quesitos
+            // Itera por todas as notas pertencentes a mesma categoria   --- não diferencia jurados nem quesitos nem apresentações        
         // Realiza cálculo da média final da nota
         double media = 0;
-        for (NotaFinal nota : notasApresentacao) {
-            media  += nota.getNotaFinal();        
+
+        for (ApresentacaoDto apresentacao : apresentacoes) { 
+            List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorApresentacao(apresentacao.getCodigo());
+            for (NotaFinal notaApresentacao : notasApresentacao) {
+                media  += notaApresentacao.getNotaFinal();        
+            }
+
+            System.out.println(media);
+            media = (media / notasApresentacao.size());            
+
+            // Após media calcula monta o objeto classificação
+            Classificacao classificacao = Classificacao.builder()
+            .notafinal(media)   
+            .categoria(categoriaServices.encontrarPorId(apresentacao.getCategoria()).get()) 
+            .apresentacao(apresentacaoServices.encontrarPorId(apresentacao.getCodigo()).get())
+            .build();
+
+            classificacaoDB.save(classificacao); 
+            // System.out.println(classificacao);       
+            media = 0;
         }
-
-        media = (media / notasApresentacao.size());
-        System.out.println(media);
-
-
-        // Após media calcula monta o objeto nota final
-        Classificacao classificacao = Classificacao.builder()
-        .notafinal(media)   
-        .categoria(notasApresentacao.get(0).getCategoria()) 
-        .apresentacao(notasApresentacao.get(0).getApresentacao())
-        .build();
-
-        // classificacaoDB.save(classificacao); 
-        System.out.println(classificacao);       
 
     }
     
