@@ -62,19 +62,12 @@ public class ClassificacaoServices {
     }
 
     public void calcularClassificacao(long codigoCategoria){
-            // Recebe o identificador código da apresentação e transforma optional em objeto apresentacao
-
-            // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
-        // System.out.println(encontrarPorApresentacao(apresentacao.getId()));
-            //return;
-
-            // Retornar lista de notas pertencentes a apresentação
+        // Retornar lista de notas finais pertencentes a categoria
         List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrar();
         if(!(apresentacoes.size() > 0))
             return;
 
-            // Itera por todas as notas pertencentes a mesma categoria   --- não diferencia jurados nem quesitos nem apresentações        
-        // Realiza cálculo da média final da nota
+        // Itera por todas as notas pertencentes a mesma categoria   --- não diferencia jurados nem quesitos nem apresentações        
         double media = 0;
 
         for (ApresentacaoDto apresentacao : apresentacoes) { 
@@ -94,7 +87,6 @@ public class ClassificacaoServices {
             .build();
 
             classificacaoDB.save(classificacao); 
-            // System.out.println(classificacao);       
             media = 0;
         }
 
