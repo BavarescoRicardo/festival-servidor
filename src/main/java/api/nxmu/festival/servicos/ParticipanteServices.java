@@ -28,10 +28,8 @@ public class ParticipanteServices {
             listaDto.add(new ParticipanteDto(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
                 participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
-                participante.getEndereco(), participante.getCidade(), participante.getEstado(), participante.getCep(), participante.getTelefone(), 
-                participante.getMusica(), participante.getGravacao(), participante.getTom(), participante.getOpcao_categoria(), 
-                participante.getOpcao_participante())
-            );
+                participante.getEndereco(), participante.getCidade(), participante.getEstado(), 
+                participante.getCep(), participante.getTelefone()));
         }
 
         return listaDto;
@@ -43,9 +41,8 @@ public class ParticipanteServices {
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
                 participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
-                participante.getEndereco(), participante.getCidade(), participante.getEstado(), participante.getCep(), participante.getTelefone(), 
-                participante.getMusica(), participante.getGravacao(), participante.getTom(), participante.getOpcao_categoria(), 
-                participante.getOpcao_participante());
+                participante.getEndereco(), participante.getCidade(), participante.getEstado(), 
+                participante.getCep(), participante.getTelefone());
 
             this.participanteDB.save(p);    
         } catch (Exception e) {
