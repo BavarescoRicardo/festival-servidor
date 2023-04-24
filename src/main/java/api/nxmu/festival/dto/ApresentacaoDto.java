@@ -42,8 +42,8 @@ public class ApresentacaoDto {
     private int ordem;
     private int senha;
     private int individuos;
-    private Long categoria;
     private Long participante;
+    private Long categoria;    
 
     public Long getParticipante() {
         return participante;
