@@ -35,7 +35,7 @@ public class ParticipanteServices {
         return listaDto;
     }
 
-    public boolean salvar(ParticipanteDto participante){
+    public Participante salvar(ParticipanteDto participante){
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Participante p = new Participante(
@@ -44,11 +44,10 @@ public class ParticipanteServices {
                 participante.getEndereco(), participante.getCidade(), participante.getEstado(), 
                 participante.getCep(), participante.getTelefone());
 
-            this.participanteDB.save(p);    
+                return this.participanteDB.save(p);    
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return true;
     }
     
 }

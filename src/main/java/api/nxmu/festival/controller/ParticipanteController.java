@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.servicos.ParticipanteServices;
 import lombok.RequiredArgsConstructor;
 
@@ -28,13 +29,13 @@ public class ParticipanteController {
     }    
 
     @RequestMapping(value = "/salvaparticipante", method =  RequestMethod.POST)
-	public boolean salvarParticipante(@RequestBody ParticipanteDto participante)
+	public Participante salvarParticipante(@RequestBody ParticipanteDto participante)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
             return participanteService.salvar(participante);
         } catch (Exception e) {
-            return false;
+            return null;
         }               
 	}
 
