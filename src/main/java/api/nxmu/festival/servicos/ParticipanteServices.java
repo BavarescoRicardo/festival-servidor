@@ -3,18 +3,18 @@ package api.nxmu.festival.servicos;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.repositorio.ParticipanteRepositorio;
+import lombok.RequiredArgsConstructor;
 
 @Service
+@RequiredArgsConstructor
 public class ParticipanteServices {
 
-    @Autowired
-    private ParticipanteRepositorio participanteDB;
+    private final ParticipanteRepositorio participanteDB;
 
     public Optional<Participante> encontrarPorId(Long id){        
         return participanteDB.findById(id);
@@ -27,9 +27,7 @@ public class ParticipanteServices {
         for(Participante participante: participanteDB.findAll()) {
             listaDto.add(new ParticipanteDto(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
-                participante.getEndereco(), participante.getCidade(), participante.getEstado(), 
-                participante.getCep(), participante.getTelefone()));
+                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade()));
         }
 
         return listaDto;
@@ -40,9 +38,7 @@ public class ParticipanteServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(), 
-                participante.getEndereco(), participante.getCidade(), participante.getEstado(), 
-                participante.getCep(), participante.getTelefone());
+                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade());
 
                 return this.participanteDB.save(p);    
         } catch (Exception e) {

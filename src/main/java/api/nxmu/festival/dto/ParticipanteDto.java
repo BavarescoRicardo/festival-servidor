@@ -13,7 +13,6 @@ import lombok.Setter;
 @Setter
 public class ParticipanteDto {
 
-
     private String nomeArtistico;
     private String nomeResponsavel;
     private String genero;
@@ -22,16 +21,10 @@ public class ParticipanteDto {
     private String email;
     private String necessidade;
     private String descrinescessidade;
-    private String endereco;
-    private String cidade;
-    private String estado;
-    private String cep;
-    private String telefone;
     private byte[] fotoPerfil;
 
     public ParticipanteDto(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade, String endereco,
-            String cidade, String estado, String cep, String telefone) {
+            String documentorg, String email, String necessidade, String descrinescessidade) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -40,11 +33,6 @@ public class ParticipanteDto {
         this.email = email;
         this.necessidade = necessidade;
         this.descrinescessidade = descrinescessidade;
-        this.endereco = endereco;
-        this.cidade = cidade;
-        this.estado = estado;
-        this.cep = cep;
-        this.telefone = telefone;
     }
     public ParticipanteDto() {
     }
@@ -96,36 +84,6 @@ public class ParticipanteDto {
     }
     public void setDescrinescessidade(String descrinescessidade) {
         this.descrinescessidade = descrinescessidade;
-    }
-    public String getEndereco() {
-        return endereco;
-    }
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-    public String getCidade() {
-        return cidade;
-    }
-    public void setCidade(String cidade) {
-        this.cidade = cidade;
-    }
-    public String getEstado() {
-        return estado;
-    }
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-    public String getCep() {
-        return cep;
-    }
-    public void setCep(String cep) {
-        this.cep = cep;
-    }
-    public String getTelefone() {
-        return telefone;
-    }
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
     public byte[] getFotoPerfil() {
         return fotoPerfil;

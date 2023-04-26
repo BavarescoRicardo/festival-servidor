@@ -27,7 +27,8 @@ public class SecurityConfiguration {
         .disable()
         .authorizeHttpRequests()
             .requestMatchers(HttpMethod.OPTIONS).permitAll()
-            .requestMatchers("/api/evento/auth/**", "/api/evento/salvaparticipante", "/api/salvaapresentacao", "/api/apresentacoes").permitAll()
+            .requestMatchers("/api/evento/auth/**", "/api/evento/salvaparticipante",
+                "/api/salvaendereco", "/api/enderecos", "/api/salvaapresentacao", "/api/apresentacoes").permitAll()
         .anyRequest()
         .authenticated()
         .and()
