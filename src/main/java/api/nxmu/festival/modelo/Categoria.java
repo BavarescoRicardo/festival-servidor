@@ -1,6 +1,6 @@
 package api.nxmu.festival.modelo;
 
-import java.util.Date;
+import java.time.LocalDate;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -32,8 +32,8 @@ public class Categoria {
     private Long id;
     private String titulo;
     private String descricao;
-    private Date dataInicial;
-    private Date dataFinal;
+    private LocalDate dataInicial;
+    private LocalDate dataFinal;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id")
@@ -51,7 +51,7 @@ public class Categoria {
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
     private List<NotaFinal> notasfinais;        
 
-    public Categoria(String titulo, String descricao, Date dataInicial, Date dataFinal, Evento evento) {
+    public Categoria(String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal, Evento evento) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;
@@ -59,7 +59,7 @@ public class Categoria {
         this.evento = evento;
     }
 
-    public Categoria(String titulo, String descricao, Date dataInicial, Date dataFinal) {
+    public Categoria(String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal) {
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;

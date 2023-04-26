@@ -1,16 +1,16 @@
 package api.nxmu.festival.dto;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class CategoriaDto {
 
     private Long codigo;
     private String titulo;
     private String descricao;
-    private Date dataInicial;
-    private Date dataFinal;
+    private LocalDate dataInicial;
+    private LocalDate dataFinal;
 
-    public CategoriaDto(Long codigo, String titulo, String descricao, Date dataInicial, Date dataFinal) {
+    public CategoriaDto(Long codigo, String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.descricao = descricao;
@@ -46,19 +46,19 @@ public class CategoriaDto {
         this.descricao = descricao;
     }
 
-    public Date getDataInicial() {
+    public LocalDate getDataInicial() {
         return this.dataInicial;
     }
 
-    public void setDataInicial(Date dataInicial) {
+    public void setDataInicial(LocalDate dataInicial) {
         this.dataInicial = dataInicial;
     }
 
-    public Date getDataFinal() {
+    public LocalDate getDataFinal() {
         return dataFinal;
     }
 
-    public void setDataFinal(Date dataFinal) {
+    public void setDataFinal(LocalDate dataFinal) {
         this.dataFinal = dataFinal;
     }    
 }
