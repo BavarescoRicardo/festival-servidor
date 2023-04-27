@@ -29,6 +29,7 @@ public class NotaFinal {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double notaFinal;
+    private int ativo;
 
     // n - 1 categoria 
     @ManyToOne(fetch = FetchType.LAZY)

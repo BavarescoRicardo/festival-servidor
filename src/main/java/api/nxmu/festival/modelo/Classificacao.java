@@ -30,6 +30,7 @@ public class Classificacao {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double notafinal;
+    private int ativo;
 
     // ainda restam ligações fk
     // n - 1 categoria

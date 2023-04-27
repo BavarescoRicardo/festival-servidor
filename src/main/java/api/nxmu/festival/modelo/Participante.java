@@ -35,6 +35,7 @@ public class Participante {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private int ativo;
     private byte[] fotoPerfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")

@@ -29,6 +29,7 @@ public class Nota {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private double nota;
+    private int ativo;
 
     // ainda restam ligações fk    
     // n - 1 categoria 

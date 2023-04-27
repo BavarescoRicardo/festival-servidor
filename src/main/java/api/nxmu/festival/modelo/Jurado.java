@@ -33,6 +33,7 @@ public class Jurado {
     private String contato;
     private String documento;
     private String observacao;
+    private int ativo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id")

@@ -34,6 +34,7 @@ public class Categoria {
     private String descricao;
     private LocalDate dataInicial;
     private LocalDate dataFinal;
+    private int ativo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "evento_id")

@@ -31,6 +31,7 @@ public class Endereco {
     private String estado;
     private String cep;
     private String telefone;
+    private int ativo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "participante_id")

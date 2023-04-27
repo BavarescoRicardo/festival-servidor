@@ -34,7 +34,7 @@ public class Conta {
     private String descricao;
     private Date dataInicial;
     private Date dataFinal;
-
+    private int ativo;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "conta")
     private List<Usuario> usuarios;    

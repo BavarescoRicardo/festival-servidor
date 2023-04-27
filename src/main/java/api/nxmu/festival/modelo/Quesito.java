@@ -29,6 +29,7 @@ public class Quesito {
     private Long id;
     private String descricao;
     private double peso;
+    private int ativo;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "quesito")
     private List<Nota> notas;
