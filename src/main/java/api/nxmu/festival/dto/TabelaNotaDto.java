@@ -2,12 +2,23 @@ package api.nxmu.festival.dto;
 
 public class TabelaNotaDto {
     
+    private long codigo;
     private double nota;
     private String categoria;
     private String participante;
     private String jurado;
     private String apresentacao;
     private String quesito;
+
+    public TabelaNotaDto(long codigo, double nota, String categoria, String participante, String jurado, String apresentacao, String quesito) {
+        this.codigo = codigo;
+        this.nota = nota;
+        this.categoria = categoria;
+        this.participante = participante;
+        this.jurado = jurado;
+        this.apresentacao = apresentacao;
+        this.quesito = quesito;
+    }    
 
     public TabelaNotaDto(double nota, String categoria, String participante, String jurado, String apresentacao, String quesito) {
         this.nota = nota;
@@ -20,6 +31,15 @@ public class TabelaNotaDto {
     
     public TabelaNotaDto() {
     }
+
+    public long getCodigo() {
+        return codigo;
+    }
+
+    public void setCodigo(long codigo) {
+        this.codigo = codigo;
+    }
+
     public double getNota() {
         return nota;
     }
