@@ -59,7 +59,24 @@ public class NotaServices {
             return false;
         }
         return true;
-    }   
+    }
+
+    public boolean remover(NotaDto notaDto){
+        try {
+
+            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            Nota e =  Nota.builder()
+                .nota(notaDto.getNota())
+                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito())).build();
+            this.notaDB.delete(e);    
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }     
     
     public List<Nota> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         

@@ -40,6 +40,17 @@ public class NotaController {
         }               
 	}
 
+    @RequestMapping(value = "/removenota", method =  RequestMethod.POST)
+	public boolean RemoverNota(@RequestBody NotaDto nota)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return notaService.remover(nota);
+        } catch (Exception e) {
+            return false;
+        }               
+	}    
+
     @RequestMapping(value = "/calcularnotafinal", method =  RequestMethod.POST)
 	public boolean calcMedia(@RequestBody NotaFinalDto notaFinalDto)
     {
