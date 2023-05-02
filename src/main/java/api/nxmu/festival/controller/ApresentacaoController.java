@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -37,5 +38,16 @@ public class ApresentacaoController {
             return false;
         }               
 	}
+
+    @RequestMapping(value = "/apresentacao/{id}", method =  RequestMethod.PATCH)
+	public ApresentacaoDto atualizarApresentacao(@RequestBody ApresentacaoDto apresentacao, @PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return apresentacaoService.atualizar(apresentacao, id);
+        } catch (Exception e) {
+            return null;
+        }               
+	}    
 
 }

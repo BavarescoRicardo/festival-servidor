@@ -55,5 +55,26 @@ public class ApresentacaoServices {
         }
         return true;
     }
+
+    public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id){
+        try {
+            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            Apresentacao apresentacao = this.encontrarPorId(id).get();
+
+            // Atualizar modelo com campos do objeto dto
+            apresentacao.setMusica(apresentacaoDto.getMusica());
+            apresentacao.setNomeartistico(apresentacaoDto.getNomeartistico());
+            apresentacao.setTom(apresentacaoDto.getTom());
+            apresentacao.setGravacao(apresentacaoDto.getGravacao());
+            apresentacao.setAutor(apresentacaoDto.getAutor());
+            apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
+            apresentacao.setParticipante(participanteServices.encontrarPorId(apresentacaoDto.getParticipante()).get());
+            apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
+            this.apresentacaoDB.save(apresentacao);
+            return apresentacaoDto;
+        } catch (Exception e) {
+            return null;
+        }
+    }
     
 }
