@@ -19,12 +19,12 @@ public class NotaServices {
 
     private final NotaRepositorio notaDB;    
     private final NotaFinalRepositorio notaFinalDB;    
+    private final NotaFinalServices notaFinalServices;
 
     private final CategoriaServices categoriaServices;
     private final JuradoServices juradoServices;    
     private final ApresentacaoServices apresentacaoServices;
     private final QuesitoServices quesitoServices;
-    private final NotaFinalServices notaFinalServices;
 
     public Optional<Nota> encontrarPorId(Long id){        
         return notaDB.findById(id);
@@ -72,6 +72,9 @@ public class NotaServices {
             nota.setApresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get());
             nota.setQuesito(quesitoServices.encontrarPorId(notaDto.getQuesito()));
             this.notaDB.save(nota);
+
+            // Após atualizar a nota deve refazer o calculo da nota nofinal
+            this.calcularNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
         } catch (Exception e) {
             return null;
         }
@@ -100,11 +103,7 @@ public class NotaServices {
         return  notaDB.findAllByApresentacaoJurado(codigoApresentacao, codigoJurado);
     }    
 
-    public void calcularNotaFinal(long codigoApresentacao, long codigoJurado){
-
-            // Confere se a classificacao ja existe para esta apresentacao -- se ja houver classificacao retorn e sai da operação
-            if (notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).size() > 0)
-                return;
+    public void calcularNotaFinal(long codigoApresentacao, long codigoJurado){        
 
             // Retornar lista de notas pertencentes a apresentação
         List<Nota> notasApresentacao = encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado);
@@ -128,8 +127,13 @@ public class NotaServices {
         .apresentacao(notasApresentacao.get(0).getApresentacao())
         .build();
 
-        notaFinalDB.save(notaFinal);
 
+        // Confere se a nota final ja existe para esta apresentacao -- se ja houver nota define id da nota e salva atualizando
+        if (notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).size() > 0){
+            notaFinal.setId(notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).get(0).getId());
+        }
+            
+        notaFinalDB.save(notaFinal);
     }    
 
 }
