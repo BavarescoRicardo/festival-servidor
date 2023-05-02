@@ -50,7 +50,7 @@ public class EnderecoServices {
     
     public EnderecoDto atualizar(EnderecoDto endereco, long id){
         try {
-            // Define seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
             Endereco e = this.encontrarPorId(id).get();
             e.setEndereco(endereco.getEndereco()); 
             e.setCidade(endereco.getCidade()); 

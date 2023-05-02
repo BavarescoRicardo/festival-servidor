@@ -63,7 +63,7 @@ public class ClassificacaoServices {
 
     public ClassificacaoDto atualizar(ClassificacaoDto classificacao, long id){
         try {
-            // Define seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            // Encontra objeto salvo pelo id e depois atualiza
             Classificacao clas = this.encontrarPorId(id).get();
             clas.setNotafinal(classificacao.getNotafinal());
             clas.setCategoria(categoriaServices.encontrarPorId(classificacao.getCategoria()).get());

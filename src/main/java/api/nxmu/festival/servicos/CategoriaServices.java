@@ -49,7 +49,7 @@ public class CategoriaServices {
 
     public CategoriaDto atualizar(CategoriaDto categoria, long id){
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            // Encontra objeto salvo pelo id e depois atualiza
             Categoria cat = this.encontrarPorId(id).get();
             cat.setTitulo(categoria.getTitulo());
             cat.setDescricao(categoria.getDescricao());

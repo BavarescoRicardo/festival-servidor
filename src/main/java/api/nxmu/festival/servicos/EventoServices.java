@@ -1,6 +1,7 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,6 +15,10 @@ public class EventoServices {
 
     @Autowired
     private EventoRepositorio eventoDB;
+
+    public Optional<Evento> encontrarPorId(Long id){        
+        return eventoDB.findById(id);
+    }    
 
     // public void salvarFotoForm(MultipartFile img, Authentication auth) {
     //     try {
@@ -56,5 +61,21 @@ public class EventoServices {
         }
         return true;
     }
-    
+
+    public EventoDto atualizar(EventoDto evento, long id){
+        try {
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Evento e = this.encontrarPorId(id).get();
+            e.setTitulo(evento.getTitulo());
+            e.setDescricao(evento.getDescricao());
+            e.setDataInicial(evento.getDataInicial());
+            e.setDataFinal(evento.getDataFinal());
+            e.setLocal(evento.getLocal());
+
+            this.eventoDB.save(e);    
+        } catch (Exception e) {
+            return null;
+        }
+        return evento;
+    }    
 }
