@@ -48,4 +48,21 @@ public class EnderecoServices {
         return true;
     }
     
+    public EnderecoDto atualizar(EnderecoDto endereco, long id){
+        try {
+            // Define seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Endereco e = this.encontrarPorId(id).get();
+            e.setEndereco(endereco.getEndereco()); 
+            e.setCidade(endereco.getCidade()); 
+            e.setEstado(endereco.getEstado());
+            e.setCep(endereco.getCep());
+            e.setTelefone(endereco.getTelefone()); 
+            e.setParticipante(participanteServices.encontrarPorId(endereco.getParticipante()).get());
+
+            this.enderecoDB.save(e);    
+        } catch (Exception e) {
+            return null;
+        }
+        return endereco;
+    }    
 }

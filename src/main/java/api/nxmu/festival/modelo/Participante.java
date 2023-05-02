@@ -39,7 +39,10 @@ public class Participante {
     private byte[] fotoPerfil;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
-    private List<Apresentacao> apresentacoes;   
+    private List<Apresentacao> apresentacoes;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
+    private List<Endereco> enderecos;     
         
     public Participante(Long id, byte[] fotoPerfil) {
         this.id = id;
