@@ -58,7 +58,7 @@ public class ApresentacaoServices {
 
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id){
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            // Encontra objeto salvo pelo id e depois atualiza
             Apresentacao apresentacao = this.encontrarPorId(id).get();
 
             // Atualizar modelo com campos do objeto dto
