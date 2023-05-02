@@ -46,5 +46,21 @@ public class JuradoServices {
         }
         return true;
     }
-    
+
+
+    public JuradoDto atualizar(JuradoDto jurado, long id){
+        try {
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Jurado jur = this.encontrarPorId(id).get();
+            jur.setNome(jurado.getNome());
+            jur.setContato(jurado.getContato());
+            jur.setDocumento(jurado.getDocumento()); 
+            jur.setObservacao(jurado.getObservacao());
+
+            this.juradoDB.save(jur);
+        } catch (Exception e) {
+            return null;
+        }
+        return jurado;
+    }    
 }

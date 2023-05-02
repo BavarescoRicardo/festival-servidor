@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -28,7 +29,7 @@ public class JuradoController {
     }    
 
     @RequestMapping(value = "/salvajurado", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody JuradoDto jurado)
+	public boolean salvarJurado(@RequestBody JuradoDto jurado)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
@@ -38,4 +39,14 @@ public class JuradoController {
         }               
 	}
 
+    @RequestMapping(value = "/atualizajurado/{id}", method =  RequestMethod.PATCH)
+	public JuradoDto atualizarJurado(@RequestBody JuradoDto jurado, @PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return juradoService.atualizar(jurado, id);
+        } catch (Exception e) {
+            return null;
+        }               
+	}    
 }
