@@ -61,6 +61,21 @@ public class ClassificacaoServices {
         return true;
     }
 
+    public ClassificacaoDto atualizar(ClassificacaoDto classificacao, long id){
+        try {
+            // Define seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Classificacao clas = this.encontrarPorId(id).get();
+            clas.setNotafinal(classificacao.getNotafinal());
+            clas.setCategoria(categoriaServices.encontrarPorId(classificacao.getCategoria()).get());
+            clas.setApresentacao(apresentacaoServices.encontrarPorId(classificacao.getApresentacao()).get());
+
+            this.classificacaoDB.save(clas);
+            return classificacao;
+        } catch (Exception e) {
+            return null;
+        }
+    }    
+
     public void calcularClassificacao(long codigoCategoria){
         // Retornar lista de notas finais pertencentes a categoria
         List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrar();
