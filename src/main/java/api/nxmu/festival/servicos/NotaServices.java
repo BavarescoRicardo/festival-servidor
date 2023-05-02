@@ -61,6 +61,23 @@ public class NotaServices {
         return true;
     }
 
+    public NotaDto atualizar(NotaDto notaDto, long id){
+        try {
+
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Nota nota =  this.encontrarPorId(id).get();
+            nota.setNota(notaDto.getNota());
+            nota.setCategoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get());
+            nota.setJurado(juradoServices.encontrarPorId(notaDto.getJurado()).get());
+            nota.setApresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get());
+            nota.setQuesito(quesitoServices.encontrarPorId(notaDto.getQuesito()));
+            this.notaDB.save(nota);
+        } catch (Exception e) {
+            return null;
+        }
+        return notaDto;
+    }    
+
     public boolean remover(NotaDto notaDto){
         try {
 

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -39,6 +40,17 @@ public class NotaController {
             return false;
         }               
 	}
+
+    @RequestMapping(value = "/atualizanota/{id}", method =  RequestMethod.PATCH)
+	public NotaDto atualizarNota(@RequestBody NotaDto nota, @PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return notaService.atualizar(nota, id);
+        } catch (Exception e) {
+            return null;
+        }               
+	}    
 
     @RequestMapping(value = "/removenota", method =  RequestMethod.POST)
 	public boolean RemoverNota(@RequestBody NotaDto nota)
