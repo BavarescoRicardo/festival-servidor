@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -23,19 +24,29 @@ public class CategoriaController {
     private final CategoriaServices categoriaService;
 
     @RequestMapping(value = "/categorias", method =  RequestMethod.GET)
-    public List<CategoriaDto> getEventos(){
+    public List<CategoriaDto> getCategorias(){
         return categoriaService.encontrar();
     }    
 
     @RequestMapping(value = "/salvacategoria", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody CategoriaDto evento)
+	public boolean salvarCategoria(@RequestBody CategoriaDto categoria)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return categoriaService.salvar(evento);
+            return categoriaService.salvar(categoria);
         } catch (Exception e) {
             return false;
         }               
 	}
 
+    @RequestMapping(value = "/atualizacategoria/{id}", method =  RequestMethod.PATCH)
+	public CategoriaDto atualizarCategoria(@RequestBody CategoriaDto categoria, @PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return categoriaService.atualizar(categoria, id);
+        } catch (Exception e) {
+            return null;
+        }               
+	}
 }

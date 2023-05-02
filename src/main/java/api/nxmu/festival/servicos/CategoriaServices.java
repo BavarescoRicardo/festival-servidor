@@ -46,5 +46,20 @@ public class CategoriaServices {
         }
         return true;
     }
-    
+
+    public CategoriaDto atualizar(CategoriaDto categoria, long id){
+        try {
+            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            Categoria cat = this.encontrarPorId(id).get();
+            cat.setTitulo(categoria.getTitulo());
+            cat.setDescricao(categoria.getDescricao());
+            cat.setDataInicial(categoria.getDataInicial());
+            cat.setDataFinal(categoria.getDataFinal());
+
+            this.categoriaDB.save(cat);
+            return categoria;    
+        } catch (Exception e) {
+            return null;
+        }
+    }    
 }
