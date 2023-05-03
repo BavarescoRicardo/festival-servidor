@@ -45,5 +45,24 @@ public class ParticipanteServices {
             return null;
         }
     }
-    
+
+    public ParticipanteDto atualizar(ParticipanteDto participante, long id){
+        try {
+            //  envolver metodo em try catch retorno certo no tr retorno false no catch
+            Participante p = this.encontrarPorId(id).get();
+            p.setNomeArtistico(participante.getNomeArtistico());
+            p.setNomeResponsavel(participante.getNomeResponsavel()); 
+            p.setGenero(participante.getGenero());
+            p.setNascimento(participante.getNascimento());
+            p.setDocumentorg(participante.getDocumentorg()); 
+            p.setEmail(participante.getEmail());
+            p.setNecessidade(participante.getNecessidade()); 
+            p.setDescrinescessidade(participante.getDescrinescessidade());
+
+            this.participanteDB.save(p);    
+        } catch (Exception e) {
+            return null;
+        }
+        return participante;
+    }        
 }
