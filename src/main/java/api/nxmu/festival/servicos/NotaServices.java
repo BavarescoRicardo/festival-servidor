@@ -53,7 +53,7 @@ public class NotaServices {
                 .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito())).build();
+                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get()).build();
             this.notaDB.save(e);    
         } catch (Exception e) {
             return false;
@@ -70,7 +70,7 @@ public class NotaServices {
             nota.setCategoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get());
             nota.setJurado(juradoServices.encontrarPorId(notaDto.getJurado()).get());
             nota.setApresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get());
-            nota.setQuesito(quesitoServices.encontrarPorId(notaDto.getQuesito()));
+            nota.setQuesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get());
             this.notaDB.save(nota);
 
             // Após atualizar a nota deve refazer o calculo da nota nofinal
@@ -90,7 +90,7 @@ public class NotaServices {
                 .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito())).build();
+                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get()).build();
             this.notaDB.delete(e);    
         } catch (Exception e) {
             return false;

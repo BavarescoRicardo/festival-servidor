@@ -48,7 +48,7 @@ public class ParticipanteServices {
 
     public ParticipanteDto atualizar(ParticipanteDto participante, long id){
         try {
-            //  envolver metodo em try catch retorno certo no tr retorno false no catch
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
             Participante p = this.encontrarPorId(id).get();
             p.setNomeArtistico(participante.getNomeArtistico());
             p.setNomeResponsavel(participante.getNomeResponsavel()); 

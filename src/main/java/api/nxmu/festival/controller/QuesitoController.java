@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -20,22 +21,32 @@ import lombok.RequiredArgsConstructor;
 public class QuesitoController {
 
     @Autowired
-    private final QuesitoServices eventoService;
+    private final QuesitoServices quesitoService;
 
     @RequestMapping(value = "/quesitos", method =  RequestMethod.GET)
-    public List<QuesitoDto> getEventos(){
-        return eventoService.encontrar();
+    public List<QuesitoDto> getQuesitos(){
+        return quesitoService.encontrar();
     }    
 
     @RequestMapping(value = "/salvaquesito", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody QuesitoDto evento)
+	public boolean salvarQuesito(@RequestBody QuesitoDto quesito)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return eventoService.salvar(evento);
+            return quesitoService.salvar(quesito);
         } catch (Exception e) {
             return false;
         }               
 	}
 
+    @RequestMapping(value = "/atualizaquesito/{id}", method =  RequestMethod.PATCH)
+	public QuesitoDto atualizarQuesito(@RequestBody QuesitoDto quesito, @PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return quesitoService.atualizar(quesito, id);
+        } catch (Exception e) {
+            return null;
+        }               
+	}
 }
