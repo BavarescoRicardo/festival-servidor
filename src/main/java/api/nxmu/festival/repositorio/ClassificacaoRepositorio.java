@@ -9,6 +9,6 @@ import org.springframework.data.jpa.repository.Query;
 public interface ClassificacaoRepositorio extends JpaRepository<Classificacao, Long>{
 
     // Must be One
-    @Query("select u from Classificacao u where u.apresentacao = ?1")
-    Optional<Classificacao> findByIdApresentacao(Long codigo);
+    @Query("select u from Classificacao u where u.apresentacao.id = ?1")
+    Optional<Classificacao> findByIdApresentacao(long codigo);
 }

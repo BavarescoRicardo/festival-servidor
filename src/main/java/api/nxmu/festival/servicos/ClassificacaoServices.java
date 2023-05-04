@@ -29,7 +29,7 @@ public class ClassificacaoServices {
         return classificacaoDB.findById(id);
     }
 
-    public Optional<Classificacao> encontrarPorApresentacao(Long id){        
+    public Optional<Classificacao> encontrarPorApresentacao(long id){        
         return classificacaoDB.findByIdApresentacao(id);
     }
 
@@ -101,13 +101,10 @@ public class ClassificacaoServices {
             .apresentacao(apresentacaoServices.encontrarPorId(apresentacao.getCodigo()).get())
             .build();
             
-            // if (!this.encontrarPorApresentacao(apresentacao.getCodigo()).isEmpty()){
-                System.out.println("Verifica se apresentação ja tem classificacao");
-                System.out.println("Caso ja tenha, tenta atualizar classificacao");
-               // Classificacao cx = this.encontrarPorApresentacao(apresentacao.getCodigo()).get();
-               // System.out.println(cx.toString());
-               // classificacao.setId(this.encontrarPorApresentacao(apresentacao.getCodigo()).get().getId());
-            // }
+            if (!this.encontrarPorApresentacao(apresentacao.getCodigo()).isEmpty()){
+
+                classificacao.setId(this.encontrarPorApresentacao(apresentacao.getCodigo()).get().getId());
+            }
 
             classificacaoDB.save(classificacao); 
             media = 0;

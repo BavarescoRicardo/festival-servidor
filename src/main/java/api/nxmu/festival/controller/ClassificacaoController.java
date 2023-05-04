@@ -60,7 +60,7 @@ public class ClassificacaoController {
             classificacaoService.calcularClassificacao(calculoClassificaoDto.getCategoria());
             return true;
         } catch (Exception e) {
-            return false;
+            throw e;
         }               
 	}
 
