@@ -41,7 +41,7 @@ public class EventoServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Evento evento: eventoDB.findAll()) {
             listaDto.add(new EventoDto(
-                evento.getTitulo(), evento.getDescricao(), 
+                evento.getId(), evento.getTitulo(), evento.getDescricao(), 
                 evento.getDataInicial(), evento.getDataFinal()));
         }
 
