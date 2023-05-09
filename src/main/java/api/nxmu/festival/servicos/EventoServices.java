@@ -42,7 +42,7 @@ public class EventoServices {
         for(Evento evento: eventoDB.findAll()) {
             listaDto.add(new EventoDto(
                 evento.getId(), evento.getTitulo(), evento.getDescricao(), 
-                evento.getDataInicial(), evento.getDataFinal()));
+                evento.getDataInicial(), evento.getDataFinal(), evento.getLocal()));
         }
 
         return listaDto;

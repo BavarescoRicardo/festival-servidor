@@ -11,12 +11,13 @@ public class EventoDto {
     private Date dataFinal;
     private String local;
 
-    public EventoDto(Long codigo, String titulo, String descricao, Date dataInicial, Date dataFinal) {
+    public EventoDto(Long codigo, String titulo, String descricao, Date dataInicial, Date dataFinal, String local) {
         this.codigo = codigo;
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
+        this.local = local;
     }
 
     public EventoDto() {
