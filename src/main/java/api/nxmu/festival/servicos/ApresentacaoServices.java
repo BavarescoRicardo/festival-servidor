@@ -3,6 +3,8 @@ package api.nxmu.festival.servicos;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
@@ -76,5 +78,17 @@ public class ApresentacaoServices {
             return null;
         }
     }
+
+    public ResponseEntity<String> remover(long id){
+        try {
+            
+            Apresentacao apresentacao = this.encontrarPorId(id).get();
+            this.apresentacaoDB.delete(apresentacao);
+
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }    
     
 }
