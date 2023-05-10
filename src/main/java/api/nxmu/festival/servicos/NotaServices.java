@@ -93,7 +93,7 @@ public class NotaServices {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }        
+    }    
     
     public List<Nota> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         

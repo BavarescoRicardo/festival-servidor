@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.QuesitoDto;
@@ -57,5 +58,17 @@ public class QuesitoServices {
             return null;
         }
         return quesito;
+    }
+    
+    public ResponseEntity<String> remover(long id){
+        try {
+            
+            Quesito ques = this.encontrarPorId(id).get();
+            this.quesitoDB.delete(ques);
+
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }    
 }

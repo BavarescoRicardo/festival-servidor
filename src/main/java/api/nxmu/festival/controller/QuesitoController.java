@@ -3,6 +3,7 @@ package api.nxmu.festival.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -47,6 +48,17 @@ public class QuesitoController {
             return quesitoService.atualizar(quesito, id);
         } catch (Exception e) {
             return null;
-        }               
+        }              
 	}
+
+    @RequestMapping(value = "/removequesito/{id}", method =  RequestMethod.DELETE)
+	public ResponseEntity<String> notaJurado(@PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return quesitoService.remover(id);
+        } catch (Exception e) {
+            return null;
+        }
+	}    
 }
