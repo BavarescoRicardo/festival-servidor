@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
@@ -74,7 +75,19 @@ public class ClassificacaoServices {
         } catch (Exception e) {
             return null;
         }
-    }    
+    }
+    
+    public ResponseEntity<String> remover(long id){
+        try {
+            
+            Classificacao clas = this.encontrarPorId(id).get();
+            this.classificacaoDB.delete(clas);            
+
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }       
 
     public void calcularClassificacao(long codigoCategoria){
         // Retornar lista de notas finais pertencentes a categoria
