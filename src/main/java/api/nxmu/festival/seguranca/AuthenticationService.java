@@ -1,5 +1,6 @@
 package api.nxmu.festival.seguranca;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -45,5 +46,17 @@ public class AuthenticationService {
         .token(jwtToken)
         .build();
   }
+
+  public ResponseEntity<String> remover(long id){
+    try {
+        
+        Usuario user = this.repository.findById(id).get();
+        this.repository.delete(user);            
+
+        return ResponseEntity.ok().body("Removido objeto de id: "+id);
+    } catch (Exception e) {
+        return ResponseEntity.notFound().build();
+    }
+}  
 }
 

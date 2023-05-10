@@ -3,6 +3,7 @@ package api.nxmu.festival.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,5 +50,16 @@ public class ContaController {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());
         }               
 	}
+
+    @RequestMapping(value = "/removeconta/{id}", method =  RequestMethod.DELETE)
+	public ResponseEntity<String> removerClassif(@PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return service.remover(id);
+        } catch (Exception e) {
+            return null;
+        }
+	}    
 
 }
