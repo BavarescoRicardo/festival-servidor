@@ -3,6 +3,8 @@ package api.nxmu.festival.servicos;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.NotaDto;
@@ -81,22 +83,17 @@ public class NotaServices {
         return notaDto;
     }    
 
-    public boolean remover(NotaDto notaDto){
+    public ResponseEntity<String> remover(long id){
         try {
+            
+            Nota nota = this.encontrarPorId(id).get();
+            this.notaDB.delete(nota);
 
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Nota e =  Nota.builder()
-                .nota(notaDto.getNota())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get()).build();
-            this.notaDB.delete(e);    
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {
-            return false;
+            return ResponseEntity.notFound().build();
         }
-        return true;
-    }     
+    }        
     
     public List<Nota> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         

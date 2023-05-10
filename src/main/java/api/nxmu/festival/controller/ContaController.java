@@ -52,7 +52,7 @@ public class ContaController {
 	}
 
     @RequestMapping(value = "/removeconta/{id}", method =  RequestMethod.DELETE)
-	public ResponseEntity<String> removerClassif(@PathVariable long id)
+	public ResponseEntity<String> removerConta(@PathVariable long id)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
