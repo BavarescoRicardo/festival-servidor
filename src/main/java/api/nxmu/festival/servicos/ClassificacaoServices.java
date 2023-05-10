@@ -87,7 +87,7 @@ public class ClassificacaoServices {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }       
+    }   
 
     public void calcularClassificacao(long codigoCategoria){
         // Retornar lista de notas finais pertencentes a categoria

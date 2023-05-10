@@ -36,7 +36,7 @@ public class JuradoController {
             return juradoService.salvar(jurado);
         } catch (Exception e) {
             return false;
-        }               
+        }          
 	}
 
     @RequestMapping(value = "/atualizajurado/{id}", method =  RequestMethod.PATCH)
