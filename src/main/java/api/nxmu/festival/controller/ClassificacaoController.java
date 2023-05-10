@@ -61,8 +61,8 @@ public class ClassificacaoController {
             return classificacaoService.remover(id);
         } catch (Exception e) {
             return null;
-        }               
-	}    
+        }
+	}
 
     @RequestMapping(value = "/calcularclassificacao", method =  RequestMethod.POST)
 	public boolean calcMedia(@RequestBody CalculoClassificaoDto calculoClassificaoDto)

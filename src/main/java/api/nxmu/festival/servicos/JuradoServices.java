@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.JuradoDto;
@@ -62,5 +63,17 @@ public class JuradoServices {
             return null;
         }
         return jurado;
+    }
+    
+    public ResponseEntity<String> remover(long id){
+        try {
+            
+            Jurado jur = this.encontrarPorId(id).get();
+            this.juradoDB.delete(jur);
+
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
     }    
 }
