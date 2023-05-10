@@ -66,7 +66,7 @@ public class NotaController {
 	}
     
     @RequestMapping(value = "/removenota/{id}", method =  RequestMethod.DELETE)
-	public ResponseEntity<String> notaJurado(@PathVariable long id)
+	public ResponseEntity<String> removeNota(@PathVariable long id)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
