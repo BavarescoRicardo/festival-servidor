@@ -2,6 +2,8 @@ package api.nxmu.festival.servicos;
 
 import java.util.List;
 import java.util.Optional;
+import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -35,12 +37,14 @@ public class ClassificacaoServices {
     }
 
     public List<ClassificacaoListaDto> encontrar(){
+        BigDecimal bd;
         List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: classificacaoDB.findAll()) {
+            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoListaDto(
-                classificacao.getId(), classificacao.getNotafinal(),
+                classificacao.getId(), bd.doubleValue(),
                 classificacao.getCategoria().getDescricao(), classificacao.getApresentacao().getMusica()));
         }
 
