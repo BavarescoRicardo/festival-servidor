@@ -75,5 +75,5 @@ public class JuradoServices {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }    
+    }
 }
