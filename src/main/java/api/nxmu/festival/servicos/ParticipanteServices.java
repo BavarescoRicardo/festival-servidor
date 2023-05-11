@@ -28,8 +28,9 @@ public class ParticipanteServices {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Participante participante: participanteDB.findAll()) {
             listaDto.add(new ParticipanteDto(
-                participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade()));
+                participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
+                participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade()));
         }
 
         return listaDto;

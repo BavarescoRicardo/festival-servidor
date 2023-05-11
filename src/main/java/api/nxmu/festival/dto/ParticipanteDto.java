@@ -13,6 +13,7 @@ import lombok.Setter;
 @Setter
 public class ParticipanteDto {
 
+    private Long codigo;
     private String nomeArtistico;
     private String nomeResponsavel;
     private String genero;
@@ -23,8 +24,9 @@ public class ParticipanteDto {
     private String descrinescessidade;
     private byte[] fotoPerfil;
 
-    public ParticipanteDto(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
+    public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
             String documentorg, String email, String necessidade, String descrinescessidade) {
+        this.codigo = codigo;
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -37,6 +39,14 @@ public class ParticipanteDto {
     public ParticipanteDto() {
     }
 
+    public Long getCodigo(){
+        return this.codigo;
+    }
+
+    public void setCodigo(Long codigo){
+        this.codigo = codigo;
+    }
+    
     public String getNomeArtistico() {
         return nomeArtistico;
     }
