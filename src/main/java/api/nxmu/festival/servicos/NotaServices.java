@@ -68,6 +68,9 @@ public class NotaServices {
 
             // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
             Nota nota =  this.encontrarPorId(id).get();
+            
+            // Remove nota final antes de alterar a nota
+            this.notaFinalServices.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
             nota.setNota(notaDto.getNota());
             nota.setCategoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get());
             nota.setJurado(juradoServices.encontrarPorId(notaDto.getJurado()).get());
@@ -87,6 +90,7 @@ public class NotaServices {
         try {
             
             Nota nota = this.encontrarPorId(id).get();
+            this.notaFinalServices.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
             this.notaDB.delete(nota);
 
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
