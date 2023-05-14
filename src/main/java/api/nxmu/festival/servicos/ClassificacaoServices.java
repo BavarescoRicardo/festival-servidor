@@ -95,7 +95,7 @@ public class ClassificacaoServices {
 
     public void calcularClassificacao(long codigoCategoria){
         // Retornar lista de notas finais pertencentes a categoria
-        List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrar();
+        List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrarPorCategoria(codigoCategoria);
         if(!(apresentacoes.size() > 0))
             return;
 

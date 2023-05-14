@@ -38,6 +38,20 @@ public class ApresentacaoServices {
         return listaDto;
     }
 
+    public List<ApresentacaoDto> encontrarPorCategoria(long codCategoria){
+        List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Apresentacao apresentacao: apresentacaoDB.findAllByCategoria(codCategoria)) {
+            listaDto.add(new ApresentacaoDto(
+                apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+        }
+
+        return listaDto;
+    }
+
     public boolean salvar(ApresentacaoDto apresentacaoDto){
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
