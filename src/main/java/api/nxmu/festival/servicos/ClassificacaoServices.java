@@ -104,6 +104,11 @@ public class ClassificacaoServices {
 
         for (ApresentacaoDto apresentacao : apresentacoes) { 
             List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorApresentacao(apresentacao.getCodigo());
+            
+            // Caso não existe nota final para esta apresentação pula para a proxima
+            if(notasApresentacao.isEmpty())
+                continue;
+
             for (NotaFinal notaApresentacao : notasApresentacao) {
                 media  += notaApresentacao.getNotaFinal();        
             }
