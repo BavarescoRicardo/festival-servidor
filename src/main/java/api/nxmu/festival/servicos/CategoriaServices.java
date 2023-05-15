@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoriaServices {
 
     private final CategoriaRepositorio categoriaDB;
+    private final EventoServices eventoServices;
 
     public Optional<Categoria> encontrarPorId(Long id){        
         return categoriaDB.findById(id);
@@ -40,7 +41,8 @@ public class CategoriaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Categoria e = new Categoria(
                 categoria.getTitulo(), categoria.getDescricao(), 
-                categoria.getDataInicial(), categoria.getDataFinal());
+                categoria.getDataInicial(), categoria.getDataFinal(),
+                this.eventoServices.encontrarPorId(categoria.getEventoCodigo()).get());
 
             this.categoriaDB.save(e);    
         } catch (Exception e) {
