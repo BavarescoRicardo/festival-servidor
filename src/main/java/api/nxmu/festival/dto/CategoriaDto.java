@@ -9,6 +9,7 @@ public class CategoriaDto {
     private String descricao;
     private LocalDate dataInicial;
     private LocalDate dataFinal;
+    private Long eventoCodigo;
 
     public CategoriaDto(Long codigo, String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal) {
         this.codigo = codigo;
@@ -28,6 +29,14 @@ public class CategoriaDto {
 
     public void setCodigo(Long codigo) {
         this.codigo = codigo;
+    }
+
+    public Long getEventoCodigo() {
+        return eventoCodigo;
+    }
+
+    public void setEventoCodigo(Long eventoCodigo) {
+        this.eventoCodigo = eventoCodigo;
     }    
 
     public String getTitulo() {
