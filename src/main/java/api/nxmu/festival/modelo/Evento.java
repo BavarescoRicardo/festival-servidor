@@ -1,7 +1,7 @@
 package api.nxmu.festival.modelo;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import jakarta.persistence.Entity;
@@ -29,8 +29,8 @@ public class Evento {
     private Long id;
     private String titulo;
     private String descricao;
-    private Date dataInicial;
-    private Date dataFinal;
+    private LocalDate dataInicial;
+    private LocalDate dataFinal;
     private String local;
     private int ativo;
     private byte[] fotoEvento;
@@ -45,7 +45,7 @@ public class Evento {
 
     }
 
-    public Evento(String titulo, String descricao, Date dataInicial, Date dataFinal, String local){
+    public Evento(String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal, String local){
         this.titulo = titulo;
         this.descricao = descricao;
         this.dataInicial = dataInicial;
