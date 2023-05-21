@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
 import api.nxmu.festival.modelo.Classificacao;
@@ -66,13 +67,11 @@ public class ClassificacaoServices {
         return true;
     }
 
-    public ClassificacaoDto atualizar(ClassificacaoDto classificacao, long id){
+    public AtualizaClassificacaoDto atualizar(AtualizaClassificacaoDto classificacao, long id){
         try {
             // Encontra objeto salvo pelo id e depois atualiza
             Classificacao clas = this.encontrarPorId(id).get();
             clas.setNotafinal(classificacao.getNotafinal());
-            clas.setCategoria(categoriaServices.encontrarPorId(classificacao.getCategoria()).get());
-            clas.setApresentacao(apresentacaoServices.encontrarPorId(classificacao.getApresentacao()).get());
 
             this.classificacaoDB.save(clas);
             return classificacao;

@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.CalculoClassificaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
@@ -43,7 +44,7 @@ public class ClassificacaoController {
 	}
 
     @RequestMapping(value = "/atualizaclassificacao/{id}", method =  RequestMethod.PATCH)
-	public ClassificacaoDto atualizarClassif(@RequestBody ClassificacaoDto classificacao, @PathVariable long id)
+	public AtualizaClassificacaoDto atualizarClassif(@RequestBody AtualizaClassificacaoDto classificacao, @PathVariable long id)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
