@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.dto.AtualizaNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
@@ -43,7 +44,7 @@ public class NotaController {
 	}
 
     @RequestMapping(value = "/atualizanota/{id}", method =  RequestMethod.PATCH)
-	public NotaDto atualizarNota(@RequestBody NotaDto nota, @PathVariable long id)
+	public AtualizaNotaDto atualizarNota(@RequestBody AtualizaNotaDto nota, @PathVariable long id)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {

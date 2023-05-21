@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import api.nxmu.festival.dto.AtualizaNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.modelo.Nota;
@@ -63,7 +64,7 @@ public class NotaServices {
         return true;
     }
 
-    public NotaDto atualizar(NotaDto notaDto, long id){
+    public AtualizaNotaDto atualizar(AtualizaNotaDto notaDto, long id){
         try {
 
             // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
@@ -72,10 +73,6 @@ public class NotaServices {
             // Remove nota final antes de alterar a nota
             this.notaFinalServices.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
             nota.setNota(notaDto.getNota());
-            nota.setCategoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get());
-            nota.setJurado(juradoServices.encontrarPorId(notaDto.getJurado()).get());
-            nota.setApresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get());
-            nota.setQuesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get());
             this.notaDB.save(nota);
 
             // Após atualizar a nota deve refazer o calculo da nota nofinal
