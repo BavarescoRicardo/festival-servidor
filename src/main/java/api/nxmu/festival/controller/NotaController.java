@@ -1,6 +1,7 @@
 package api.nxmu.festival.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
+import api.nxmu.festival.dto.FiltroNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
@@ -30,7 +32,16 @@ public class NotaController {
     @RequestMapping(value = "/notas", method =  RequestMethod.GET)
     public List<TabelaNotaDto> getNotas(){
         return notaService.encontrar();
-    }    
+    }
+    
+    @RequestMapping(value = "/notasfiltro", method =  RequestMethod.POST)
+    public List<TabelaNotaDto> GetArtigoFiltrado(
+    @RequestBody(required = false) Optional<FiltroNotaDto> filtro) {
+        
+        FiltroNotaDto filtroRecebido = filtro.get();
+        return notaService.encontrarFiltrado(filtroRecebido);
+
+    }      
 
     @RequestMapping(value = "/salvanota", method =  RequestMethod.POST)
 	public boolean salvarNota(@RequestBody NotaDto nota)

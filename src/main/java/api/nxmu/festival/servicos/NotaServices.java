@@ -4,10 +4,13 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
+import api.nxmu.festival.dto.FiltroNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.modelo.Nota;
@@ -46,6 +49,24 @@ public class NotaServices {
 
         return listaDto;
     }
+
+    public List<TabelaNotaDto> encontrarFiltrado(FiltroNotaDto filtro){
+        List<TabelaNotaDto> listaDto = new ArrayList<TabelaNotaDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 4);
+        List<Nota> listaFiltrada = notaDB.
+            findAllFiltrado(
+                filtro.getCodCategoria(), pageable).getContent();        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Nota nota: listaFiltrada) {
+            listaDto.add(new TabelaNotaDto(
+                nota.getId(), nota.getNota(), nota.getCategoria().getDescricao(), 
+                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
+                nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
+        }
+
+        return listaDto;
+    }     
 
     public boolean salvar(NotaDto notaDto){
         try {
