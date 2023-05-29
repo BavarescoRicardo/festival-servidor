@@ -1,6 +1,7 @@
 package api.nxmu.festival.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.FiltroApresentacaoDto;
 import api.nxmu.festival.servicos.ApresentacaoServices;
 import lombok.RequiredArgsConstructor;
 
@@ -27,6 +29,15 @@ public class ApresentacaoController {
     @RequestMapping(value = "/apresentacoes", method =  RequestMethod.GET)
     public List<ApresentacaoDto> getApresentacoes(){
         return apresentacaoService.encontrar();
+    }
+
+    @RequestMapping(value = "/apresentacoesfiltro", method =  RequestMethod.POST)
+    public List<ApresentacaoDto> GetArtigoFiltrado(
+    @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro) {
+        
+        FiltroApresentacaoDto filtroRecebido = filtro.get();
+        return apresentacaoService.encontrarFiltrado(filtroRecebido);
+
     }    
 
     @RequestMapping(value = "/salvaapresentacao", method =  RequestMethod.POST)
