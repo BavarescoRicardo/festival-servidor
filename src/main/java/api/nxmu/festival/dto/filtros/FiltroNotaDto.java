@@ -1,4 +1,4 @@
-package api.nxmu.festival.dto;
+package api.nxmu.festival.dto.filtros;
 
 public class FiltroNotaDto {
     private Long codCategoria;
@@ -18,7 +18,7 @@ public class FiltroNotaDto {
     public void setPg(String pg) {
         this.pg = pg;
     }
-    
+
     public Long getCodCategoria() {
         return codCategoria;
     }

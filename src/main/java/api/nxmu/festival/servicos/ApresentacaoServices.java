@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
-import api.nxmu.festival.dto.FiltroApresentacaoDto;
+import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.repositorio.ApresentacaoRepositorio;
 import lombok.RequiredArgsConstructor;

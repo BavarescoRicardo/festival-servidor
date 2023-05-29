@@ -10,9 +10,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
-import api.nxmu.festival.dto.FiltroNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
+import api.nxmu.festival.dto.filtros.FiltroNotaDto;
 import api.nxmu.festival.modelo.Nota;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.NotaFinalRepositorio;

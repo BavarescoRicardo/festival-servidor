@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
-import api.nxmu.festival.dto.FiltroApresentacaoDto;
+import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.servicos.ApresentacaoServices;
 import lombok.RequiredArgsConstructor;
 

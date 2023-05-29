@@ -13,10 +13,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
-import api.nxmu.festival.dto.FiltroNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
+import api.nxmu.festival.dto.filtros.FiltroNotaDto;
 import api.nxmu.festival.servicos.NotaServices;
 import lombok.RequiredArgsConstructor;
 
@@ -40,7 +40,6 @@ public class NotaController {
         
         FiltroNotaDto filtroRecebido = filtro.get();
         return notaService.encontrarFiltrado(filtroRecebido);
-
     }      
 
     @RequestMapping(value = "/salvanota", method =  RequestMethod.POST)

@@ -1,4 +1,4 @@
-package api.nxmu.festival.dto;
+package api.nxmu.festival.dto.filtros;
 
 public class FiltroApresentacaoDto {
     private String textoFiltro;
