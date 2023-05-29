@@ -43,7 +43,7 @@ public class ApresentacaoServices {
 
     public List<ApresentacaoDto> encontrarFiltrado(FiltroApresentacaoDto filtro){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 4);
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40);
         List<Apresentacao> listaFiltrada = apresentacaoDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        

@@ -52,7 +52,7 @@ public class NotaServices {
 
     public List<TabelaNotaDto> encontrarFiltrado(FiltroNotaDto filtro){
         List<TabelaNotaDto> listaDto = new ArrayList<TabelaNotaDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 4);
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40);
         List<Nota> listaFiltrada = notaDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), pageable).getContent();        
