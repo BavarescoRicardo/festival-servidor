@@ -6,6 +6,8 @@ import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +15,7 @@ import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
+import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.ClassificacaoRepositorio;
@@ -51,6 +54,25 @@ public class ClassificacaoServices {
 
         return listaDto;
     }
+
+    public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
+        BigDecimal bd;
+        List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40);
+        List<Classificacao> listaFiltrada = classificacaoDB.
+            findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Classificacao classificacao: listaFiltrada) {
+            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
+            listaDto.add(new ClassificacaoListaDto(
+                classificacao.getId(), bd.doubleValue(),
+                classificacao.getCategoria().getDescricao(), classificacao.getApresentacao().getMusica()));
+        }
+
+        return listaDto;
+    }      
 
     public boolean salvar(ClassificacaoDto classificacao){
         try {

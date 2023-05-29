@@ -1,6 +1,7 @@
 package api.nxmu.festival.controller;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,7 @@ import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.CalculoClassificaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
+import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
 import api.nxmu.festival.servicos.ClassificacaoServices;
 import lombok.RequiredArgsConstructor;
 
@@ -30,7 +32,15 @@ public class ClassificacaoController {
     @RequestMapping(value = "/classificacoes", method =  RequestMethod.GET)
     public List<ClassificacaoListaDto> getClassificacoes(){
         return classificacaoService.encontrar();
-    }    
+    }
+    
+    @RequestMapping(value = "/classificacoesfiltro", method =  RequestMethod.POST)
+    public List<ClassificacaoListaDto> GetArtigoFiltrado(
+    @RequestBody(required = false) Optional<FiltroClassificacaoDto> filtro) {
+        
+        FiltroClassificacaoDto filtroRecebido = filtro.get();
+        return classificacaoService.encontrarFiltrado(filtroRecebido);
+    }        
 
     @RequestMapping(value = "/salvaclassificacao", method =  RequestMethod.POST)
 	public boolean salvarClassif(@RequestBody ClassificacaoDto classificacao)
