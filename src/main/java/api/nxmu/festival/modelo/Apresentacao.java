@@ -39,9 +39,8 @@ public class Apresentacao {
     private int individuos;
     private int ativo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "participante_id")
-    private Participante participante;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "apresentacao")
+    private List<Participante> participantes;    
     
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "categoria_id")
@@ -58,14 +57,13 @@ public class Apresentacao {
     }
 
     public Apresentacao(String musica, String nomeartistico, String tom, String gravacao, String autor,
-    int individuos, Participante participante, Categoria categoria) {
+    int individuos, Categoria categoria) {
         this.musica = musica;
         this.nomeartistico = nomeartistico;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
         this.individuos = individuos;
-        this.participante = participante;
         this.categoria = categoria;
     }
 

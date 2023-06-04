@@ -3,6 +3,7 @@ package api.nxmu.festival.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -12,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ParticipanteDto;
-import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.servicos.ParticipanteServices;
 import lombok.RequiredArgsConstructor;
 
@@ -28,18 +28,17 @@ public class ParticipanteController {
     @RequestMapping(value = "/participantes", method =  RequestMethod.GET)
     public List<ParticipanteDto> getParticipantes(){
         return participanteService.encontrar();
-    }    
+    }
 
-    @RequestMapping(value = "/salvaparticipante", method =  RequestMethod.POST)
-	public Participante salvarParticipante(@RequestBody ParticipanteDto participante)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+    @RequestMapping(value = "/salvaparticipante", method = RequestMethod.POST)
+    public ResponseEntity<Long> salvarParticipante(@RequestBody ParticipanteDto participante) {
         try {
-            return participanteService.salvar(participante);
+            return ResponseEntity.ok(participanteService.salvar(participante));
+
         } catch (Exception e) {
-            return null;
-        }               
-	}
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @RequestMapping(value = "/atualizaparticipante/{id}", method =  RequestMethod.PATCH)
 	public ParticipanteDto atualizarParticipante(@RequestBody ParticipanteDto participante, @PathVariable long id)

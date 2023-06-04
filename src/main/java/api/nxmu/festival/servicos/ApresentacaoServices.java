@@ -21,7 +21,6 @@ public class ApresentacaoServices {
 
     private final ApresentacaoRepositorio apresentacaoDB;
     private final CategoriaServices categoriaServices;
-    private final ParticipanteServices participanteServices;
 
     public Optional<Apresentacao> encontrarPorId(Long id){        
         return apresentacaoDB.findById(id);
@@ -35,7 +34,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getId()));
         }
 
         return listaDto;
@@ -53,7 +52,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getId()));
         }
 
         return listaDto;
@@ -67,13 +66,14 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getParticipante().getId(), apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getId()));
         }
 
         return listaDto;
     }
 
-    public boolean salvar(ApresentacaoDto apresentacaoDto){
+    public Long salvar(ApresentacaoDto apresentacaoDto) throws Exception{
+        Apresentacao apresentacaoSalva = null;
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Apresentacao apresentacao = Apresentacao.builder()
@@ -83,14 +83,13 @@ public class ApresentacaoServices {
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
                 .individuos(apresentacaoDto.getIndividuos())
-                .participante(participanteServices.encontrarPorId(apresentacaoDto.getParticipante()).get())
                 .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
-            this.apresentacaoDB.save(apresentacao);    
+                apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
         } catch (Exception e) {
-            return false;
+            throw new Exception(e.getMessage(), e.getCause());
         }
-        return true;
+        return apresentacaoSalva.getId();
     }
 
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id){
@@ -105,7 +104,6 @@ public class ApresentacaoServices {
             apresentacao.setGravacao(apresentacaoDto.getGravacao());
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
-            apresentacao.setParticipante(participanteServices.encontrarPorId(apresentacaoDto.getParticipante()).get());
             apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
             this.apresentacaoDB.save(apresentacao);
             return apresentacaoDto;

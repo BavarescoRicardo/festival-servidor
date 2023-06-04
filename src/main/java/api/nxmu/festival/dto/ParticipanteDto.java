@@ -4,11 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Data
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 @Getter
 @Setter
 public class ParticipanteDto {
@@ -22,10 +24,11 @@ public class ParticipanteDto {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private Long apresentacao;
     private byte[] fotoPerfil;
 
     public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade) {
+            String documentorg, String email, String necessidade, String descrinescessidade, Long apresentacao) {
         this.codigo = codigo;
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
@@ -35,8 +38,7 @@ public class ParticipanteDto {
         this.email = email;
         this.necessidade = necessidade;
         this.descrinescessidade = descrinescessidade;
-    }
-    public ParticipanteDto() {
+        this.apresentacao = apresentacao;
     }
 
     public Long getCodigo(){

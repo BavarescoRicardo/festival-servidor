@@ -7,6 +7,8 @@ import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -38,8 +40,9 @@ public class Participante {
     private int ativo;
     private byte[] fotoPerfil;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
-    private List<Apresentacao> apresentacoes;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "apresentacao_id")
+    private Apresentacao apresentacao;    
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
     private List<Endereco> enderecos;     
@@ -48,8 +51,9 @@ public class Participante {
         this.id = id;
         this.fotoPerfil = fotoPerfil;
     }
+
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade) {
+            String documentorg, String email, String necessidade, String descrinescessidade, Apresentacao apresentacao) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -58,7 +62,9 @@ public class Participante {
         this.email = email;
         this.necessidade = necessidade;
         this.descrinescessidade = descrinescessidade;
-    }
+        this.apresentacao = apresentacao;
+    }    
+
     public Participante() {
     }
     public Long getId() {

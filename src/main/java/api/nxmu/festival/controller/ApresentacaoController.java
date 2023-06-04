@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -41,15 +42,14 @@ public class ApresentacaoController {
     }    
 
     @RequestMapping(value = "/salvaapresentacao", method =  RequestMethod.POST)
-	public boolean salvarApresentacao(@RequestBody ApresentacaoDto apresentacao)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+    public ResponseEntity<Long> salvarParticipante(@RequestBody ApresentacaoDto apresentacaoDto) {
         try {
-            return apresentacaoService.salvar(apresentacao);
+            return ResponseEntity.ok(apresentacaoService.salvar(apresentacaoDto));
+
         } catch (Exception e) {
-            return false;
-        }               
-	}
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
 
     @RequestMapping(value = "/apresentacao/{id}", method =  RequestMethod.PATCH)
 	public ApresentacaoDto atualizarApresentacao(@RequestBody ApresentacaoDto apresentacao, @PathVariable long id)

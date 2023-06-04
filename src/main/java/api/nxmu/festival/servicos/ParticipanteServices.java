@@ -17,6 +17,7 @@ import lombok.RequiredArgsConstructor;
 public class ParticipanteServices {
 
     private final ParticipanteRepositorio participanteDB;
+    private final ApresentacaoServices apresentacaoServices;
 
     public Optional<Participante> encontrarPorId(Long id){        
         return participanteDB.findById(id);
@@ -30,22 +31,25 @@ public class ParticipanteServices {
             listaDto.add(new ParticipanteDto(
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
-                participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade()));
+                participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
+                participante.getApresentacao().getId()));
         }
 
         return listaDto;
     }
 
-    public Participante salvar(ParticipanteDto participante){
+    public Long salvar(ParticipanteDto participante) {
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade());
-
-                return this.participanteDB.save(p);    
+                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
+                apresentacaoServices.encontrarPorId(participante.getApresentacao()).get()
+            );
+    
+            Participante participanteSalvo = this.participanteDB.save(p);
+            return participanteSalvo.getId();
         } catch (Exception e) {
-            return null;
+            throw e;
         }
     }
 
@@ -61,6 +65,7 @@ public class ParticipanteServices {
             p.setEmail(participante.getEmail());
             p.setNecessidade(participante.getNecessidade()); 
             p.setDescrinescessidade(participante.getDescrinescessidade());
+            p.setApresentacao(apresentacaoServices.encontrarPorId(participante.getApresentacao()).get());
 
             this.participanteDB.save(p);    
         } catch (Exception e) {
