@@ -78,6 +78,15 @@ public class NotaServices {
                 .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get()).build();
+
+            // Confere se ja existe nota para esta apresentacao este jurado e quesito
+            long apr = notaDto.getApresentacao(); 
+            long jur = notaDto.getJurado(); 
+            long ques = notaDto.getQuesito(); 
+            if (this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).size() > 0){
+                e.setId(this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).get(0).getId());
+            }
+
             this.notaDB.save(e);    
         } catch (Exception e) {
             return false;
@@ -120,7 +129,12 @@ public class NotaServices {
     public List<Nota> encontrarPorApresentacaoeJurado(long codigoApresentacao, long codigoJurado){        
         
         return  notaDB.findAllByApresentacaoJurado(codigoApresentacao, codigoJurado);
-    }    
+    }
+    
+    public List<Nota> encontrarPorApresentacaoeJuradoQuesito(long codigoApresentacao, long codigoJurado, long quesito){        
+        
+        return  notaDB.encontrarPorApresentacaoeJuradoQuesito(codigoApresentacao, codigoJurado, quesito);
+    }     
 
     public void calcularNotaFinal(long codigoApresentacao, long codigoJurado){        
 
