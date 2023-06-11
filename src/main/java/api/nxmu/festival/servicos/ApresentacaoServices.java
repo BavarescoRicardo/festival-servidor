@@ -34,7 +34,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -52,7 +52,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -66,7 +66,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getCategoria().getId()));
+                apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;

@@ -6,7 +6,7 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    int individuos, Long categoria) {
+    int individuos, String categoriaTitulo) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -14,7 +14,7 @@ public class ApresentacaoDto {
         this.gravacao = gravacao;
         this.autor = autor;
         this.individuos = individuos;
-        this.categoria = categoria;
+        this.categoriaTitulo = categoriaTitulo;
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
@@ -41,6 +41,15 @@ public class ApresentacaoDto {
     private int senha;
     private int individuos;
     private Long categoria;
+    private String categoriaTitulo;
+
+    public String getCategoriaTitulo() {
+        return categoriaTitulo;
+    }
+
+    public void setCategoriaTitulo(String categoriaTitulo) {
+        this.categoriaTitulo = categoriaTitulo;
+    }
 
     public Long getCodigo() {
         return codigo;
