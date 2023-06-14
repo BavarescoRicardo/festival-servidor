@@ -13,6 +13,7 @@ import api.nxmu.festival.dto.AtualizaNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.dto.filtros.FiltroNotaDto;
+import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.modelo.Nota;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.NotaFinalRepositorio;
@@ -70,6 +71,12 @@ public class NotaServices {
 
     public boolean salvar(NotaDto notaDto){
         try {
+            // Validações
+                // Verifica se a apresentacao pertence a categoria informada
+            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
+                return false;
+            }
 
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
