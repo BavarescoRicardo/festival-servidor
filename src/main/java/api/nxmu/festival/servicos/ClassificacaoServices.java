@@ -58,7 +58,7 @@ public class ClassificacaoServices {
     public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
         BigDecimal bd;
         List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40);
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10);
         List<Classificacao> listaFiltrada = classificacaoDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
