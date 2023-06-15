@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -58,7 +59,7 @@ public class ClassificacaoServices {
     public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
         BigDecimal bd;
         List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10);
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
         List<Classificacao> listaFiltrada = classificacaoDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
