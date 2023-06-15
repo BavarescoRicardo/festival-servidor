@@ -18,6 +18,19 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
+    int individuos, String categoriaTitulo, Long categoria) {
+        this.codigo = codigo;
+        this.musica = musica;
+        this.nomeartistico = nomeartistico;
+        this.tom = tom;
+        this.gravacao = gravacao;
+        this.autor = autor;
+        this.individuos = individuos;
+        this.categoriaTitulo = categoriaTitulo;
+        this.categoria = categoria;
+    }    
+
+    public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
             int ordem, int senha, int individuos, Long categoria) {
         this.codigo = codigo;                
         this.musica = musica;
