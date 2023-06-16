@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
@@ -83,6 +84,24 @@ public class ParticipanteServices {
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
+        }
+    }
+
+
+    public void savaImagem(Long idParticipante, MultipartFile files) {
+        try {
+            Participante participante = this.encontrarPorId(idParticipante).get();
+            
+            if((idParticipante == null) || !(participante.getId() > 0)){
+                throw new Exception("Participante não encontrado");
+            
+            }
+
+            // Se excecao nao disparada entao realiza tarefas
+            participante.setFotoPerfil(files.getBytes());
+            this.participanteDB.save(participante);    
+        } catch (Exception e) {
+            return;
         }
     }    
 }
