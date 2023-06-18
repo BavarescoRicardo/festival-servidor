@@ -103,5 +103,22 @@ public class ParticipanteServices {
         } catch (Exception e) {
             return;
         }
-    }    
+    }
+    
+    public void savaDocumento(Long idParticipante, MultipartFile files) {
+        try {
+            Participante participante = this.encontrarPorId(idParticipante).get();
+            
+            if((idParticipante == null) || !(participante.getId() > 0)){
+                throw new Exception("Participante não encontrado");
+            
+            }
+
+            // Se excecao nao disparada entao realiza tarefas
+            participante.setFotoDocumento(files.getBytes());
+            this.participanteDB.save(participante);    
+        } catch (Exception e) {
+            return;
+        }
+    }      
 }

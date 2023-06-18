@@ -75,6 +75,18 @@ public class ParticipanteController {
         }
 
         return ResponseEntity.ok("Imagem salva com sucesso");     
-    }    
+    }
+    
+    @PostMapping("/participante/documento")
+    public ResponseEntity<Object> savaDocumento(int participante, MultipartFile image) throws IOException {
+        try {
+            Long idParticipante =  (long) participante;
+            this.participanteService.savaDocumento(idParticipante, image);
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body("Erro controller. Não foi possível salvar imagem");
+        }
+
+        return ResponseEntity.ok("Imagem salva com sucesso");     
+    }     
     
 }

@@ -39,18 +39,14 @@ public class Participante {
     private String descrinescessidade;
     private int ativo;
     private byte[] fotoPerfil;
+    private byte[] fotoDocumento;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apresentacao_id")
     private Apresentacao apresentacao;    
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
-    private List<Endereco> enderecos;     
-        
-    public Participante(Long id, byte[] fotoPerfil) {
-        this.id = id;
-        this.fotoPerfil = fotoPerfil;
-    }
+    private List<Endereco> enderecos;
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
             String documentorg, String email, String necessidade, String descrinescessidade, Apresentacao apresentacao) {
@@ -127,4 +123,10 @@ public class Participante {
     public void setFotoPerfil(byte[] fotoPerfil) {
         this.fotoPerfil = fotoPerfil;
     }
+    public byte[] getFotoDocumento() {
+        return fotoDocumento;
+    }
+    public void setFotoDocumento(byte[] fotoDocumento) {
+        this.fotoDocumento = fotoDocumento;
+    }    
 }
