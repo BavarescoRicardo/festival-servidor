@@ -104,7 +104,9 @@ public class ApresentacaoServices {
             apresentacao.setGravacao(apresentacaoDto.getGravacao());
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
-            apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
+            // Verifica se deve alterar categoria
+            if(apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0)
+                apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
             // Verificações se deve alterar ordem e/ou senha
             if(apresentacaoDto.getOrdem() > 0)
                 apresentacao.setOrdem(apresentacaoDto.getOrdem());
