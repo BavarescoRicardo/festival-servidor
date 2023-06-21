@@ -6,7 +6,7 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    int individuos, String categoriaTitulo) {
+    int individuos, int ordem, int senha, String categoriaTitulo) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -14,6 +14,8 @@ public class ApresentacaoDto {
         this.gravacao = gravacao;
         this.autor = autor;
         this.individuos = individuos;
+        this.ordem = ordem;
+        this.senha = senha;
         this.categoriaTitulo = categoriaTitulo;
     }
 

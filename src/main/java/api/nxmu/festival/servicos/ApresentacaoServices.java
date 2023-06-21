@@ -34,7 +34,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getCategoria().getTitulo()));
+                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -52,7 +52,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getCategoria().getTitulo()));
+                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -105,6 +105,12 @@ public class ApresentacaoServices {
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
             apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
+            // Verificações se deve alterar ordem e/ou senha
+            if(apresentacaoDto.getOrdem() > 0)
+                apresentacao.setOrdem(apresentacaoDto.getOrdem());
+            if(apresentacaoDto.getSenha() > 0)
+                apresentacao.setSenha(apresentacaoDto.getSenha());
+
             this.apresentacaoDB.save(apresentacao);
             return apresentacaoDto;
         } catch (Exception e) {
