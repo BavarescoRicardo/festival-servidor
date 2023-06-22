@@ -15,4 +15,7 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
 
     @Query("select u from Apresentacao u where (u.categoria.id = ?1)")
     Page<Apresentacao> findAllFiltrado(long codCategoria, String textoFiltro, Pageable p);
+
+    @Query("select u from Apresentacao u")
+    Page<Apresentacao> findAllOrdenado(Pageable p);    
 }

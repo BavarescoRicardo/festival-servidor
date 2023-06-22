@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -28,9 +29,10 @@ public class ApresentacaoServices {
 
     public List<ApresentacaoDto> encontrar(){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
+        Pageable pageable = PageRequest.of(0, 50, Sort.by("ordem"));
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
-        for(Apresentacao apresentacao: apresentacaoDB.findAll()) {
+        for(Apresentacao apresentacao: apresentacaoDB.findAllOrdenado(pageable)) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
@@ -42,7 +44,7 @@ public class ApresentacaoServices {
 
     public List<ApresentacaoDto> encontrarFiltrado(FiltroApresentacaoDto filtro){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40);
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40, Sort.by("senha"));
         List<Apresentacao> listaFiltrada = apresentacaoDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
