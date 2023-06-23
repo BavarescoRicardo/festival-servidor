@@ -4,6 +4,15 @@ public class FiltroApresentacaoDto {
     private String textoFiltro;
     private Long codCategoria;
     private String pg;
+    private String ordem;
+
+    public String getOrdem() {
+        return ordem;
+    }
+
+    public void setOrdem(String ordem) {
+        this.ordem = ordem;
+    }
 
     public FiltroApresentacaoDto() {
     }
@@ -12,9 +21,10 @@ public class FiltroApresentacaoDto {
         this.codCategoria = codCategoria;
     }
 
-    public FiltroApresentacaoDto(String textoFiltro, Long codCategoria) {
+    public FiltroApresentacaoDto(String textoFiltro, Long codCategoria, String ordem) {
         this.textoFiltro = textoFiltro;
         this.codCategoria = codCategoria;
+        this.ordem = ordem;
     }
 
     public String getTextoFiltro() {
