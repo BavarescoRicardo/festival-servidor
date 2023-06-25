@@ -2,6 +2,7 @@ package api.nxmu.festival.repositorio;
 import api.nxmu.festival.modelo.Apresentacao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,4 +19,11 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
 
     @Query("select u from Apresentacao u")
     Page<Apresentacao> findAllOrdenado(Pageable p);    
+
+@Query("SELECT new map(a.id as codigo, a.musica as musica, a.nomeartistico as nomeartistico, a.autor as autor, " +
+       "a.ordem as ordem, c.titulo as categoriaTitulo, b.fotoPerfil as fotoPerfil) " +
+       "FROM Apresentacao a " +
+       "JOIN a.participantes b " +
+       "JOIN a.categoria c")
+Page<Map<String, Object>> findAllCartao(Pageable p);
 }

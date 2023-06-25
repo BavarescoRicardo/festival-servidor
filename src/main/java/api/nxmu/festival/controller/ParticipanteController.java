@@ -87,6 +87,6 @@ public class ParticipanteController {
         }
 
         return ResponseEntity.ok("Imagem salva com sucesso");     
-    }     
+    }  
     
 }

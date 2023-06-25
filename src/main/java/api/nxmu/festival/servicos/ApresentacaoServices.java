@@ -1,9 +1,11 @@
 package api.nxmu.festival.servicos;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 import java.util.ArrayList;
 
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -11,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.repositorio.ApresentacaoRepositorio;
@@ -132,6 +135,45 @@ public class ApresentacaoServices {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }    
+    }
+    
+    public List<ListaCartaoApresentacaoDto> encontrarCartao(){
+        List<ListaCartaoApresentacaoDto> listaDto = new ArrayList<ListaCartaoApresentacaoDto>();
+        Pageable pageable = PageRequest.of(0, 50, Sort.by("ordem"));
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        Page<Map<String, Object>> resultados = apresentacaoDB.findAllCartao(pageable);
+        for (Map<String, Object> row : resultados.getContent()) {
+            Long codigo = (Long) row.get("codigo");
+            String musica = (String) row.get("musica");
+            String nomeartistico = (String) row.get("nomeartistico");
+            String autor = (String) row.get("autor");
+            Integer ordem = (row.get("ordem") != null) ? (Integer) row.get("ordem") : 0;
+            String categoriaTitulo = (String) row.get("categoriaTitulo");
+            byte[] fotoPerfil = (byte[]) row.get("fotoPerfil");
+
+            listaDto.add(new ListaCartaoApresentacaoDto(codigo, musica, nomeartistico, autor, ordem, categoriaTitulo, fotoPerfil));
+        }
+        
+        return listaDto;
+    }
+
+    public List<ListaCartaoApresentacaoDto> encontrarFiltradoCartao(FiltroApresentacaoDto filtro){
+        List<ListaCartaoApresentacaoDto> listaDto = new ArrayList<ListaCartaoApresentacaoDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40, Sort.by(filtro.getOrdem()));
+        List<Apresentacao> listaFiltrada = apresentacaoDB.
+            findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Apresentacao apresentacao: listaFiltrada) {
+            listaDto.add(new ListaCartaoApresentacaoDto(
+                apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), 
+                apresentacao.getAutor(), apresentacao.getOrdem(), apresentacao.getCategoria().getTitulo(),
+                null));
+        }
+
+        return listaDto;
+    }  
     
 }

@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.servicos.ApresentacaoServices;
 import lombok.RequiredArgsConstructor;
@@ -34,11 +35,10 @@ public class ApresentacaoController {
 
     @RequestMapping(value = "/apresentacoesfiltro", method =  RequestMethod.POST)
     public List<ApresentacaoDto> GetArtigoFiltrado(
-    @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro) {
-        
+    @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro) {        
+
         FiltroApresentacaoDto filtroRecebido = filtro.get();
         return apresentacaoService.encontrarFiltrado(filtroRecebido);
-
     }    
 
     @RequestMapping(value = "/salvaapresentacao", method =  RequestMethod.POST)
@@ -71,6 +71,19 @@ public class ApresentacaoController {
         } catch (Exception e) {
             return null;
         }
-	}    
+	}  
+
+    @RequestMapping(value = "/apresentacoescartao", method =  RequestMethod.GET)
+    public List<ListaCartaoApresentacaoDto> getApresentacoesCartao(){
+        return apresentacaoService.encontrarCartao();
+    }
+
+    @RequestMapping(value = "/apresentacoesfiltrocartao", method =  RequestMethod.POST)
+    public List<ListaCartaoApresentacaoDto> GetArtigoFiltradoCartao(
+    @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro) {        
+        
+        FiltroApresentacaoDto filtroRecebido = filtro.get();
+        return apresentacaoService.encontrarFiltradoCartao(filtroRecebido);
+    }   
 
 }
