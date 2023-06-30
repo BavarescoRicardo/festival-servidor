@@ -20,10 +20,10 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
     @Query("select u from Apresentacao u")
     Page<Apresentacao> findAllOrdenado(Pageable p);    
 
-@Query("SELECT new map(a.id as codigo, a.musica as musica, a.nomeartistico as nomeartistico, a.autor as autor, " +
-       "a.ordem as ordem, c.titulo as categoriaTitulo, b.fotoPerfil as fotoPerfil) " +
-       "FROM Apresentacao a " +
-       "JOIN a.participantes b " +
-       "JOIN a.categoria c")
-Page<Map<String, Object>> findAllCartao(Pageable p);
+    @Query("select new map(a.id as codigo, a.musica as musica, a.nomeartistico as nomeartistico, a.autor as autor, " +
+            "a.ordem as ordem, c.titulo as categoriaTitulo, b.fotoPerfil as fotoPerfil) " +
+            "from Participante b " +
+            "join b.apresentacao a " +
+            "join a.categoria c")
+    Page<Map<String, Object>> findAllCartao(Pageable p);
 }
