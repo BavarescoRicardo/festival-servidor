@@ -39,6 +39,21 @@ public class ParticipanteServices {
         return listaDto;
     }
 
+    public List<ParticipanteDto> encontrarPorApresentacaoId(Long idApresentacao){
+        List<ParticipanteDto> listaDto = new ArrayList<ParticipanteDto>();
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Participante participante: participanteDB.findAll()) {
+            listaDto.add(new ParticipanteDto(
+                participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
+                participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
+                participante.getApresentacao().getId()));
+        }
+
+        return listaDto;
+    }    
+
     public Long salvar(ParticipanteDto participante) {
         try {
             Participante p = new Participante(
@@ -77,9 +92,7 @@ public class ParticipanteServices {
     
     public ResponseEntity<String> remover(long id){
         try {
-            
-            Participante participante = this.encontrarPorId(id).get();
-            this.participanteDB.delete(participante);
+            this.participanteDB.deleteById(id);
 
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {

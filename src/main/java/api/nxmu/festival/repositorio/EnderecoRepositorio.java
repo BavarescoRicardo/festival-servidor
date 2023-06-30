@@ -9,6 +9,9 @@ import org.springframework.data.jpa.repository.Query;
 public interface EnderecoRepositorio extends JpaRepository<Endereco, Long>{
 
     // Must be One
-    @Query("select u from Endereco u where u.participante = ?1")
+    @Query("select u from Endereco u where u.participante.id = ?1")
     Optional<Endereco> findByIdParticipante(Long codigo);
+    
+    @Query("delete from Endereco where participante.id = ?1")
+    void removeByIdParticipante(Long codigo);    
 }

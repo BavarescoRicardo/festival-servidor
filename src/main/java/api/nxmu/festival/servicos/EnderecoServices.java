@@ -3,9 +3,12 @@ package api.nxmu.festival.servicos;
 import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
+
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.EnderecoDto;
+import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Endereco;
 import api.nxmu.festival.repositorio.EnderecoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -16,10 +19,30 @@ public class EnderecoServices {
 
     private final EnderecoRepositorio enderecoDB;
     private final ParticipanteServices participanteServices;
+    private final ApresentacaoServices apresentacaoServices;
 
     public Optional<Endereco> encontrarPorId(Long id){        
         return enderecoDB.findById(id);
     }
+
+    public Optional<Endereco> encontrarPorParticipante(Long id){        
+        try {
+            return enderecoDB.findByIdParticipante(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+            
+        }
+    }
+
+    public void removerPorParticipante(Long id){        
+        try {
+            enderecoDB.removeByIdParticipante(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
+    }    
+
 
     public List<EnderecoDto> encontrar(){
         List<EnderecoDto> listaDto = new ArrayList<EnderecoDto>();
@@ -64,5 +87,31 @@ public class EnderecoServices {
             return null;
         }
         return endereco;
-    }    
+    }
+
+    
+    public ResponseEntity<String> remover(long id){
+        try {
+            // Encontra objetos da lista de participantes pelo id da apresentacao
+            List<ParticipanteDto> participantes = participanteServices.encontrarPorApresentacaoId(id);
+            // remover endereco de todos os participantes 
+            for (ParticipanteDto participanteDto : participantes) {
+                // enderecoDB.removeByIdParticipante(participanteDto.getCodigo());                 
+                Endereco endereco = enderecoDB.findById(participanteDto.getCodigo()).get();
+                enderecoDB.deleteById(endereco.getId());
+                // remover participante 
+                participanteServices.remover(participanteDto.getCodigo());
+                apresentacaoServices.remover(id);
+            }
+
+            // por fim remover apresentacao
+            apresentacaoServices.remover(id);
+            
+
+            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+        } catch (Exception e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }
