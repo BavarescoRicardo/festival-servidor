@@ -1,0 +1,28 @@
+version: "3.8"
+
+services:
+  psql-db:
+    image: postgres
+    container_name: psql-db
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=festivalr
+    ports:
+      - '5432:5432'
+
+  festival-servidor:
+    container_name: festival_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '3033:3033'
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - psql-db
