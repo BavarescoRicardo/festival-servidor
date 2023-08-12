@@ -6,16 +6,18 @@ public class ClassificacaoListaDto {
     private double notafinal;
     private String categoria;
     private String apresentacao;
+    private String nomeArtistico;
     
     public ClassificacaoListaDto(){
         
     }
 
-    public ClassificacaoListaDto(Long codigo, double notafinal, String categoria, String apresentacao) {
+    public ClassificacaoListaDto(Long codigo, double notafinal, String categoria, String apresentacao, String nomeArtistico) {
         this.codigo = codigo;
         this.notafinal = notafinal;
         this.categoria = categoria;
         this.apresentacao = apresentacao;
+        this.nomeArtistico = nomeArtistico;
     }
 
     public ClassificacaoListaDto(double notafinal, String categoria, String apresentacao) {
@@ -52,7 +54,15 @@ public class ClassificacaoListaDto {
         return apresentacao;
     }
 
-    public void setApresentacao(String apresentacao) {
-        this.apresentacao = apresentacao;
+    public void setApresentacao(String nomeArtistico) {
+        this.nomeArtistico = nomeArtistico;
     }
+
+    public String getNomeArtistico() {
+        return apresentacao;
+    }
+
+    public void setNomeArtistico(String nomeArtistico) {
+        this.apresentacao = nomeArtistico;
+    }    
 }

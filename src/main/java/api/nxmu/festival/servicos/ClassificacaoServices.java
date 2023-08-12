@@ -49,8 +49,8 @@ public class ClassificacaoServices {
         for(Classificacao classificacao: classificacaoDB.findAll()) {
             bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoListaDto(
-                classificacao.getId(), bd.doubleValue(),
-                classificacao.getCategoria().getDescricao(), classificacao.getApresentacao().getMusica()));
+                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
+                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico()));
         }
 
         return listaDto;
@@ -68,8 +68,8 @@ public class ClassificacaoServices {
         for(Classificacao classificacao: listaFiltrada) {
             bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoListaDto(
-                classificacao.getId(), bd.doubleValue(),
-                classificacao.getCategoria().getDescricao(), classificacao.getApresentacao().getMusica()));
+                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
+                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico()));
         }
 
         return listaDto;
