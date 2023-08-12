@@ -59,7 +59,7 @@ public class ClassificacaoListaDto {
     }
 
     public String getNomeArtistico() {
-        return apresentacao;
+        return nomeArtistico;
     }
 
     public void setNomeArtistico(String nomeArtistico) {
