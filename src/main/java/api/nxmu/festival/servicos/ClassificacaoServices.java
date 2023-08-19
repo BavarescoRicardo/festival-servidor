@@ -16,6 +16,7 @@ import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
+import api.nxmu.festival.dto.ClassificacaoRelDto;
 import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
@@ -73,7 +74,26 @@ public class ClassificacaoServices {
         }
 
         return listaDto;
-    }      
+    } 
+    
+    public List<ClassificacaoRelDto> encontrarRel(FiltroClassificacaoDto filtro){
+        BigDecimal bd;
+        List<ClassificacaoRelDto> listaDto = new ArrayList<ClassificacaoRelDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
+        List<Classificacao> listaFiltrada = classificacaoDB.
+            findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Classificacao classificacao: listaFiltrada) {
+            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
+            listaDto.add(new ClassificacaoRelDto(
+                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
+                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico(), "Cidade x"));
+        }
+
+        return listaDto;
+    }     
 
     public boolean salvar(ClassificacaoDto classificacao){
         try {

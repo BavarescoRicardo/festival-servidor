@@ -13,6 +13,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.modelo.Apresentacao;
@@ -62,6 +63,24 @@ public class ApresentacaoServices {
 
         return listaDto;
     }    
+
+    public List<ApresentacaoRelDto> encontrarRel(FiltroApresentacaoDto filtro){
+        List<ApresentacaoRelDto> listaDto = new ArrayList<ApresentacaoRelDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 40, Sort.by(filtro.getOrdem()));
+        List<Apresentacao> listaFiltrada = apresentacaoDB.
+            findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Apresentacao apresentacao: listaFiltrada) {
+            listaDto.add(new ApresentacaoRelDto(
+                apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo(), "cidade"));
+        }
+
+        return listaDto;
+    }        
 
     public List<ApresentacaoDto> encontrarPorCategoria(long codCategoria){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();

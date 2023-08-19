@@ -16,6 +16,7 @@ import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.CalculoClassificaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
+import api.nxmu.festival.dto.ClassificacaoRelDto;
 import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
 import api.nxmu.festival.servicos.ClassificacaoServices;
 import lombok.RequiredArgsConstructor;
@@ -35,12 +36,20 @@ public class ClassificacaoController {
     }
     
     @RequestMapping(value = "/classificacoesfiltro", method =  RequestMethod.POST)
-    public List<ClassificacaoListaDto> GetArtigoFiltrado(
+    public List<ClassificacaoListaDto> getClassificacoesFiltrado(
     @RequestBody(required = false) Optional<FiltroClassificacaoDto> filtro) {
         
         FiltroClassificacaoDto filtroRecebido = filtro.get();
         return classificacaoService.encontrarFiltrado(filtroRecebido);
-    }        
+    }
+    
+    @RequestMapping(value = "/classificacoesrel", method =  RequestMethod.POST)
+    public List<ClassificacaoRelDto> getClassificacoesRel(
+    @RequestBody(required = false) Optional<FiltroClassificacaoDto> filtro) {
+        
+        FiltroClassificacaoDto filtroRecebido = filtro.get();
+        return classificacaoService.encontrarRel(filtroRecebido);
+    }       
 
     @RequestMapping(value = "/salvaclassificacao", method =  RequestMethod.POST)
 	public boolean salvarClassif(@RequestBody ClassificacaoDto classificacao)

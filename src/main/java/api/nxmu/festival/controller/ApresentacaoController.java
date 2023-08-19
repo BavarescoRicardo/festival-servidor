@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
+import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.servicos.ApresentacaoServices;
@@ -32,6 +33,13 @@ public class ApresentacaoController {
     public List<ApresentacaoDto> getApresentacoes(){
         return apresentacaoService.encontrar();
     }
+
+    @RequestMapping(value = "/apresentacoesrel", method =  RequestMethod.POST)
+    public List<ApresentacaoRelDto> getApresentacoesRel(
+        @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro){
+            FiltroApresentacaoDto filtroRecebido = filtro.get();
+            return apresentacaoService.encontrarRel(filtroRecebido);
+    }    
 
     @RequestMapping(value = "/apresentacoesfiltro", method =  RequestMethod.POST)
     public List<ApresentacaoDto> GetArtigoFiltrado(
