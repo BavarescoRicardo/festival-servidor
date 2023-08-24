@@ -2,13 +2,18 @@ package api.nxmu.festival.servicos;
 
 import java.util.List;
 import java.util.Optional;
+import java.io.BufferedReader;
+import java.io.FileReader;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.EnderecoDto;
+import api.nxmu.festival.dto.ImportacaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.modelo.Endereco;
 import api.nxmu.festival.repositorio.EnderecoRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -112,6 +117,112 @@ public class EnderecoServices {
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
-    }
+    }    
+
+    public boolean importar(){
+        try {
+            int qtde = 0;
+            List<ImportacaoDto> importacoes = new ArrayList<ImportacaoDto>();
+            try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/fimusii.csv"))) {
+                String line;
+                
+                while ((line = br.readLine()) != null) {
+                    String[] values = line.split(",");
+                    qtde++;
+                    if(qtde == 1)
+                        continue;
+                      importacoes.add(
+                          new ImportacaoDto(
+                             values[1], // Nome Artistico 1
+                              values[2] + values[3], // Primeiro e ultimo nome
+                              values[4],  // Data de nascimento
+                              values[5], // Número do Documento
+                              values[6], // email
+                              values[7], // telefone
+                              values[8], // necessidade espec - sim - não
+                              values[10], // descrição' necessidade espec 
+                                    // Repete para dupla
+                              values[11] + values[12], // Primeiro e ultimo nome
+                              values[13],  // Data de nascimento
+                              values[14], // email
+                              values[15], // telefone                              
+                                    // Repete para trio
+                              values[16] + values[17], // Primeiro e ultimo nome
+                              values[18],  // email
+                              values[19], // telefone
+                              values[20], // Data de nascimento 
+                                    // Repete pata grupo
+                              values[21] + values[22], // Primeiro e ultimo nome
+                              values[23],  // email
+                              values[24], // telefone
+                              values[25], // Data de nascimento 
+                                    //  codigo apresentacao
+                                Long.valueOf(0),
+                                    // Dados Apresentação
+                              values[31], // musica
+                              values[33], // tom 
+                              values[32], // gravação
+                              values[34], // autor
+                             1, // participação                              
+                                    //  codigo apresentacao
+                                Long.parseLong("1"), // categoria 
+                                "", // dESCRIÇÃO CATEGORIA
+                             // Dados endereco
+                              values[26], // bairro
+                              values[27], // cidade
+                              values[28], // estado
+                              values[29], // codigo postal
+                                    //  codigo apresentacao
+                                Long.valueOf(0)
+                    //          // Dados Finais
+                    //          values[38] // Documento foto
+                                          )
+                      );
+
+                }
+            }             
+
+            
+            System.out.println("Importando csv");
+            for (ImportacaoDto importacao : importacoes) {                
+                // Salvar a apresentacao de cada importacao
+                long idApre = apresentacaoServices.salvar(
+                    new ApresentacaoDto(
+                        Long.valueOf(0),
+                        importacao.getMusica(),
+                        importacao.getNomeArtistico(),
+                        importacao.getTom(),
+                        importacao.getGravacao(),
+                        importacao.getAutor(),
+                        importacao.getOrdem(),
+                        importacao.getSenha(),
+                        importacao.getIndividuos(),
+                        importacao.getCategoria()
+                    )
+                );            
+                long idPart = participanteServices.salvar(
+                    new ParticipanteDto(
+                        Long.valueOf(0),
+                        importacao.getNomeArtistico(), importacao.getNomeResponsavel(), 
+                        importacao.getGenero(), importacao.getNascimento(),
+                        importacao.getDocumentorg(), importacao.getEmail(), 
+                        importacao.getNecessidade(), importacao.getDescrinescessidade(),
+                        idApre
+                    )
+                );
+
+                // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+                Endereco e = new Endereco(
+                    importacao.getEndereco(), importacao.getCidade(), importacao.getEstado(), importacao.getCep(),
+                    importacao.getTelefone(), participanteServices.encontrarPorId(idPart).get());
+
+                this.enderecoDB.save(e);
+            }
+
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }    
 
 }

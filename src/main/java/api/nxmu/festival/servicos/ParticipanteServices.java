@@ -57,8 +57,10 @@ public class ParticipanteServices {
     public Long salvar(ParticipanteDto participante) {
         try {
             Participante p = new Participante(
-                participante.getNomeArtistico(), participante.getNomeResponsavel(), participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
+                participante.getNomeArtistico(), participante.getNomeResponsavel(), 
+                participante.getGenero(), participante.getNascimento(),
+                participante.getDocumentorg(), participante.getEmail(), 
+                participante.getNecessidade(), participante.getDescrinescessidade(),
                 apresentacaoServices.encontrarPorId(participante.getApresentacao()).get()
             );
     
