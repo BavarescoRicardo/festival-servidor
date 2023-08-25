@@ -147,7 +147,7 @@ public class ApresentacaoServices {
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
             // Verifica se deve alterar categoria
-            if(apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0)
+            if((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 4))
                 apresentacao.setCategoria(categoriaServices.encontrarPorId(categoria).get());
             // Verificações se deve alterar ordem e/ou senha
             if(apresentacaoDto.getOrdem() > 0)
