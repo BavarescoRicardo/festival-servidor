@@ -121,51 +121,64 @@ public class EnderecoServices {
 
     public boolean importar(){
         try {
+            long resultadoCategoria = 0;
             int qtde = 0;
             List<ImportacaoDto> importacoes = new ArrayList<ImportacaoDto>();
-            try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/fimusii.csv"))) {
+            try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/fimusicsv.csv"))) {
                 String line;
                 
                 while ((line = br.readLine()) != null) {
-                    String[] values = line.split(",");
+                    String[] values = line.split(";");
                     qtde++;
                     if(qtde == 1)
                         continue;
+                    String categoria = values[33].toLowerCase();
+                    if (categoria.equals("infantil")) {
+                        resultadoCategoria = 1L;
+                    } else if (categoria.equals("juvenil")) {
+                        resultadoCategoria = 2L;
+                    } else if (categoria.equals("popular")) {
+                        resultadoCategoria = 3L;
+                    } else if (categoria.equals("sertanejo")) {
+                        resultadoCategoria = 4L;
+                    } else {
+                        resultadoCategoria = 4L;
+                    }
+
                       importacoes.add(
                           new ImportacaoDto(
-                             values[1], // Nome Artistico 1
-                              values[2] + values[3], // Primeiro e ultimo nome
-                              values[4],  // Data de nascimento
-                              values[5], // Número do Documento
-                              values[6], // email
-                              values[7], // telefone
-                              values[8], // necessidade espec - sim - não
-                              values[10], // descrição' necessidade espec 
+                             values[0], // Nome Artistico 1
+                              values[1] + values[2], // Primeiro e ultimo nome
+                              values[3],  // Data de nascimento
+                              values[4], // Número do Documento
+                              values[5], // email
+                              values[6], // telefone
+                              values[7], // necessidade espec - sim - não
+                              values[8], // descrição' necessidade espec 
                                     // Repete para dupla
-                              values[11] + values[12], // Primeiro e ultimo nome
-                              values[13],  // Data de nascimento
-                              values[14], // email
-                              values[15], // telefone                              
+                              values[9] + values[10], // Primeiro e ultimo nome
+                              values[11],  // Data de nascimento
+                              values[12], // email
+                              values[13], // telefone                              
                                     // Repete para trio
-                              values[16] + values[17], // Primeiro e ultimo nome
-                              values[18],  // email
-                              values[19], // telefone
-                              values[20], // Data de nascimento 
+                              values[14] + values[15], // Primeiro e ultimo nome
+                              values[16],  // email
+                              values[17], // telefone
+                              values[18], // Data de nascimento 
                                     // Repete pata grupo
-                              values[21] + values[22], // Primeiro e ultimo nome
-                              values[23],  // email
-                              values[24], // telefone
-                              values[25], // Data de nascimento 
+                              values[19] + values[20], // Primeiro e ultimo nome
+                              values[21],  // email
+                              values[22], // telefone
+                              values[23], // Data de nascimento 
                                     //  codigo apresentacao
                                 Long.valueOf(0),
                                     // Dados Apresentação
-                              values[31], // musica
-                              values[33], // tom 
-                              values[32], // gravação
-                              values[34], // autor
-                             1, // participação                              
-                                    //  codigo apresentacao
-                                Long.parseLong("1"), // categoria 
+                              values[29], // musica
+                              values[31], // tom 
+                              values[30], // gravação
+                              values[32], // autor
+                             1, // participação 
+                                resultadoCategoria, 
                                 "", // dESCRIÇÃO CATEGORIA
                              // Dados endereco
                               values[26], // bairro

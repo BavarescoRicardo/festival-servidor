@@ -117,7 +117,25 @@ public class ApresentacaoServices {
     }
 
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id){
+        long categoria = 0;
         try {
+            switch (apresentacaoDto.getCategoriaTitulo().toLowerCase()) {
+                case "infantil":
+                    categoria = 1L;
+                    break;
+                case "juvenil":
+                    categoria = 2L;
+                    break;
+                case "popular":
+                    categoria = 3L;
+                    break;
+                case "sertaneja":
+                    categoria = 4L;
+                    break;                                    
+            
+                default:
+                    break;
+            }
             // Encontra objeto salvo pelo id e depois atualiza
             Apresentacao apresentacao = this.encontrarPorId(id).get();
 
@@ -130,7 +148,7 @@ public class ApresentacaoServices {
             apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
             // Verifica se deve alterar categoria
             if(apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0)
-                apresentacao.setCategoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
+                apresentacao.setCategoria(categoriaServices.encontrarPorId(categoria).get());
             // Verificações se deve alterar ordem e/ou senha
             if(apresentacaoDto.getOrdem() > 0)
                 apresentacao.setOrdem(apresentacaoDto.getOrdem());
