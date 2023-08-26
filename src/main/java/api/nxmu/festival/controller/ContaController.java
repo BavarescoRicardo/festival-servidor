@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import api.nxmu.festival.dto.ImportacaoEntradaDto;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
 import api.nxmu.festival.seguranca.AuthenticationService;
@@ -44,12 +45,13 @@ public class ContaController {
     }
     
 
-    @RequestMapping(value = "/testaapi", method =  RequestMethod.GET)
-	public ResponseEntity<?> testeApi()
+    @RequestMapping(value = "/testaapi", method =  RequestMethod.POST)
+	public ResponseEntity<?> testeApi(
+    @RequestBody ImportacaoEntradaDto arquivo)
     {
         //  envolver metodo em try catch retorno certo no tr retorno erraado no false
         try {
-            enderecoServices.importar();
+            enderecoServices.importar(arquivo.getSes());
             return ResponseEntity.ok().body("Executadas açoes com sucesso absoluto!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());

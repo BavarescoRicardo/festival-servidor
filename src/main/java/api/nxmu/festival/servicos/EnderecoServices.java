@@ -119,12 +119,18 @@ public class EnderecoServices {
         }
     }    
 
-    public boolean importar(){
+    public boolean importar(int arquivo){
         try {
             long resultadoCategoria = 0;
             int qtde = 0;
             List<ImportacaoDto> importacoes = new ArrayList<ImportacaoDto>();
-            try (BufferedReader br = new BufferedReader(new FileReader("src/main/resources/fimusicsv.csv"))) {
+            String caminhoArquivo = "src/main/resources/fimusicsv.csv";
+            if(arquivo == 2)
+                caminhoArquivo = "src/main/resources/fimusicsv2.csv";
+
+            if(arquivo == 3)
+                caminhoArquivo = "src/main/resources/fimusicsv3.csv";
+            try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
                 String line;
                 
                 while ((line = br.readLine()) != null) {
@@ -193,7 +199,7 @@ public class EnderecoServices {
                       );
 
                 }
-            }             
+            }                               
 
             
             System.out.println("Importando csv");
