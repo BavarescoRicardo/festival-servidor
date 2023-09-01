@@ -76,7 +76,8 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoRelDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
-                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo(), "cidade"));
+                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo(), 
+                    apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade()));
         }
 
         return listaDto;
