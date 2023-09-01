@@ -130,16 +130,22 @@ public class EnderecoServices {
 
             if(arquivo == 3)
                 caminhoArquivo = "src/main/resources/fimusicsv3.csv";
+
+            if(arquivo == 4)
+                caminhoArquivo = "src/main/resources/fimusicsv4.csv";                
+
+            if(arquivo == 5)
+                caminhoArquivo = "src/main/resources/fimusicsv5.csv";                
             try (BufferedReader br = new BufferedReader(new FileReader(caminhoArquivo))) {
                 String line;
                 
                 while ((line = br.readLine()) != null) {
                     String[] values = line.split(";");
                     qtde++;
-                    if(qtde == 1)
+                    if(qtde == 1 && (arquivo < 2))
                         continue;
                     String categoria = values[33].toLowerCase();
-                    if (categoria.equals("infantil")) {
+                    if (categoria.equals("infantil ")) {
                         resultadoCategoria = 1L;
                     } else if (categoria.equals("juvenil")) {
                         resultadoCategoria = 2L;
