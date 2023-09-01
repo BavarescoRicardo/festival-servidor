@@ -189,6 +189,7 @@ public class EnderecoServices {
                               values[31], // tom 
                               values[30], // gravação
                               values[32], // autor
+                              values[35], // link musica
                              1, // participação 
                                 resultadoCategoria, 
                                 "", // dESCRIÇÃO CATEGORIA
@@ -211,7 +212,7 @@ public class EnderecoServices {
             System.out.println("Importando csv");
             for (ImportacaoDto importacao : importacoes) {                
                 // Salvar a apresentacao de cada importacao
-                long idApre = apresentacaoServices.salvar(
+                long idApre = apresentacaoServices.salvarImport(
                     new ApresentacaoDto(
                         Long.valueOf(0),
                         importacao.getMusica(),
@@ -219,6 +220,7 @@ public class EnderecoServices {
                         importacao.getTom(),
                         importacao.getGravacao(),
                         importacao.getAutor(),
+                        importacao.getLinkmusica(),
                         importacao.getOrdem(),
                         importacao.getSenha(),
                         importacao.getIndividuos(),

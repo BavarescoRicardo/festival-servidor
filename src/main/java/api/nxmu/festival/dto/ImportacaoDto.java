@@ -28,11 +28,11 @@ public class ImportacaoDto {
             String telefoneGrupo, String nascimentoGrupo, 
             Long apresentacao, String musica, 
             String tom, String gravacao, 
-            String autor, int individuos, 
-            Long categoria, String categoriaTitulo, 
-            String endereco, String cidade, 
-            String estado, String cep, 
-            Long participante
+            String autor, String linkmusica,
+            int individuos, Long categoria, 
+            String categoriaTitulo, String endereco, 
+            String cidade, String estado, 
+            String cep, Long participante
         ) 
         {
 
@@ -61,6 +61,7 @@ public class ImportacaoDto {
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
+        this.linkmusica = linkmusica;
         this.individuos = individuos;
         this.categoria = categoria;
         this.categoriaTitulo = categoriaTitulo;
@@ -102,6 +103,7 @@ public class ImportacaoDto {
     private String tom;
     private String gravacao;
     private String autor;
+    private String linkmusica;
     private int ordem;
     private int senha;
     private int individuos;

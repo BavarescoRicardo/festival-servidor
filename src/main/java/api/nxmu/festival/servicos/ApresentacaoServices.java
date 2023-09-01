@@ -116,6 +116,28 @@ public class ApresentacaoServices {
         return apresentacaoSalva.getId();
     }
 
+    public Long salvarImport(ApresentacaoDto apresentacaoDto) throws Exception{
+        Apresentacao apresentacaoSalva = null;
+        try {
+            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
+            Apresentacao apresentacao = Apresentacao.builder()
+                .musica(apresentacaoDto.getMusica())
+                .nomeartistico(apresentacaoDto.getNomeartistico())
+                .tom(apresentacaoDto.getTom())
+                .gravacao(apresentacaoDto.getGravacao())
+                .autor(apresentacaoDto.getAutor())
+                .linkmusica(apresentacaoDto.getLinkmusica())
+                .individuos(apresentacaoDto.getIndividuos())
+                .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
+                .build();
+                apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
+        } catch (Exception e) {
+            throw new Exception(e.getMessage(), e.getCause());
+        }
+        return apresentacaoSalva.getId();
+    }
+
+
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id){
         long categoria = 0;
         try {
