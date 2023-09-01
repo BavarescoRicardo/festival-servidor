@@ -84,7 +84,7 @@ public class ApresentacaoServices {
     
     public List<ApresentacaoRelDto> encontrarRelBanda(FiltroApresentacaoDto filtro){
         List<ApresentacaoRelDto> listaDto = new ArrayList<ApresentacaoRelDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 60, Sort.by(filtro.getOrdem()));
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 200, Sort.by(filtro.getOrdem()));
         List<Apresentacao> listaFiltrada = apresentacaoDB.
             findAllFiltrado(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
