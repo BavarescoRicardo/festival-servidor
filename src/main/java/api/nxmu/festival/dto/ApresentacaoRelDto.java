@@ -9,6 +9,7 @@ public class ApresentacaoRelDto {
     private String cidadeUf;
     private String gravacao;
     private String autor;
+    private String linkmusica;
     private int ordem;
     private int senha;
     private int individuos;
@@ -32,6 +33,22 @@ public class ApresentacaoRelDto {
         this.categoriaTitulo = categoriaTitulo;
         this.cidadeUf = cidadeUf;
     }
+
+    public ApresentacaoRelDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
+    String linkmusica, int individuos, int ordem, int senha, String categoriaTitulo, String cidadeUf) {
+        this.codigo = codigo;
+        this.musica = musica;
+        this.nomeartistico = nomeartistico;
+        this.tom = tom;
+        this.gravacao = gravacao;
+        this.autor = autor;
+        this.linkmusica = linkmusica;
+        this.individuos = individuos;
+        this.ordem = ordem;
+        this.senha = senha;
+        this.categoriaTitulo = categoriaTitulo;
+        this.cidadeUf = cidadeUf;
+    }    
 
     public String getCategoriaTitulo() {
         return categoriaTitulo;
@@ -95,6 +112,14 @@ public class ApresentacaoRelDto {
 
     public void setAutor(String autor) {
         this.autor = autor;
+    }
+
+    public String getLinkmusica() {
+        return linkmusica;
+    }
+
+    public void setLinkmusica(String linkmusica) {
+        this.linkmusica = linkmusica;
     }
 
     public int getOrdem() {

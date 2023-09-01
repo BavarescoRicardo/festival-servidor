@@ -41,6 +41,14 @@ public class ApresentacaoController {
             return apresentacaoService.encontrarRel(filtroRecebido);
     }    
 
+    @RequestMapping(value = "/apresentacoesrelbanda", method =  RequestMethod.POST)
+    public List<ApresentacaoRelDto> getApresentacoesRelBanda(
+        @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro){
+            FiltroApresentacaoDto filtroRecebido = filtro.get();
+            return apresentacaoService.encontrarRelBanda(filtroRecebido);
+    }    
+
+
     @RequestMapping(value = "/apresentacoesfiltro", method =  RequestMethod.POST)
     public List<ApresentacaoDto> GetArtigoFiltrado(
     @RequestBody(required = false) Optional<FiltroApresentacaoDto> filtro) {        
