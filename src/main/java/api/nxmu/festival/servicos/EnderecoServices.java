@@ -5,7 +5,6 @@ import java.util.Optional;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
