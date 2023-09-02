@@ -77,6 +77,17 @@ public class ApresentacaoController {
             return null;
         }               
 	}
+
+    @RequestMapping(value = "/apresentacao/{id}", method =  RequestMethod.GET)
+	public ApresentacaoDto encontrarId(@PathVariable long id)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            return apresentacaoService.encontrarDtoPorId(id);
+        } catch (Exception e) {
+            return null;
+        }
+	}      
     
     @RequestMapping(value = "/removeapresentacao/{id}", method =  RequestMethod.DELETE)
 	public ResponseEntity<String> removeApresentacao(@PathVariable long id)

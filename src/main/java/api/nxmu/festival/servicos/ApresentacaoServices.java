@@ -31,6 +31,17 @@ public class ApresentacaoServices {
         return apresentacaoDB.findById(id);
     }
 
+    public ApresentacaoDto encontrarDtoPorId(Long id){        
+        ApresentacaoDto dto;
+        Apresentacao apresentacao = apresentacaoDB.findById(id).get();
+
+        dto = new ApresentacaoDto(
+                apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo());
+        return dto;
+    }    
+
     public List<ApresentacaoDto> encontrar(){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
         Pageable pageable = PageRequest.of(0, 50, Sort.by("ordem"));
