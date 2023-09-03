@@ -38,7 +38,8 @@ public class ApresentacaoServices {
         dto = new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
-                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo());
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(), apresentacao.getOrdem(), 
+                apresentacao.getSenha(), apresentacao.getCategoria().getTitulo());
         return dto;
     }    
 
@@ -51,7 +52,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
-                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(), apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -69,7 +70,7 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
-                apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(), apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
         return listaDto;
@@ -120,7 +121,8 @@ public class ApresentacaoServices {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
-                apresentacao.getCategoria().getTitulo(), apresentacao.getCategoria().getId()));
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(), apresentacao.getCategoria().getTitulo(), 
+                apresentacao.getCategoria().getId()));
         }
 
         return listaDto;

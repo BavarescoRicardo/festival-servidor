@@ -1,12 +1,25 @@
 package api.nxmu.festival.dto;
 
 public class ApresentacaoDto {
+    private Long codigo;
+    private String musica;
+    private String nomeartistico;
+    private String tom;
+    private String gravacao;
+    private String autor;
+    private String linkmusica;
+    private int ordem;
+    private int senha;
+    private Long idEndereco;
+    private String cidade;
+    private Long categoria;
+    private String categoriaTitulo;    
 
     public ApresentacaoDto() {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    String cidade, int ordem, int senha, String categoriaTitulo) {
+    String cidade, Long idEndereco, int ordem, int senha, String categoriaTitulo) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -14,13 +27,14 @@ public class ApresentacaoDto {
         this.gravacao = gravacao;
         this.autor = autor;
         this.cidade = cidade;
+        this.idEndereco = idEndereco;
         this.ordem = ordem;
         this.senha = senha;
         this.categoriaTitulo = categoriaTitulo;
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    String cidade, String categoriaTitulo, Long categoria) {
+    String cidade, Long idEndereco, String categoriaTitulo, Long categoria) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -28,6 +42,7 @@ public class ApresentacaoDto {
         this.gravacao = gravacao;
         this.autor = autor;
         this.cidade = cidade;
+        this.idEndereco = idEndereco;
         this.categoriaTitulo = categoriaTitulo;
         this.categoria = categoria;
     }    
@@ -47,7 +62,7 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-            String linkmusica, int ordem, int senha, String cidade, Long categoria) {
+            String linkmusica, int ordem, int senha, String cidade, Long idEndereco, Long categoria) {
         this.codigo = codigo;                
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -58,21 +73,9 @@ public class ApresentacaoDto {
         this.ordem = ordem;
         this.senha = senha;
         this.cidade = cidade;
+        this.idEndereco = idEndereco;
         this.categoria = categoria;
-    }    
-
-    private Long codigo;
-    private String musica;
-    private String nomeartistico;
-    private String tom;
-    private String gravacao;
-    private String autor;
-    private String linkmusica;
-    private int ordem;
-    private int senha;
-    private String cidade;
-    private Long categoria;
-    private String categoriaTitulo;
+    }
 
     public String getCategoriaTitulo() {
         return categoriaTitulo;
@@ -160,6 +163,14 @@ public class ApresentacaoDto {
 
     public void setCidade(String cidade) {
         this.cidade = cidade;
+    }
+
+    public Long getIdEndereco() {
+        return idEndereco;
+    }
+
+    public void setIdEndereco(Long idEndereco) {
+        this.idEndereco = idEndereco;
     }
 
     public Long getCategoria() {

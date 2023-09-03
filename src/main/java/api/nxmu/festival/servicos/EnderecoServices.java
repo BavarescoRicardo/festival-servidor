@@ -223,6 +223,7 @@ public class EnderecoServices {
                         importacao.getOrdem(),
                         importacao.getSenha(),
                         importacao.getCidade(),
+                        Long.valueOf("0"),
                         importacao.getCategoria()
                     )
                 );            
