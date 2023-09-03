@@ -37,7 +37,7 @@ public class ApresentacaoServices {
 
         dto = new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
-                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
                 apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo());
         return dto;
     }    
@@ -50,7 +50,7 @@ public class ApresentacaoServices {
         for(Apresentacao apresentacao: apresentacaoDB.findAllOrdenado(pageable)) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
-                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
                 apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
@@ -68,7 +68,7 @@ public class ApresentacaoServices {
         for(Apresentacao apresentacao: listaFiltrada) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
-                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
                 apresentacao.getOrdem(), apresentacao.getSenha(), apresentacao.getCategoria().getTitulo()));
         }
 
@@ -119,7 +119,7 @@ public class ApresentacaoServices {
         for(Apresentacao apresentacao: apresentacaoDB.findAllByCategoria(codCategoria)) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
-                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getIndividuos(), 
+                apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
                 apresentacao.getCategoria().getTitulo(), apresentacao.getCategoria().getId()));
         }
 
@@ -136,7 +136,7 @@ public class ApresentacaoServices {
                 .tom(apresentacaoDto.getTom())
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
-                .individuos(apresentacaoDto.getIndividuos())
+                // .individuos(apresentacaoDto.getIndividuos())
                 .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
                 apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
@@ -157,7 +157,7 @@ public class ApresentacaoServices {
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
                 .linkmusica(apresentacaoDto.getLinkmusica())
-                .individuos(apresentacaoDto.getIndividuos())
+                // .individuos(apresentacaoDto.getIndividuos())
                 .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
                 apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
@@ -197,7 +197,6 @@ public class ApresentacaoServices {
             apresentacao.setTom(apresentacaoDto.getTom());
             apresentacao.setGravacao(apresentacaoDto.getGravacao());
             apresentacao.setAutor(apresentacaoDto.getAutor());
-            apresentacao.setIndividuos(apresentacaoDto.getIndividuos());
             // Verifica se deve alterar categoria
             if((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 4))
                 apresentacao.setCategoria(categoriaServices.encontrarPorId(categoria).get());

@@ -222,7 +222,7 @@ public class EnderecoServices {
                         importacao.getLinkmusica(),
                         importacao.getOrdem(),
                         importacao.getSenha(),
-                        importacao.getIndividuos(),
+                        importacao.getCidade(),
                         importacao.getCategoria()
                     )
                 );            

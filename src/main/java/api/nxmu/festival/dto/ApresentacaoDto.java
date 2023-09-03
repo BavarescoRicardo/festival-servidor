@@ -6,34 +6,34 @@ public class ApresentacaoDto {
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    int individuos, int ordem, int senha, String categoriaTitulo) {
+    String cidade, int ordem, int senha, String categoriaTitulo) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
-        this.individuos = individuos;
+        this.cidade = cidade;
         this.ordem = ordem;
         this.senha = senha;
         this.categoriaTitulo = categoriaTitulo;
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-    int individuos, String categoriaTitulo, Long categoria) {
+    String cidade, String categoriaTitulo, Long categoria) {
         this.codigo = codigo;
         this.musica = musica;
         this.nomeartistico = nomeartistico;
         this.tom = tom;
         this.gravacao = gravacao;
         this.autor = autor;
-        this.individuos = individuos;
+        this.cidade = cidade;
         this.categoriaTitulo = categoriaTitulo;
         this.categoria = categoria;
     }    
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-            int ordem, int senha, int individuos, Long categoria) {
+            int ordem, int senha, String cidade, Long categoria) {
         this.codigo = codigo;                
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -42,12 +42,12 @@ public class ApresentacaoDto {
         this.autor = autor;
         this.ordem = ordem;
         this.senha = senha;
-        this.individuos = individuos;
+        this.cidade = cidade;
         this.categoria = categoria;
     }
 
     public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao,  String autor,
-            String linkmusica, int ordem, int senha, int individuos, Long categoria) {
+            String linkmusica, int ordem, int senha, String cidade, Long categoria) {
         this.codigo = codigo;                
         this.musica = musica;
         this.nomeartistico = nomeartistico;
@@ -57,7 +57,7 @@ public class ApresentacaoDto {
         this.linkmusica = linkmusica;
         this.ordem = ordem;
         this.senha = senha;
-        this.individuos = individuos;
+        this.cidade = cidade;
         this.categoria = categoria;
     }    
 
@@ -70,7 +70,7 @@ public class ApresentacaoDto {
     private String linkmusica;
     private int ordem;
     private int senha;
-    private int individuos;
+    private String cidade;
     private Long categoria;
     private String categoriaTitulo;
 
@@ -154,12 +154,12 @@ public class ApresentacaoDto {
         this.senha = senha;
     }
 
-    public int getIndividuos() {
-        return individuos;
+    public String getCidade() {
+        return this.cidade;
     }
 
-    public void setIndividuos(int individuos) {
-        this.individuos = individuos;
+    public void setCidade(String cidade) {
+        this.cidade = cidade;
     }
 
     public Long getCategoria() {
