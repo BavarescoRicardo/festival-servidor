@@ -79,9 +79,14 @@ public class ApresentacaoServices {
     public List<ApresentacaoRelDto> encontrarRel(FiltroApresentacaoDto filtro){
         List<ApresentacaoRelDto> listaDto = new ArrayList<ApresentacaoRelDto>();
         Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 60, Sort.by(filtro.getOrdem()));
-        List<Apresentacao> listaFiltrada = apresentacaoDB.
-            findAllFiltrado(
+        List<Apresentacao> listaFiltrada = null;
+        if(filtro.getTextoFiltro().length()> 1){ // findAllFiltradoEnsaio
+        listaFiltrada = apresentacaoDB.findAllFiltradoEnsaio(
                 filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        } else {
+        listaFiltrada = apresentacaoDB.findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        }
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Apresentacao apresentacao: listaFiltrada) {
