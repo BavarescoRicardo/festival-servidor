@@ -224,7 +224,8 @@ public class ApresentacaoServices {
         try {
             
             Apresentacao apresentacao = this.encontrarPorId(id).get();
-            this.apresentacaoDB.delete(apresentacao);
+            apresentacao.setAtivo(1);
+            this.apresentacaoDB.save(apresentacao);
 
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {

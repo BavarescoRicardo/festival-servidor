@@ -11,13 +11,13 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Long>{
 
-    @Query("select u from Apresentacao u where u.categoria.id = ?1")
+    @Query("select u from Apresentacao u where u.ativo = 0 and u.categoria.id = ?1")
     List<Apresentacao> findAllByCategoria(Long codigoCategoria);
 
-    @Query("select u from Apresentacao u where (u.categoria.id = ?1)")
+    @Query("select u from Apresentacao u where u.ativo = 0 and (u.categoria.id = ?1)")
     Page<Apresentacao> findAllFiltrado(long codCategoria, String textoFiltro, Pageable p);
 
-    @Query("select u from Apresentacao u where u.senha > 0 and u.categoria.id = ?1")
+    @Query("select u from Apresentacao u where u.ativo = 0 and u.senha > 0 and u.categoria.id = ?1")
     Page<Apresentacao> findAllFiltradoEnsaio(long codCategoria, String textoFiltro, Pageable p);    
 
     @Query("select u from Apresentacao u")
