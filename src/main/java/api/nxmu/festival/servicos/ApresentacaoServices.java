@@ -137,15 +137,14 @@ public class ApresentacaoServices {
         Apresentacao apresentacaoSalva = null;
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Apresentacao apresentacao = Apresentacao.builder()
-                .musica(apresentacaoDto.getMusica())
-                .nomeartistico(apresentacaoDto.getNomeartistico())
-                .tom(apresentacaoDto.getTom())
-                .gravacao(apresentacaoDto.getGravacao())
-                .autor(apresentacaoDto.getAutor())
-                // .individuos(apresentacaoDto.getIndividuos())
-                .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
-                .build();
+            Apresentacao apresentacao = new Apresentacao(
+                apresentacaoDto.getMusica(),
+                apresentacaoDto.getNomeartistico(),
+                apresentacaoDto.getTom(),
+                apresentacaoDto.getGravacao(),
+                apresentacaoDto.getAutor(),
+                1,
+                categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
                 apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e.getCause());
