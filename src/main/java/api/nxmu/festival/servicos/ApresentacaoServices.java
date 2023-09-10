@@ -18,6 +18,8 @@ import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.repositorio.ApresentacaoRepositorio;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -26,6 +28,7 @@ public class ApresentacaoServices {
 
     private final ApresentacaoRepositorio apresentacaoDB;
     private final CategoriaServices categoriaServices;
+    private final EntityManager entityManager;
 
     public Optional<Apresentacao> encontrarPorId(Long id){        
         return apresentacaoDB.findById(id);
@@ -133,23 +136,26 @@ public class ApresentacaoServices {
         return listaDto;
     }
 
+    @Transactional
     public Long salvar(ApresentacaoDto apresentacaoDto) throws Exception{
-        Apresentacao apresentacaoSalva = null;
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Apresentacao apresentacao = new Apresentacao(
-                apresentacaoDto.getMusica(),
-                apresentacaoDto.getNomeartistico(),
-                apresentacaoDto.getTom(),
-                apresentacaoDto.getGravacao(),
-                apresentacaoDto.getAutor(),
-                1,
-                categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get());
-                apresentacaoSalva = this.apresentacaoDB.save(apresentacao);
+            Apresentacao apresentacao = Apresentacao.builder()
+                .musica(apresentacaoDto.getMusica())
+                .nomeartistico(apresentacaoDto.getNomeartistico())
+                .tom(apresentacaoDto.getTom())
+                .gravacao(apresentacaoDto.getGravacao())
+                .autor(apresentacaoDto.getAutor())
+                .linkmusica("")
+                .individuos(1)
+                .categoria(categoriaServices.encontrarPorId(apresentacaoDto.getCategoria()).get())
+            .build();
+
+            entityManager.persist(apresentacao);
+            Thread.sleep(500);
+            return apresentacao.getId();
         } catch (Exception e) {
             throw new Exception(e.getMessage(), e.getCause());
         }
-        return apresentacaoSalva.getId();
     }
 
     public Long salvarImport(ApresentacaoDto apresentacaoDto) throws Exception{

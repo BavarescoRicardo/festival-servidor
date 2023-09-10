@@ -15,6 +15,8 @@ import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.modelo.Endereco;
 import api.nxmu.festival.repositorio.EnderecoRepositorio;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -24,6 +26,7 @@ public class EnderecoServices {
     private final EnderecoRepositorio enderecoDB;
     private final ParticipanteServices participanteServices;
     private final ApresentacaoServices apresentacaoServices;
+    private final EntityManager entityManager;
 
     public Optional<Endereco> encontrarPorId(Long id){        
         return enderecoDB.findById(id);
@@ -61,6 +64,7 @@ public class EnderecoServices {
         return listaDto;
     }
 
+    @Transactional
     public boolean salvar(EnderecoDto endereco){
         try {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
@@ -68,11 +72,13 @@ public class EnderecoServices {
                 endereco.getEndereco(), endereco.getCidade(), endereco.getEstado(), endereco.getCep(),
                 endereco.getTelefone(), participanteServices.encontrarPorId(endereco.getParticipante()).get());
 
-            this.enderecoDB.save(e);    
+            Thread.sleep(100);
+            entityManager.persist(e);
+            Thread.sleep(1000);
+            return e.getId() != null; 
         } catch (Exception e) {
             return false;
         }
-        return true;
     }
     
     public EnderecoDto atualizar(EnderecoDto endereco, long id){

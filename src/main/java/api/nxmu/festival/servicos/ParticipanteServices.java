@@ -11,12 +11,14 @@ import org.springframework.web.multipart.MultipartFile;
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.repositorio.ParticipanteRepositorio;
+import jakarta.persistence.EntityManager;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
 public class ParticipanteServices {
-
+    private final EntityManager entityManager;
     private final ParticipanteRepositorio participanteDB;
     private final ApresentacaoServices apresentacaoServices;
 
@@ -54,8 +56,9 @@ public class ParticipanteServices {
         return listaDto;
     }    
 
-    public Long salvar(ParticipanteDto participante) {
-        try {
+    @Transactional
+    public Long salvar(ParticipanteDto participante) throws Exception{
+        try {            
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(),
@@ -63,9 +66,10 @@ public class ParticipanteServices {
                 participante.getNecessidade(), participante.getDescrinescessidade(),
                 apresentacaoServices.encontrarPorId(participante.getApresentacao()).get()
             );
-    
-            Participante participanteSalvo = this.participanteDB.save(p);
-            return participanteSalvo.getId();
+
+            entityManager.persist(p);
+            Thread.sleep(500);
+            return p.getId();
         } catch (Exception e) {
             throw e;
         }
