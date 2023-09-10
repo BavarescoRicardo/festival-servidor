@@ -79,10 +79,18 @@ public class ClassificacaoServices {
     public List<ClassificacaoRelDto> encontrarRel(FiltroClassificacaoDto filtro){
         BigDecimal bd;
         List<ClassificacaoRelDto> listaDto = new ArrayList<ClassificacaoRelDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
-        List<Classificacao> listaFiltrada = classificacaoDB.
-            findAllFiltrado(
-                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        Pageable pageable = null; 
+
+        List<Classificacao> listaFiltrada = null;
+        if(filtro.getTextoFiltro().equals("ordem")){ // findAllFiltradoEnsaio
+            pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100, Sort.by("notafinal").descending());
+            listaFiltrada = classificacaoDB.findAllFiltrado(
+                    filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+            } else {
+                pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
+                listaFiltrada = classificacaoDB.findAllFiltrado(
+                        filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+            }
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: listaFiltrada) {
