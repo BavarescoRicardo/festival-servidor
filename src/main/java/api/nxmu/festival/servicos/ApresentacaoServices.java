@@ -195,7 +195,16 @@ public class ApresentacaoServices {
                     break;
                 case "sertaneja":
                     categoria = 4L;
-                    break;                                    
+                    break;       
+                case "gospel":
+                    categoria = 5L;
+                    break;
+                case "final popular":
+                    categoria = 6L;
+                    break;
+                case "final sertaneja":
+                    categoria = 7L;
+                    break;                                                                                  
             
                 default:
                     break;
@@ -210,7 +219,7 @@ public class ApresentacaoServices {
             apresentacao.setGravacao(apresentacaoDto.getGravacao());
             apresentacao.setAutor(apresentacaoDto.getAutor());
             // Verifica se deve alterar categoria
-            if((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 4))
+            if((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 7))
                 apresentacao.setCategoria(categoriaServices.encontrarPorId(categoria).get());
             // Verificações se deve alterar ordem e/ou senha
             if(apresentacaoDto.getOrdem() > 0)
