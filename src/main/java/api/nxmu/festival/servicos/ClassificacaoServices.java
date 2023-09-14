@@ -82,15 +82,9 @@ public class ClassificacaoServices {
         Pageable pageable = null; 
 
         List<Classificacao> listaFiltrada = null;
-        if(filtro.getTextoFiltro().equals("ordem")){ // findAllFiltradoEnsaio
-            pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100, Sort.by("notafinal").descending());
+            pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
             listaFiltrada = classificacaoDB.findAllFiltrado(
                     filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
-            } else {
-                pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
-                listaFiltrada = classificacaoDB.findAllFiltrado(
-                        filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
-            }
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: listaFiltrada) {
