@@ -53,6 +53,20 @@ public class NotaController {
         }               
 	}
 
+    @RequestMapping(value = "/salvanotas", method =  RequestMethod.POST)
+	public boolean salvarNotas(@RequestBody List<NotaDto> notas)
+    {
+        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+        try {
+            for (NotaDto notaDto : notas) {
+                notaService.salvar(notaDto);    
+            }
+            return true;            
+        } catch (Exception e) {
+            return false;
+        }               
+	}    
+
     @RequestMapping(value = "/atualizanota/{id}", method =  RequestMethod.PATCH)
 	public AtualizaNotaDto atualizarNota(@RequestBody AtualizaNotaDto nota, @PathVariable long id)
     {
