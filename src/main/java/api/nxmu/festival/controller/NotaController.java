@@ -59,7 +59,12 @@ public class NotaController {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
             for (NotaDto notaDto : notas) {
-                notaService.salvar(notaDto);    
+                if(notaDto.getNota()> 0){
+                    notaService.salvar(notaDto);    
+                } else {
+                    throw new Exception("Nota sem valor");
+                }
+                    
             }
             return true;            
         } catch (Exception e) {
