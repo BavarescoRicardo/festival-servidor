@@ -1,12 +1,19 @@
 package api.nxmu.festival.dto;
 
+import jakarta.validation.constraints.NotNull;
+
 public class NotaDto {
-    
+    @NotNull(message = "nota cannot be null")
     private double nota;
+    @NotNull(message = "Categoria cannot be null")
     private Long categoria;
+    @NotNull(message = "Participante cannot be null")
     private Long participante;
+    @NotNull(message = "Jurado cannot be null")
     private Long jurado;
+    @NotNull(message = "Apresentacao cannot be null")
     private Long apresentacao;
+    @NotNull(message = "Quesito cannot be null")
     private Long quesito;
 
     public NotaDto(double nota, Long categoria, Long participante, Long jurado, Long apresentacao, Long quesito) {
