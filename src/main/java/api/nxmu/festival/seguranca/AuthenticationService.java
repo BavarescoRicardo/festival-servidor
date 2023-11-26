@@ -21,7 +21,7 @@ public class AuthenticationService {
 
   public AuthenticationResponse register(RegisterRequest request) {
     var user = Usuario.builder()
-        .email(request.getEmail())
+        .email(request.getEmail())        
         .senha(passwordEncoder.encode(request.getSenha()))
         .role(Role.MASTER)
         .build();

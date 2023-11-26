@@ -21,22 +21,20 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
         http
-        .csrf()
-        .disable()
-        .authorizeHttpRequests()
+            .csrf(csrf -> csrf
+                    .disable())
+            .authorizeHttpRequests()
             .requestMatchers(HttpMethod.OPTIONS).permitAll()
-            .requestMatchers("/api/evento/**", "/api/categorias",
-                "/api/salvaendereco", "/api/enderecos", "/api/salvaapresentacao", "/api/apresentacoescartao").permitAll()
-        .anyRequest()
-        .authenticated()
-        .and()
-        .sessionManagement()
-        .sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-        .and()
-        .authenticationProvider(authenticationProvider)
-        .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+            .requestMatchers("/api/evento/auth/**", "/api/categorias", "/api/apresentacoescartao").permitAll()
+            .anyRequest()
+            .authenticated()
+            .and()
+            .sessionManagement(management -> management
+                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+            .authenticationProvider(authenticationProvider)
+            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
