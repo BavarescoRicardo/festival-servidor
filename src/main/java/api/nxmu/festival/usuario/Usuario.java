@@ -3,6 +3,7 @@ package api.nxmu.festival.usuario;
 import java.util.Collection;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +30,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Audited
 public class Usuario implements UserDetails {
 
     @Id
