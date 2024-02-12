@@ -4,6 +4,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ import lombok.Setter;
 @Entity
 @Getter
 @Setter
+@Audited
 public class Evento {
 
     @Id
