@@ -49,7 +49,6 @@ public class ContaController {
 	public ResponseEntity<?> testeApi(
     @RequestBody ImportacaoEntradaDto arquivo)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno erraado no false
         try {
             enderecoServices.importar(arquivo.getSes());
             return ResponseEntity.ok().body("Executadas açoes com sucesso absoluto!");
@@ -61,7 +60,6 @@ public class ContaController {
     @RequestMapping(value = "/removeconta/{id}", method =  RequestMethod.DELETE)
 	public ResponseEntity<String> removerConta(@PathVariable long id)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
             return service.remover(id);
         } catch (Exception e) {
