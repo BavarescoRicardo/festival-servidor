@@ -1,6 +1,8 @@
 package api.nxmu.festival.modelo;
 
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -24,6 +26,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
+@Audited
 public class Classificacao {
 
     @Id

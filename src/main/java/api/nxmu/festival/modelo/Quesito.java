@@ -2,6 +2,8 @@ package api.nxmu.festival.modelo;
 
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -22,6 +24,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
+@Audited
 public class Quesito {
 
     @Id

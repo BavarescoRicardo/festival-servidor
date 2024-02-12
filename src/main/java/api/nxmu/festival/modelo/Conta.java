@@ -3,6 +3,8 @@ package api.nxmu.festival.modelo;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.envers.Audited;
+
 import api.nxmu.festival.usuario.Usuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,6 +27,7 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
+@Audited
 public class Conta {
 
     @Id
