@@ -7,8 +7,6 @@ public class NotaDto {
     private double nota;
     @NotNull(message = "Categoria cannot be null")
     private Long categoria;
-    @NotNull(message = "Participante cannot be null")
-    private Long participante;
     @NotNull(message = "Jurado cannot be null")
     private Long jurado;
     @NotNull(message = "Apresentacao cannot be null")
@@ -19,7 +17,6 @@ public class NotaDto {
     public NotaDto(double nota, Long categoria, Long participante, Long jurado, Long apresentacao, Long quesito) {
         this.nota = nota;
         this.categoria = categoria;
-        this.participante = participante;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
         this.quesito = quesito;
@@ -38,12 +35,6 @@ public class NotaDto {
     }
     public void setCategoria(Long categoria) {
         this.categoria = categoria;
-    }
-    public Long getParticipante() {
-        return participante;
-    }
-    public void setParticipante(Long participante) {
-        this.participante = participante;
     }
     public Long getJurado() {
         return jurado;
