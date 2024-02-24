@@ -3,6 +3,7 @@ package api.nxmu.festival.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,6 +25,7 @@ public class JuradoController {
     @Autowired
     private final JuradoServices juradoService;
 
+//    @Cacheable("jurados")
     @RequestMapping(value = "/jurados", method =  RequestMethod.GET)
     public List<JuradoDto> getJurados(){
         return juradoService.encontrar();

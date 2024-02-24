@@ -1,5 +1,6 @@
 package api.nxmu.festival.modelo;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.hibernate.envers.Audited;

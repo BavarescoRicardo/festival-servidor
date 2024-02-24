@@ -35,18 +35,17 @@ public class CategoriaServices {
         return listaDto;
     }
 
-    public boolean salvar(CategoriaDto categoria){
+    public CategoriaDto salvar(CategoriaDto categoria){        
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Categoria e = new Categoria(
-                categoria.getTitulo(), categoria.getDescricao(), 
-                categoria.getDataInicial(), categoria.getDataFinal());
+                    categoria.getTitulo(), categoria.getDescricao(), 
+                    categoria.getDataInicial(), categoria.getDataFinal());
 
-            this.categoriaDB.save(e);    
+            this.categoriaDB.save(e);
+            return categoria;    
         } catch (Exception e) {
-            return false;
-        }
-        return true;
+            return null;
+        }        
     }
 
     public CategoriaDto atualizar(CategoriaDto categoria, long id){
@@ -65,15 +64,14 @@ public class CategoriaServices {
         }
     }
     
-    public ResponseEntity<String> remover(long id){
+    public Categoria remover(long id){
         try {
-            
             Categoria cat = this.encontrarPorId(id).get();
             this.categoriaDB.delete(cat);
 
-            return ResponseEntity.ok().body("Removido objeto de id: "+id);
+            return cat;
         } catch (Exception e) {
-            return ResponseEntity.notFound().build();
+            return null;
         }
     }    
 }

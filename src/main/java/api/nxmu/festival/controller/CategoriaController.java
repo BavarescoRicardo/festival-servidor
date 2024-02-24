@@ -1,7 +1,5 @@
 package api.nxmu.festival.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -12,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.CategoriaDto;
+import api.nxmu.festival.dto.RespostaErrorDto;
 import api.nxmu.festival.servicos.CategoriaServices;
 import lombok.RequiredArgsConstructor;
 
@@ -25,40 +24,44 @@ public class CategoriaController {
     private final CategoriaServices categoriaService;
 
     @RequestMapping(value = "/categorias", method =  RequestMethod.GET)
-    public List<CategoriaDto> getCategorias(){
-        return categoriaService.encontrar();
+    public ResponseEntity<?> getCategorias(){        
+        try {
+            return ResponseEntity.ok().body(categoriaService.encontrar());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(
+            		RespostaErrorDto.builder().mensagem("Não foi possível salvar " + e.getMessage()));
+        }         
     }    
 
     @RequestMapping(value = "/salvacategoria", method =  RequestMethod.POST)
-	public boolean salvarCategoria(@RequestBody CategoriaDto categoria)
+	public ResponseEntity<?> salvarCategoria(@RequestBody CategoriaDto categoria)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return categoriaService.salvar(categoria);
+            return ResponseEntity.ok().body(categoriaService.salvar(categoria));
         } catch (Exception e) {
-            return false;
+            return ResponseEntity.internalServerError().body(
+            		RespostaErrorDto.builder().mensagem("Não foi possível salvar " + e.getMessage()));
         }               
 	}
 
     @RequestMapping(value = "/atualizacategoria/{id}", method =  RequestMethod.PATCH)
-	public CategoriaDto atualizarCategoria(@RequestBody CategoriaDto categoria, @PathVariable long id)
+	public ResponseEntity<?> atualizarCategoria(@RequestBody CategoriaDto categoria, @PathVariable long id)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return categoriaService.atualizar(categoria, id);
+            return ResponseEntity.ok().body(categoriaService.atualizar(categoria, id));
         } catch (Exception e) {
-            return null;
-        }               
+            return ResponseEntity.notFound().build();
+        }          
 	}
 
     @RequestMapping(value = "/removecategoria/{id}", method =  RequestMethod.DELETE)
-	public ResponseEntity<String> removeCategoria(@PathVariable long id)
+	public ResponseEntity<?> removeCategoria(@PathVariable long id)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
-            return categoriaService.remover(id);
+            return ResponseEntity.ok().body("Removido objeto de id: "+categoriaService.remover(id));
         } catch (Exception e) {
-            return null;
+            return ResponseEntity.notFound().build();
         }
-	}    
+    }
+        
 }
