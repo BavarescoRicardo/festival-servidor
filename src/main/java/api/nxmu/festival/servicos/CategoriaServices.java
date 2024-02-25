@@ -64,12 +64,13 @@ public class CategoriaServices {
         }
     }
     
-    public Categoria remover(long id){
+    public String remover(long id){
         try {
             Categoria cat = this.encontrarPorId(id).get();
+            final String nomeCategoia = cat.getDescricao();
             this.categoriaDB.delete(cat);
 
-            return cat;
+            return nomeCategoia;
         } catch (Exception e) {
             return null;
         }
