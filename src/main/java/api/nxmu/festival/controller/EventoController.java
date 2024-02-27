@@ -45,7 +45,8 @@ public class EventoController {
     @PostMapping(value = "/salvaevento")
 	public ResponseEntity<?> salvarEvento(@RequestBody EventoDto eventoDto) {
         try {
-            return RespostaRequestUtils.buildResponseOk(eventoService.salvar(eventoDto).getTitulo());
+            var eventoSalvo = eventoService.salvar(eventoDto);
+            return RespostaRequestUtils.buildResponseOk("Evento " +eventoSalvo.getTitulo() + " salvo!");
         } catch (Exception exception) {
             var mensagem = "Erro ao salvar evento " + eventoDto.getDescricao();
             log.error(mensagem, exception);
@@ -54,24 +55,26 @@ public class EventoController {
 	}
 
     @PatchMapping(value = "/atualizaevento/{id}")
-	public EventoDto atualizarEvento(@RequestBody EventoDto evento, @PathVariable long id)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+	public ResponseEntity<?> atualizarEvento(@RequestBody EventoDto eventoDto, @PathVariable long id) {
         try {
-            return eventoService.atualizar(evento, id);
-        } catch (Exception e) {
-            return null;
+            var eventoAtualizado = eventoService.atualizar(eventoDto, id);
+            return RespostaRequestUtils.buildResponseOk("Evento " +eventoAtualizado.getTitulo() + " atualizado!");
+        } catch (Exception exception) {
+            var mensagem = "Erro ao atualizar evento " + eventoDto.getDescricao();
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
         }               
 	}
 
     @DeleteMapping(value = "/removeevento/{id}")
-	public ResponseEntity<String> removerEvento(@PathVariable long id)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+	public ResponseEntity<?> removerEvento(@PathVariable long id) {
         try {
-            return eventoService.remover(id);
-        } catch (Exception e) {
-            return null;
+            eventoService.remover(id);
+            return RespostaRequestUtils.buildResponseOk("Evento removido!");
+        } catch (Exception exception) {
+            var mensagem = "Erro ao atualizar evento ID" + id;
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
         }
-	}     
+    }
 }

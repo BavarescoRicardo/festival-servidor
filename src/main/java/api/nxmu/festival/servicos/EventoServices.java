@@ -54,32 +54,19 @@ public class EventoServices {
         return this.eventoDB.save(evento);
     }
 
-    public EventoDto atualizar(EventoDto evento, long id){
-        try {
-            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
-            Evento e = this.encontrarPorId(id).get();
-            e.setTitulo(evento.getTitulo());
-            e.setDescricao(evento.getDescricao());
-            e.setDataInicial(evento.getDataInicial());
-            e.setDataFinal(evento.getDataFinal());
-            e.setLocal(evento.getLocal());
+    public Evento atualizar(EventoDto eventoDto, long id) {
+        Evento evento = this.encontrarPorId(id).orElseThrow(() -> new RuntimeException("Evento não encontrado!"));
+        evento.setTitulo(eventoDto.getTitulo());
+        evento.setDescricao(eventoDto.getDescricao());
+        evento.setDataInicial(eventoDto.getDataInicial());
+        evento.setDataFinal(eventoDto.getDataFinal());
+        evento.setLocal(eventoDto.getLocal());
 
-            this.eventoDB.save(e);    
-        } catch (Exception e) {
-            return null;
-        }
-        return evento;
+        return this.eventoDB.save(evento);
     }
     
-    public ResponseEntity<String> remover(long id){
-        try {
-            
-            Evento evento = this.encontrarPorId(id).get();
-            this.eventoDB.delete(evento);
-
-            return ResponseEntity.ok().body("Removido objeto de id: "+id);
-        } catch (Exception e) {
-            return ResponseEntity.notFound().build();
-        }
-    }    
+    public void remover(long id){
+        Evento evento = this.encontrarPorId(id).orElseThrow(() -> new RuntimeException("Evento não encontrado!"));
+        this.eventoDB.delete(evento);
+    }
 }
