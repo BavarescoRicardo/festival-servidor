@@ -48,7 +48,7 @@ public class Participante {
     @JoinColumn(name = "apresentacao_id")
     private Apresentacao apresentacao;    
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "participante")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "participante")
     private List<Endereco> enderecos;
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,

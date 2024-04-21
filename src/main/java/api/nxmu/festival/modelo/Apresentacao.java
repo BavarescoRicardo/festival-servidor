@@ -43,10 +43,10 @@ public class Apresentacao {
     private int individuos;
     private int ativo;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "apresentacao")
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "apresentacao")
     private List<Participante> participantes;    
     
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;       
     

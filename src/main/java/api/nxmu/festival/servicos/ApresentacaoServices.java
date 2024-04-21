@@ -49,9 +49,10 @@ public class ApresentacaoServices {
     public List<ApresentacaoDto> encontrar(){
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
         Pageable pageable = PageRequest.of(0, 50, Sort.by("ordem"));
+        Page<Apresentacao> apresentacoes = apresentacaoDB.findAllOrdenado(pageable);
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
-        for(Apresentacao apresentacao: apresentacaoDB.findAllOrdenado(pageable)) {
+        for(Apresentacao apresentacao: apresentacoes) {
             listaDto.add(new ApresentacaoDto(
                 apresentacao.getId(), apresentacao.getMusica(), apresentacao.getNomeartistico(), apresentacao.getTom(), 
                 apresentacao.getGravacao(), apresentacao.getAutor(), apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(), 
