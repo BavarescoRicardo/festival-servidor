@@ -36,22 +36,22 @@ public class Nota {
 
     // ainda restam ligações fk    
     // n - 1 categoria 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
     // n - 1 jurado
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jurado_id")
     private Jurado jurado;
 
     // n - 1 apresentacao
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "apresentacao_id")
     private Apresentacao apresentacao;
 
     // n - 1 quesito
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "quesito_id")
     private Quesito quesito;
 
