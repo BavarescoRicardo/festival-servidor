@@ -21,7 +21,7 @@ public class HistoricoNotaDto {
     @NotNull(message = "Quesito cannot be null")
     private Long quesito;
 
-    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, Long categoria, Long participante, Long jurado, Long apresentacao, Long quesito) {
+    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, Long categoria, Long jurado, Long apresentacao, Long quesito) {
         this.notaAfinacao = notaAfinacao;
         this.notaRitmo = notaRitmo;
         this.notaInterpretacao = notaInterpretacao;
@@ -32,6 +32,13 @@ public class HistoricoNotaDto {
         this.apresentacao = apresentacao;
         this.quesito = quesito;
     }
+    
+    public HistoricoNotaDto(Long categoria, Long jurado, Long apresentacao, Long quesito) {        
+        this.categoria = categoria;
+        this.jurado = jurado;
+        this.apresentacao = apresentacao;
+        this.quesito = quesito;
+    }    
     
     public double getNotaAfinacao() {
 		return notaAfinacao;

@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
+import api.nxmu.festival.dto.HistoricoNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.dto.filtros.FiltroNotaDto;
@@ -176,4 +177,31 @@ public class NotaServices {
         notaFinalDB.save(notaFinal);
     }    
 
+    public List<HistoricoNotaDto> encontrarHistoricoNotas(){       
+
+	        // Retornar lista de notas pertencentes a apresentação
+	    List<Nota> notasApresentacao = notaDB.encontrarhistoricoNotas();
+	    if(!(notasApresentacao.size() > 0))
+	        return null;
+	
+	    List<HistoricoNotaDto> listaHistoricoNotas = new ArrayList();
+	    for(int idx = 0; idx < notasApresentacao.size() / 4; idx ++ ) {
+		    HistoricoNotaDto historicoNotas = new HistoricoNotaDto(
+		    		notasApresentacao.get(idx).getCategoria().getId(),
+		    		notasApresentacao.get(idx).getJurado().getId(),
+		    		notasApresentacao.get(idx).getApresentacao().getId(),
+		    		notasApresentacao.get(idx).getQuesito().getId()
+				);
+		
+		    // atribui cada quesito ao historico 0 - 3 por apresentacao  + (idx*4)
+			historicoNotas.setNotaAfinacao(notasApresentacao.get(0 + (idx*4)).getNota());        
+			historicoNotas.setNotaRitmo(notasApresentacao.get(1 + (idx*4)).getNota());
+			historicoNotas.setNotaInterpretacao(notasApresentacao.get(2 + (idx*4)).getNota());
+			historicoNotas.setNotaDiccao(notasApresentacao.get(3 + (idx*4)).getNota());
+		    
+			listaHistoricoNotas.add(historicoNotas);        
+	    }
+	    
+	    return listaHistoricoNotas;
+    }      
 }

@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.AtualizaNotaDto;
+import api.nxmu.festival.dto.HistoricoNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
@@ -104,6 +105,11 @@ public class NotaController {
         } catch (Exception e) {
             return null;
         }
-	}   
+	}
+    
+    @RequestMapping(value = "/historiconotas", method =  RequestMethod.GET)
+    public List<HistoricoNotaDto> getHistoricoNotas(){
+        return notaService.encontrarHistoricoNotas();
+    }    
 
 }

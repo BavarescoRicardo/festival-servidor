@@ -17,5 +17,8 @@ public interface NotaRepositorio extends JpaRepository<Nota, Long>{
     List<Nota> encontrarPorApresentacaoeJuradoQuesito(Long codigoApresentacao, Long codigoJurado, long codigoQuesito);    
 
     @Query("select u from Nota u where (u.categoria.id = ?1)")
-    Page<Nota> findAllFiltrado(long codCategoria, Pageable p);    
+    Page<Nota> findAllFiltrado(long codCategoria, Pageable p);
+    
+    @Query("select u from Nota u order by u.id desc limit 30")
+    List<Nota> encontrarhistoricoNotas();    
 }
