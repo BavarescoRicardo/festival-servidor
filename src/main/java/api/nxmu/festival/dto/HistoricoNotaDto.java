@@ -13,15 +13,13 @@ public class HistoricoNotaDto {
     private double notaDiccao;
     
     @NotNull(message = "Categoria cannot be null")
-    private Long categoria;
+    private String categoria;
     @NotNull(message = "Jurado cannot be null")
-    private Long jurado;
+    private String jurado;
     @NotNull(message = "Apresentacao cannot be null")
-    private Long apresentacao;
-    @NotNull(message = "Quesito cannot be null")
-    private Long quesito;
+    private String apresentacao;
 
-    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, Long categoria, Long jurado, Long apresentacao, Long quesito) {
+    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, String categoria, String jurado, String apresentacao) {
         this.notaAfinacao = notaAfinacao;
         this.notaRitmo = notaRitmo;
         this.notaInterpretacao = notaInterpretacao;
@@ -30,14 +28,12 @@ public class HistoricoNotaDto {
         this.categoria = categoria;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
-        this.quesito = quesito;
     }
     
-    public HistoricoNotaDto(Long categoria, Long jurado, Long apresentacao, Long quesito) {        
+    public HistoricoNotaDto(String categoria, String jurado, String apresentacao) {        
         this.categoria = categoria;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
-        this.quesito = quesito;
     }    
     
     public double getNotaAfinacao() {
@@ -74,29 +70,23 @@ public class HistoricoNotaDto {
 
 	public HistoricoNotaDto() {
     }
-    public Long getCategoria() {
+    public String getCategoria() {
         return categoria;
     }
-    public void setCategoria(Long categoria) {
+    public void setCategoria(String categoria) {
         this.categoria = categoria;
     }
-    public Long getJurado() {
+    public String getJurado() {
         return jurado;
     }
-    public void setJurado(Long jurado) {
+    public void setJurado(String jurado) {
         this.jurado = jurado;
     }
-    public Long getApresentacao() {
+    public String getApresentacao() {
         return apresentacao;
     }
-    public void setApresentacao(Long apresentacao) {
+    public void setApresentacao(String apresentacao) {
         this.apresentacao = apresentacao;
-    }
-    public Long getQuesito() {
-        return quesito;
-    }
-    public void setQuesito(Long quesito) {
-        this.quesito = quesito;
     }
 
 }

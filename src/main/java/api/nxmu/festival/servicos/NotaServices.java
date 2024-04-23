@@ -187,10 +187,9 @@ public class NotaServices {
 	    List<HistoricoNotaDto> listaHistoricoNotas = new ArrayList();
 	    for(int idx = 0; idx < notasApresentacao.size() / 4; idx ++ ) {
 		    HistoricoNotaDto historicoNotas = new HistoricoNotaDto(
-		    		notasApresentacao.get(idx).getCategoria().getId(),
-		    		notasApresentacao.get(idx).getJurado().getId(),
-		    		notasApresentacao.get(idx).getApresentacao().getId(),
-		    		notasApresentacao.get(idx).getQuesito().getId()
+		    		notasApresentacao.get(idx).getCategoria().getDescricao(),
+		    		notasApresentacao.get(idx).getJurado().getNome(),
+		    		notasApresentacao.get(idx).getApresentacao().getMusica()
 				);
 		
 		    // atribui cada quesito ao historico 0 - 3 por apresentacao  + (idx*4)
