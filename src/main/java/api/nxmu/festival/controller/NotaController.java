@@ -58,10 +58,10 @@ public class NotaController {
     public ResponseEntity<?> salvarNotas(@RequestBody List<NotaDto> notas)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
-        try {
+        try {        	
             for (NotaDto notaDto : notas) {
                 if(notaDto.getNota()> 0){
-                	return ResponseEntity.ok(notaService.salvar(notaDto));    
+                	ResponseEntity.ok(notaService.salvar(notaDto));    
                 } else {
                     throw new Exception("Nota sem valor");
                 }
@@ -70,7 +70,7 @@ public class NotaController {
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
-		return  ResponseEntity.badRequest().build();               
+		return ResponseEntity.ok("Notas inseridas com sucesso");               
 	}    
 
     @RequestMapping(value = "/atualizanota/{id}", method =  RequestMethod.PATCH)
