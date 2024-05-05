@@ -55,22 +55,22 @@ public class NotaController {
 	}
 
     @RequestMapping(value = "/salvanotas", method =  RequestMethod.POST)
-	public boolean salvarNotas(@RequestBody List<NotaDto> notas)
+    public ResponseEntity<?> salvarNotas(@RequestBody List<NotaDto> notas)
     {
         //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {
             for (NotaDto notaDto : notas) {
                 if(notaDto.getNota()> 0){
-                    notaService.salvar(notaDto);    
+                	return ResponseEntity.ok(notaService.salvar(notaDto));    
                 } else {
                     throw new Exception("Nota sem valor");
                 }
                     
             }
-            return true;            
         } catch (Exception e) {
-            return false;
-        }               
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+		return  ResponseEntity.badRequest().build();               
 	}    
 
     @RequestMapping(value = "/atualizanota/{id}", method =  RequestMethod.PATCH)

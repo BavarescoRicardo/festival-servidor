@@ -73,10 +73,14 @@ public class NotaServices {
     public boolean salvar(NotaDto notaDto){
         try {
             // Validações
-                // Verifica se a apresentacao pertence a categoria informada
+        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
+        	if(notaDto.getNota() < 5 || notaDto.getNota() > 10) {
+        		throw new Exception("Nota com valor fora dos limites deste evento");
+        	}
+            // Verifica se a apresentacao pertence a categoria informada        	
             Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-                return false;
+            	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
 
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
