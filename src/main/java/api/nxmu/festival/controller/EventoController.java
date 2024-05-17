@@ -5,60 +5,76 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.EventoDto;
+import api.nxmu.festival.dto.RespostaRequestDto;
 import api.nxmu.festival.servicos.EventoServices;
+import api.nxmu.festival.utils.RespostaRequestUtils;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 
 @RestController
 @RequestMapping("/api")
 @RequiredArgsConstructor
 @CrossOrigin
+@Slf4j
 public class EventoController {
 
-    @Autowired
     private final EventoServices eventoService;
 
-    @RequestMapping(value = "/eventos", method =  RequestMethod.GET)
-    public List<EventoDto> getEventos(){
-        return eventoService.encontrar();
+    @GetMapping(value = "/eventos")
+    public ResponseEntity<?> getEventos() {
+        try {
+            return RespostaRequestUtils.buildResponseOk(eventoService.encontrar());
+        } catch (Exception exception) {
+            var mensagem = "Erro ao listar eventos";
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
+        }
     }    
 
-    @RequestMapping(value = "/salvaevento", method =  RequestMethod.POST)
-	public boolean salvarEvento(@RequestBody EventoDto evento)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
+    @PostMapping(value = "/salvaevento")
+	public ResponseEntity<?> salvarEvento(@RequestBody EventoDto eventoDto) {
         try {
-            return eventoService.salvar(evento);
-        } catch (Exception e) {
-            return false;
-        }               
-	}
-
-    @RequestMapping(value = "/atualizaevento/{id}", method =  RequestMethod.PATCH)
-	public EventoDto atualizarEvento(@RequestBody EventoDto evento, @PathVariable long id)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
-        try {
-            return eventoService.atualizar(evento, id);
-        } catch (Exception e) {
-            return null;
-        }               
-	}
-
-    @RequestMapping(value = "/removeevento/{id}", method =  RequestMethod.DELETE)
-	public ResponseEntity<String> removerEvento(@PathVariable long id)
-    {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
-        try {
-            return eventoService.remover(id);
-        } catch (Exception e) {
-            return null;
+            var eventoSalvo = eventoService.salvar(eventoDto);
+            return RespostaRequestUtils.buildResponseOk("Evento " +eventoSalvo.getTitulo() + " salvo!");
+        } catch (Exception exception) {
+            var mensagem = "Erro ao salvar evento " + eventoDto.getDescricao();
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
         }
-	}     
+	}
+
+    @PatchMapping(value = "/atualizaevento/{id}")
+	public ResponseEntity<?> atualizarEvento(@RequestBody EventoDto eventoDto, @PathVariable long id) {
+        try {
+            var eventoAtualizado = eventoService.atualizar(eventoDto, id);
+            return RespostaRequestUtils.buildResponseOk("Evento " +eventoAtualizado.getTitulo() + " atualizado!");
+        } catch (Exception exception) {
+            var mensagem = "Erro ao atualizar evento " + eventoDto.getDescricao();
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
+        }               
+	}
+
+    @DeleteMapping(value = "/removeevento/{id}")
+	public ResponseEntity<?> removerEvento(@PathVariable long id) {
+        try {
+            eventoService.remover(id);
+            return RespostaRequestUtils.buildResponseOk("Evento removido!");
+        } catch (Exception exception) {
+            var mensagem = "Erro ao atualizar evento ID" + id;
+            log.error(mensagem, exception);
+            return RespostaRequestUtils.buildResponseInternalError(mensagem);
+        }
+    }
 }
