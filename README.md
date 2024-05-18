@@ -1,3 +1,9 @@
+## Setup
+Instale o openjdk 17 https://jdk.java.net/archive/
+
+Execute `docker-compose up -d` na raiz do projeto para subir o banco Postgres
+
+
 # festival-servidor
 Servidor de dados API para aplicativo do festival
 
