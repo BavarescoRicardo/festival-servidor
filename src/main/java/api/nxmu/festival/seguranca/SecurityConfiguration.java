@@ -27,7 +27,7 @@ public class SecurityConfiguration {
                     .disable())
             .authorizeHttpRequests()
             .requestMatchers(HttpMethod.OPTIONS).permitAll()
-            .requestMatchers("/api/evento/auth/**", "/api/categorias", "/api/apresentacoescartao").permitAll()
+            .requestMatchers(whiteList()).permitAll()
             .anyRequest()
             .authenticated()
             .and()
@@ -37,6 +37,10 @@ public class SecurityConfiguration {
             .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
+    }
+
+    private String[] whiteList() {
+        return new String[] {"/api/evento/auth/**", "/api/categorias", "/api/apresentacoescartao", "api/evento/participantes", "/api/salvaapresentacao"};
     }
     
 }
