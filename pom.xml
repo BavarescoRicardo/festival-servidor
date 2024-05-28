@@ -70,13 +70,6 @@
 			<scope>test</scope>
 		</dependency>
 
-		<!--	Auditoria	-->
-		<dependency>
-			<groupId>org.hibernate</groupId>
-			<artifactId>hibernate-envers</artifactId>
-			<version>6.1.6.Final</version>
-		</dependency>
-
 		<!-- junit 5 -->
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>

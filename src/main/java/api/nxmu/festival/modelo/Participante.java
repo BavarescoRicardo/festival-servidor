@@ -2,7 +2,6 @@ package api.nxmu.festival.modelo;
 
 import java.util.List;
 
-import org.hibernate.envers.Audited;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -26,7 +25,6 @@ import lombok.ToString;
 @Entity
 @Getter
 @Setter
-@Audited
 public class Participante {
 
     @Id

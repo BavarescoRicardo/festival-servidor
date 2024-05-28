@@ -18,6 +18,7 @@ import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
 import api.nxmu.festival.dto.ClassificacaoRelDto;
 import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
+import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.ClassificacaoRepositorio;
@@ -161,14 +162,16 @@ public class ClassificacaoServices {
             media = (media / notasApresentacao.size());            
 
             // Após media calcula monta o objeto classificação
-            Classificacao classificacao = Classificacao.builder()
-            .notafinal(media)   
-            .categoria(categoriaServices.encontrarPorId(apresentacao.getCategoria()).get()) 
-            .apresentacao(apresentacaoServices.encontrarPorId(apresentacao.getCodigo()).get())
-            .build();
+            Apresentacao apr = apresentacaoServices.encontrarPorId(apresentacao.getCodigo()).get();
+//            Classificacao classificacao = Classificacao.builder()
+//            .notafinal(media)   
+//            .categoria(categoriaServices.encontrarPorId(apresentacao.getCategoria()).get()) 
+//            .apresentacao(apr)
+//            .build();
+            
+            Classificacao classificacao = new Classificacao(media, apr.getCategoria(), apr);
             
             if (!this.encontrarPorApresentacao(apresentacao.getCodigo()).isEmpty()){
-
                 classificacao.setId(this.encontrarPorApresentacao(apresentacao.getCodigo()).get().getId());
             }
 

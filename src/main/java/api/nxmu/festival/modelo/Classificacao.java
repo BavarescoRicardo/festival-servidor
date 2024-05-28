@@ -1,8 +1,5 @@
 package api.nxmu.festival.modelo;
 
-
-import org.hibernate.envers.Audited;
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -16,7 +13,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
-import lombok.Setter;
+import jakarta.persistence.CascadeType;
+import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.ToString;
 
 @ToString
@@ -25,8 +23,6 @@ import lombok.ToString;
 @AllArgsConstructor
 @Entity
 @Getter
-@Setter
-@Audited
 public class Classificacao {
 
     @Id
@@ -41,9 +37,8 @@ public class Classificacao {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToOne(fetch = FetchType.LAZY)
-    @MapsId
-    @JoinColumn(name = "apresentacao_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @PrimaryKeyJoinColumn
     private Apresentacao apresentacao;
     
     public Classificacao(double notafinal, Categoria categoria, Apresentacao apresentacao) {
@@ -55,4 +50,13 @@ public class Classificacao {
     public Classificacao(){
         
     }
+
+	public void setNotafinal(double notafinal) {
+		this.notafinal = notafinal;		
+	}
+
+	public void setId(Long id) {
+		this.id = id;		
+	}
+
 }

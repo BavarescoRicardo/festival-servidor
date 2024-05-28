@@ -16,6 +16,7 @@ import api.nxmu.festival.dto.AtualizaNotaDto;
 import api.nxmu.festival.dto.HistoricoNotaDto;
 import api.nxmu.festival.dto.NotaDto;
 import api.nxmu.festival.dto.NotaFinalDto;
+import api.nxmu.festival.dto.NotasDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.dto.filtros.FiltroNotaDto;
 import api.nxmu.festival.servicos.NotaServices;
@@ -55,18 +56,10 @@ public class NotaController {
 	}
 
     @RequestMapping(value = "/salvanotas", method =  RequestMethod.POST)
-    public ResponseEntity<?> salvarNotas(@RequestBody List<NotaDto> notas)
+    public ResponseEntity<?> salvarNotas(@RequestBody NotasDto notas)
     {
-        //  envolver metodo em try catch retorno certo no tr retorno false no catch
         try {        	
-            for (NotaDto notaDto : notas) {
-                if(notaDto.getNota()> 0){
-                	ResponseEntity.ok(notaService.salvar(notaDto));    
-                } else {
-                    throw new Exception("Nota sem valor");
-                }
-                    
-            }
+        	ResponseEntity.ok(notaService.salvarNotas(notas));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

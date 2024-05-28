@@ -1,6 +1,5 @@
 package api.nxmu.festival.modelo;
 
-import org.hibernate.envers.Audited;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
@@ -25,7 +24,6 @@ import lombok.ToString;
 @Setter
 @ToString
 @EqualsAndHashCode
-@Audited
 public class NotaFinal {
     
     @Id
