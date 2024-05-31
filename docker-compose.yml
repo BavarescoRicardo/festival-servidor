@@ -9,7 +9,7 @@ services:
       - POSTGRES_PASSWORD=admin
       - POSTGRES_DB=festivalr
     ports:
-      - '5432:5432'
+      - '5443:5432'
     volumes:
       - psql-data:/var/lib/postgresql/data
 
@@ -19,7 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3033:3033'
+      - '3034:3033'
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
       - SPRING_DATASOURCE_USERNAME=admin

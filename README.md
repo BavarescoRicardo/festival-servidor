@@ -11,3 +11,21 @@ API REST desenvolvida com o framework Spring-Boot, conta atualmente com requisi�
 Interage com o banco de dados Postgres, onde utiliza a database de nome 'festivalr'.
 Conexões JPA hibernate já estabelicidas com sucesso.
 Utiliza segurança spring security e Tokens JWT para garantir autenticidade do 
+
+
+## Disponível docker container para execução
+comandos para executar container
+    docker-compose pull
+    docker-compose down
+    docker-compose build
+    docker-compose up
+
+## End points do docker
+http://localhost:3034
+    /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
+    /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }
+
+## End points SEM docker
+http://localhost:3033
+    /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
+    /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }    
