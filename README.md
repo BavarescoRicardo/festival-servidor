@@ -14,11 +14,14 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
 
 
 ## Disponível docker container para execução
-comandos para executar container
-    docker-compose pull
-    docker-compose down
-    docker-compose build
-    docker-compose up
+### Primeiro deve se rodar o maven para criar o jar do aplicativo
+  sudo chmod +x mvnw
+  ./ mvnw install -DskipTests
+   comandos para executar container
+     docker-compose pull
+     docker-compose down
+     docker-compose build
+     docker-compose up
 
 ## End points do docker
 http://localhost:3034
