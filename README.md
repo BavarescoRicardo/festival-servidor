@@ -14,14 +14,17 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
 
 
 ## Disponível docker container para execução
+### Instalar java 17 na maqui/ atualizar sistema
+   sudo apt install -y openjdk-17-jre
 ### Primeiro deve se rodar o maven para criar o jar do aplicativo
   sudo chmod +x mvnw
   ./ mvnw install -DskipTests
-   comandos para executar container
-     docker-compose pull
-     docker-compose down
-     docker-compose build
-     docker-compose up
+#### Instalar docker e executar imagem  
+    sudo snap install docker
+       sudo docker-compose pull
+       sudo docker-compose down
+       sudo docker-compose build
+       sudo docker-compose up
 
 ## End points do docker
 http://localhost:3034
@@ -32,3 +35,9 @@ http://localhost:3034
 http://localhost:3033
     /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
     /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }    
+
+
+## End point AWS EC2
+  18.221.80.86:80
+        /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
+       /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }    
