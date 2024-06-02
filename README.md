@@ -38,6 +38,7 @@ http://localhost:3033
 sudo certbot certonly --standalone -d festival-evento.online --email ricardo.bav17@gmail.com --agree-tos --non-interactive
 /etc/letsencrypt/live/festival-evento.online
 
+# Converter .pem para .p12 para usar no sprint properties
 sudo -i
 
 sudo openssl pkcs12 -export -in /etc/letsencrypt/live/festival-evento.online/cert.pem -inkey /etc/letsencrypt/live/festival-evento.online/privkey.pem -out /etc/letsencrypt/live/festival-evento.online/certificate.p12 -name "certificate" -CAfile /etc/letsencrypt/live/festival-evento.online/chain.pem -caname "Let's Encrypt Authority X3"
