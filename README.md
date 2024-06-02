@@ -16,7 +16,7 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
 ## Disponível docker container para execução
 ### Primeiro deve se rodar o maven para criar o jar do aplicativo
   sudo chmod +x mvnw
-  ./ mvnw install -DskipTests
+  ./mvnw install -DskipTests
    comandos para executar container
      docker-compose pull
      docker-compose down
