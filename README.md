@@ -32,3 +32,12 @@ http://localhost:3034
 http://localhost:3033
     /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
     /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }    
+
+
+## gerar o certificado
+sudo certbot certonly --standalone -d festival-evento.online --email ricardo.bav17@gmail.com --agree-tos --non-interactive
+/etc/letsencrypt/live/festival-evento.online
+
+sudo -i
+
+sudo openssl pkcs12 -export -in /etc/letsencrypt/live/festival-evento.online/cert.pem -inkey /etc/letsencrypt/live/festival-evento.online/privkey.pem -out /etc/letsencrypt/live/festival-evento.online/certificate.p12 -name "certificate" -CAfile /etc/letsencrypt/live/festival-evento.online/chain.pem -caname "Let's Encrypt Authority X3"
