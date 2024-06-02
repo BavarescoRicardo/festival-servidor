@@ -19,17 +19,15 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '3034:3033'
+      - '80:3033'
+      - '8081:3033'
+      - '443:443'
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
-      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
-    depends_on:
-      - psql-db
+    volumes:
+      - /etc/letsencrypt:/etc/letsencrypt
 
 volumes:
   psql-data:
-    # Define o tipo de volume como persistente (para dados persistirem entre as reinicializações).
-    # Caso esteja usando Docker em uma máquina local, você também pode especificar um caminho absoluto no host em vez de 'local'.
-    driver: local
