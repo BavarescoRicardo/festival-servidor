@@ -18,7 +18,7 @@ import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;
 import api.nxmu.festival.dto.ClassificacaoRelDto;
 import api.nxmu.festival.dto.filtros.FiltroClassificacaoDto;
-import api.nxmu.festival.servicos.ClassificacaoServices;
+import api.nxmu.festival.servicos.ClassificacaoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +28,7 @@ import lombok.RequiredArgsConstructor;
 public class ClassificacaoController {
 
     @Autowired
-    private final ClassificacaoServices classificacaoService;
+    private final ClassificacaoService classificacaoService;
 
     @RequestMapping(value = "/classificacoes", method =  RequestMethod.GET)
     public List<ClassificacaoListaDto> getClassificacoes(){

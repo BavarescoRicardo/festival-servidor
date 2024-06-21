@@ -17,10 +17,10 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ParticipanteServices {
+public class ParticipanteService {
     private final EntityManager entityManager;
     private final ParticipanteRepositorio participanteDB;
-    private final ApresentacaoServices apresentacaoServices;
+    private final ApresentacaoService apresentacaoService;
 
     public Optional<Participante> encontrarPorId(Long id){        
         return participanteDB.findById(id);
@@ -35,7 +35,7 @@ public class ParticipanteServices {
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
-                participante.getApresentacao().getId()));
+                participante.getApresentacao().getId(), new byte[0]));
         }
 
         return listaDto;
@@ -50,7 +50,7 @@ public class ParticipanteServices {
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
-                participante.getApresentacao().getId()));
+                participante.getApresentacao().getId(), new byte[0]));
         }
 
         return listaDto;
@@ -64,11 +64,10 @@ public class ParticipanteServices {
                 participante.getGenero(), participante.getNascimento(),
                 participante.getDocumentorg(), participante.getEmail(), 
                 participante.getNecessidade(), participante.getDescrinescessidade(),
-                apresentacaoServices.encontrarPorId(participante.getApresentacao()).get()
+                apresentacaoService.encontrarPorId(participante.getApresentacao()).get()
             );
 
             entityManager.persist(p);
-            Thread.sleep(500);
             return p.getId();
         } catch (Exception e) {
             throw e;
@@ -87,7 +86,7 @@ public class ParticipanteServices {
             p.setEmail(participante.getEmail());
             p.setNecessidade(participante.getNecessidade()); 
             p.setDescrinescessidade(participante.getDescrinescessidade());
-            p.setApresentacao(apresentacaoServices.encontrarPorId(participante.getApresentacao()).get());
+            p.setApresentacao(apresentacaoService.encontrarPorId(participante.getApresentacao()).get());
 
             this.participanteDB.save(p);    
         } catch (Exception e) {

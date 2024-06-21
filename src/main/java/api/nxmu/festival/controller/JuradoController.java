@@ -3,7 +3,6 @@ package api.nxmu.festival.controller;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -13,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.JuradoDto;
-import api.nxmu.festival.servicos.JuradoServices;
+import api.nxmu.festival.servicos.JuradoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -23,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class JuradoController {
 
     @Autowired
-    private final JuradoServices juradoService;
+    private final JuradoService juradoService;
 
 //    @Cacheable("jurados")
     @RequestMapping(value = "/jurados", method =  RequestMethod.GET)
