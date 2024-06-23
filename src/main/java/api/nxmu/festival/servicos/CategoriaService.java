@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.CategoriaDto;
@@ -14,7 +13,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CategoriaServices {
+public class CategoriaService {
 
     private final CategoriaRepositorio categoriaDB;
 

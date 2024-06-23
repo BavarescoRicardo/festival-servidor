@@ -19,7 +19,7 @@ import api.nxmu.festival.dto.NotaFinalDto;
 import api.nxmu.festival.dto.NotasDto;
 import api.nxmu.festival.dto.TabelaNotaDto;
 import api.nxmu.festival.dto.filtros.FiltroNotaDto;
-import api.nxmu.festival.servicos.NotaServices;
+import api.nxmu.festival.servicos.NotaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -29,7 +29,7 @@ import lombok.RequiredArgsConstructor;
 public class NotaController {
 
     @Autowired
-    private final NotaServices notaService;
+    private final NotaService notaService;
 
     @RequestMapping(value = "/notas", method =  RequestMethod.GET)
     public List<TabelaNotaDto> getNotas(){

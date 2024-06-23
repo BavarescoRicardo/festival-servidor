@@ -24,16 +24,16 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class NotaServices {
+public class NotaService {
 
     private final NotaRepositorio notaDB;    
     private final NotaFinalRepositorio notaFinalDB;    
-    private final NotaFinalServices notaFinalServices;
+    private final NotaFinalService notaFinalService;
 
-    private final CategoriaServices categoriaServices;
-    private final JuradoServices juradoServices;    
-    private final ApresentacaoServices apresentacaoServices;
-    private final QuesitoServices quesitoServices;
+    private final CategoriaService categoriaService;
+    private final JuradoService juradoService;
+    private final ApresentacaoService apresentacaoService;
+    private final QuesitoService quesitoService;
 
     public Optional<Nota> encontrarPorId(Long id){        
         return notaDB.findById(id);
@@ -79,7 +79,7 @@ public class NotaServices {
         		throw new Exception("Nota com valor fora dos limites deste evento");
         	}
             // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
             	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
@@ -87,10 +87,10 @@ public class NotaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNota())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(notaDto.getQuesito()).get()).build();
+                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoService.encontrarPorId(notaDto.getQuesito()).get()).build();
 
             // Confere se ja existe nota para esta apresentacao este jurado e quesito
             long apr = notaDto.getApresentacao(); 
@@ -110,7 +110,7 @@ public class NotaServices {
     public boolean salvarNotas(NotasDto notaDto){
         try {
         	// Verifica se a apresentacao pertence a categoria informada        	
-        	Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+        	Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
         	if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
         		throw new Exception("Esta apresentacao nao pertence a esta categoria");
         	}
@@ -159,7 +159,7 @@ public class NotaServices {
         		throw new Exception("Nota com valor fora dos limites deste evento");
         	}
             // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
             	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
@@ -167,10 +167,10 @@ public class NotaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaAfinacao())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(1L).get()).build();
+                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoService.encontrarPorId(1L).get()).build();
 
             // Confere se ja existe nota para esta apresentacao este jurado e quesito
             long apr = notaDto.getApresentacao(); 
@@ -195,7 +195,7 @@ public class NotaServices {
         		throw new Exception("Nota com valor fora dos limites deste evento");
         	}
             // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
             	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
@@ -203,10 +203,10 @@ public class NotaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaDiccao())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(2L).get()).build();
+                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoService.encontrarPorId(2L).get()).build();
 
             // Confere se ja existe nota para esta apresentacao este jurado e quesito
             long apr = notaDto.getApresentacao(); 
@@ -231,7 +231,7 @@ public class NotaServices {
         		throw new Exception("Nota com valor fora dos limites deste evento");
         	}
             // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
             	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
@@ -239,10 +239,10 @@ public class NotaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaRitmo())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(3L).get()).build();
+                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoService.encontrarPorId(3L).get()).build();
 
             // Confere se ja existe nota para esta apresentacao este jurado e quesito
             long apr = notaDto.getApresentacao(); 
@@ -267,7 +267,7 @@ public class NotaServices {
         		throw new Exception("Nota com valor fora dos limites deste evento");
         	}
             // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get();
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
             if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
             	throw new Exception("Esta apresentacao nao pertence a esta categoria");
             }
@@ -275,10 +275,10 @@ public class NotaServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaInterpretacao())
-                .categoria(categoriaServices.encontrarPorId(notaDto.getCategoria()).get())
-                .jurado(juradoServices.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoServices.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoServices.encontrarPorId(4L).get()).build();
+                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
+                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
+                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
+                .quesito(quesitoService.encontrarPorId(4L).get()).build();
 
             // Confere se ja existe nota para esta apresentacao este jurado e quesito
             long apr = notaDto.getApresentacao(); 
@@ -302,7 +302,7 @@ public class NotaServices {
             Nota nota =  this.encontrarPorId(id).get();
             
             // Remove nota final antes de alterar a nota
-            this.notaFinalServices.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
+            this.notaFinalService.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
             nota.setNota(notaDto.getNota());
             this.notaDB.save(nota);
 
@@ -318,7 +318,7 @@ public class NotaServices {
         try {
             
             Nota nota = this.encontrarPorId(id).get();
-            this.notaFinalServices.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
+            this.notaFinalService.removerNotaFinal(nota.getApresentacao().getId(), nota.getJurado().getId());
             this.notaDB.delete(nota);
 
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
@@ -363,8 +363,8 @@ public class NotaServices {
 
 
         // Confere se a nota final ja existe para esta apresentacao -- se ja houver nota define id da nota e salva atualizando
-        if (notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).size() > 0){
-            notaFinal.setId(notaFinalServices.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).get(0).getId());
+        if (notaFinalService.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).size() > 0){
+            notaFinal.setId(notaFinalService.encontrarPorApresentacaoeJurado(codigoApresentacao, codigoJurado).get(0).getId());
         }
             
         notaFinalDB.save(notaFinal);

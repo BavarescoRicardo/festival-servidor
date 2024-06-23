@@ -15,7 +15,7 @@ import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
 import api.nxmu.festival.seguranca.AuthenticationService;
 import api.nxmu.festival.seguranca.RegisterRequest;
-import api.nxmu.festival.servicos.EnderecoServices;
+import api.nxmu.festival.servicos.EnderecoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -28,7 +28,7 @@ public class ContaController {
     private final AuthenticationService service;
     
     @Autowired
-    private final EnderecoServices enderecoServices;
+    private final EnderecoService enderecoService;
 
     @PostMapping("/register")
     public ResponseEntity<AuthenticationResponse> register(
@@ -50,7 +50,7 @@ public class ContaController {
     @RequestBody ImportacaoEntradaDto arquivo)
     {
         try {
-            enderecoServices.importar(arquivo.getSes());
+            enderecoService.importar(arquivo.getSes());
             return ResponseEntity.ok().body("Executadas açoes com sucesso absoluto!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());

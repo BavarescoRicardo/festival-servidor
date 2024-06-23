@@ -12,7 +12,7 @@ import api.nxmu.festival.modelo.Jurado;
 import api.nxmu.festival.repositorio.JuradoRepositorio;
 
 @Service
-public class JuradoServices {
+public class JuradoService {
 
     @Autowired
     private JuradoRepositorio juradoDB;

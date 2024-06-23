@@ -12,7 +12,7 @@ import api.nxmu.festival.modelo.Quesito;
 import api.nxmu.festival.repositorio.QuesitoRepositorio;
 
 @Service
-public class QuesitoServices {
+public class QuesitoService {
 
     @Autowired
     private QuesitoRepositorio quesitoDB;

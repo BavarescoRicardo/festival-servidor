@@ -26,14 +26,14 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class ClassificacaoServices {
+public class ClassificacaoService {
 
     @Autowired
     private ClassificacaoRepositorio classificacaoDB;
 
-    private final CategoriaServices categoriaServices;
-    private final ApresentacaoServices apresentacaoServices;
-    private final NotaFinalServices notaFinalServices;
+    private final CategoriaService categoriaService;
+    private final ApresentacaoService apresentacaoService;
+    private final NotaFinalService notaFinalService;
 
     public Optional<Classificacao> encontrarPorId(Long id){        
         return classificacaoDB.findById(id);
@@ -103,8 +103,8 @@ public class ClassificacaoServices {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Classificacao e = new Classificacao(
                 classificacao.getNotafinal(), 
-                categoriaServices.encontrarPorId(classificacao.getCategoria()).get(), 
-                apresentacaoServices.encontrarPorId(classificacao.getApresentacao()).get());
+                categoriaService.encontrarPorId(classificacao.getCategoria()).get(),
+                apresentacaoService.encontrarPorId(classificacao.getApresentacao()).get());
 
             this.classificacaoDB.save(e);    
         } catch (Exception e) {
@@ -140,7 +140,7 @@ public class ClassificacaoServices {
 
     public void calcularClassificacao(long codigoCategoria){
         // Retornar lista de notas finais pertencentes a categoria
-        List<ApresentacaoDto> apresentacoes = apresentacaoServices.encontrarPorCategoria(codigoCategoria);
+        List<ApresentacaoDto> apresentacoes = apresentacaoService.encontrarPorCategoria(codigoCategoria);
         if(!(apresentacoes.size() > 0))
             return;
 
@@ -148,7 +148,7 @@ public class ClassificacaoServices {
         double media = 0;
 
         for (ApresentacaoDto apresentacao : apresentacoes) { 
-            List<NotaFinal> notasApresentacao = notaFinalServices.encontrarPorApresentacao(apresentacao.getCodigo());
+            List<NotaFinal> notasApresentacao = notaFinalService.encontrarPorApresentacao(apresentacao.getCodigo());
             
             // Caso não existe nota final para esta apresentação pula para a proxima
             if(notasApresentacao.isEmpty())
@@ -162,7 +162,7 @@ public class ClassificacaoServices {
             media = (media / notasApresentacao.size());            
 
             // Após media calcula monta o objeto classificação
-            Apresentacao apr = apresentacaoServices.encontrarPorId(apresentacao.getCodigo()).get();
+            Apresentacao apr = apresentacaoService.encontrarPorId(apresentacao.getCodigo()).get();
 //            Classificacao classificacao = Classificacao.builder()
 //            .notafinal(media)   
 //            .categoria(categoriaServices.encontrarPorId(apresentacao.getCategoria()).get()) 

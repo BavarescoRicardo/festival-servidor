@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.QuesitoDto;
-import api.nxmu.festival.servicos.QuesitoServices;
+import api.nxmu.festival.servicos.QuesitoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class QuesitoController {
 
     @Autowired
-    private final QuesitoServices quesitoService;
+    private final QuesitoService quesitoService;
 
     @RequestMapping(value = "/quesitos", method =  RequestMethod.GET)
     public List<QuesitoDto> getQuesitos(){

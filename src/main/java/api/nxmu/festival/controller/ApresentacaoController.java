@@ -17,7 +17,7 @@ import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
-import api.nxmu.festival.servicos.ApresentacaoServices;
+import api.nxmu.festival.servicos.ApresentacaoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -27,7 +27,7 @@ import lombok.RequiredArgsConstructor;
 public class ApresentacaoController {
 
     @Autowired
-    private final ApresentacaoServices apresentacaoService;
+    private final ApresentacaoService apresentacaoService;
 
     @RequestMapping(value = "/apresentacoes", method =  RequestMethod.GET)
     public List<ApresentacaoDto> getApresentacoes(){
