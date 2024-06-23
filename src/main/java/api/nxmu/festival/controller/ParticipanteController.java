@@ -3,6 +3,7 @@ package api.nxmu.festival.controller;
 import java.io.IOException;
 import java.util.List;
 
+import api.nxmu.festival.servicos.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +17,6 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
-import api.nxmu.festival.servicos.ParticipanteServices;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -26,7 +26,7 @@ import lombok.RequiredArgsConstructor;
 public class ParticipanteController {
 
     @Autowired
-    private final ParticipanteServices participanteService;
+    private final ParticipanteService participanteService;
 
     @RequestMapping(value = "/participantes", method =  RequestMethod.GET)
     public List<ParticipanteDto> getParticipantes(){

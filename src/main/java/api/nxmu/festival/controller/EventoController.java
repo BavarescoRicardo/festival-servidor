@@ -1,8 +1,5 @@
 package api.nxmu.festival.controller;
 
-import java.util.List;
-
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -12,12 +9,10 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.EventoDto;
-import api.nxmu.festival.dto.RespostaRequestDto;
-import api.nxmu.festival.servicos.EventoServices;
+import api.nxmu.festival.servicos.EventoService;
 import api.nxmu.festival.utils.RespostaRequestUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -29,7 +24,7 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 public class EventoController {
 
-    private final EventoServices eventoService;
+    private final EventoService eventoService;
 
     @GetMapping(value = "/eventos")
     public ResponseEntity<?> getEventos() {

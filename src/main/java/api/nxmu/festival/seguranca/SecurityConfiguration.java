@@ -21,33 +21,34 @@ public class SecurityConfiguration {
     private final AuthenticationProvider authenticationProvider;
 
     @Bean
-    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception{
+    SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
-            .csrf(csrf -> csrf
-                    .disable())
-            .authorizeHttpRequests()
-            .requestMatchers(HttpMethod.OPTIONS).permitAll()
-            .requestMatchers(whiteList()).permitAll()
-            .anyRequest()
-            .authenticated()
-            .and()
-            .sessionManagement(management -> management
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .authenticationProvider(authenticationProvider)
-            .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
+                .csrf(csrf -> csrf
+                        .disable())
+                .authorizeHttpRequests()
+                .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                .requestMatchers(whiteList()).permitAll()
+                .anyRequest()
+                .authenticated()
+                .and()
+                .sessionManagement(management -> management
+                        .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
+                .authenticationProvider(authenticationProvider)
+                .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
     }
 
     private String[] whiteList() {
-        return new String[] {
-            "/api/evento/auth/**",
-            "/api/categorias",
-            "/api/apresentacoescartao",
-            "/api/evento/salvaparticipante",
-            "/api/salvaapresentacao",
-            "/api/salvaendereco"
+        return new String[]{
+                "/api/evento/auth/**",
+                "/api/categorias",
+                "/api/apresentacoescartao",
+                "/api/evento/salvaparticipante",
+                "/api/salvaapresentacao",
+                "/api/salvaendereco",
+                "/inscricoes"
         };
     }
-    
+
 }

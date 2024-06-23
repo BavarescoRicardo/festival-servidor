@@ -1,4 +1,4 @@
-2023-02-19T22:46:42.774-03:00  WARN 16108 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteServices' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2023-02-19T22:46:42.774-03:00  WARN 16108 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
 2023-02-19T22:46:42.832-03:00 ERROR 16108 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
@@ -7,14 +7,14 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' that could not be found.
+Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteService' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' in your configuration.
+Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteService' in your configuration.
 
-2023-02-19T22:48:43.484-03:00  WARN 5944 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteServices' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2023-02-19T22:48:43.484-03:00  WARN 5944 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
 2023-02-19T22:48:43.525-03:00 ERROR 5944 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
@@ -23,14 +23,14 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' that could not be found.
+Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteService' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' in your configuration.
+Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteService' in your configuration.
 
-2023-02-19T22:50:10.752-03:00  WARN 6796 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteServices' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
+2023-02-19T22:50:10.752-03:00  WARN 6796 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: No qualifying bean of type 'api.nxmu.festival.servicos.ParticipanteService' available: expected at least 1 bean which qualifies as autowire candidate. Dependency annotations: {}
 2023-02-19T22:50:10.793-03:00 ERROR 6796 --- [main] o.s.b.d.LoggingFailureAnalysisReporter   : 
 
 ***************************
@@ -39,12 +39,12 @@ APPLICATION FAILED TO START
 
 Description:
 
-Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' that could not be found.
+Parameter 1 of constructor in api.nxmu.festival.controller.UsuarioController required a bean of type 'api.nxmu.festival.servicos.ParticipanteService' that could not be found.
 
 
 Action:
 
-Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteServices' in your configuration.
+Consider defining a bean of type 'api.nxmu.festival.servicos.ParticipanteService' in your configuration.
 
 2023-02-19T22:50:48.731-03:00  WARN 16668 --- [main] ConfigServletWebServerApplicationContext : Exception encountered during context initialization - cancelling refresh attempt: org.springframework.beans.factory.UnsatisfiedDependencyException: Error creating bean with name 'usuarioController' defined in file [C:\Users\Ninguem\Desktop\Desenvolvimento\Festival\festival\target\classes\api\nxmu\festival\controller\UsuarioController.class]: Unsatisfied dependency expressed through constructor parameter 1: Error creating bean with name 'participanteServices': Unsatisfied dependency expressed through field 'participanteDB': Error creating bean with name 'participanteRepositorio' defined in api.nxmu.festival.repositorio.ParticipanteRepositorio defined in @EnableJpaRepositories declared on JpaRepositoriesRegistrar.EnableJpaRepositoriesConfiguration: Not a managed type: class api.nxmu.festival.modelo.Participante
 2023-02-19T22:50:48.770-03:00 ERROR 16668 --- [main] o.s.boot.SpringApplication               : Application run failed

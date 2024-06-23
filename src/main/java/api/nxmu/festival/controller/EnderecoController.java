@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.EnderecoDto;
-import api.nxmu.festival.servicos.EnderecoServices;
+import api.nxmu.festival.servicos.EnderecoService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -22,7 +22,7 @@ import lombok.RequiredArgsConstructor;
 public class EnderecoController {
 
     @Autowired
-    private final EnderecoServices enderecoService;
+    private final EnderecoService enderecoService;
 
     @RequestMapping(value = "/enderecos", method =  RequestMethod.GET)
     public List<EnderecoDto> getEnderecos(){

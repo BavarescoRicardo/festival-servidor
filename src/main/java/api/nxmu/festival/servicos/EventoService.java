@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.ArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.EventoDto;
@@ -12,7 +11,7 @@ import api.nxmu.festival.modelo.Evento;
 import api.nxmu.festival.repositorio.EventoRepositorio;
 
 @Service
-public class EventoServices {
+public class EventoService {
 
     @Autowired
     private EventoRepositorio eventoDB;
