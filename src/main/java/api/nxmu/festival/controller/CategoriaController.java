@@ -11,7 +11,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import api.nxmu.festival.dto.CategoriaDto;
 import api.nxmu.festival.dto.RespostaErrorDto;
-import api.nxmu.festival.servicos.CategoriaServices;
+import api.nxmu.festival.servicos.CategoriaService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
@@ -21,7 +21,7 @@ import lombok.RequiredArgsConstructor;
 public class CategoriaController {
 
     @Autowired
-    private final CategoriaServices categoriaService;
+    private final CategoriaService categoriaService;
 
     @RequestMapping(value = "/categorias", method =  RequestMethod.GET)
     public ResponseEntity<?> getCategorias(){        

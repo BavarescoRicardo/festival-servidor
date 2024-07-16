@@ -11,7 +11,7 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class NotaFinalServices {
+public class NotaFinalService {
     private final NotaFinalRepositorio notaFinalDB;
 
     public Optional<NotaFinal> encontrarPorId(Long id){        

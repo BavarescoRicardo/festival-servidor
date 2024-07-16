@@ -14,14 +14,17 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
 
 
 ## Disponível docker container para execução
+### Instalar java 17 na maqui/ atualizar sistema
+   sudo apt install -y openjdk-17-jre
 ### Primeiro deve se rodar o maven para criar o jar do aplicativo
   sudo chmod +x mvnw
   ./ mvnw install -DskipTests
-   comandos para executar container
-     docker-compose pull
-     docker-compose down
-     docker-compose build
-     docker-compose up
+#### Instalar docker e executar imagem  
+    sudo snap install docker
+       sudo docker-compose pull
+       sudo docker-compose down
+       sudo docker-compose build
+       sudo docker-compose up
 
 ## End points do docker
 http://localhost:3034
@@ -42,3 +45,9 @@ sudo certbot certonly --standalone -d festival-evento.online --email ricardo.bav
 sudo -i
 
 sudo openssl pkcs12 -export -in /etc/letsencrypt/live/festival-evento.online/cert.pem -inkey /etc/letsencrypt/live/festival-evento.online/privkey.pem -out /etc/letsencrypt/live/festival-evento.online/certificate.p12 -name "certificate" -CAfile /etc/letsencrypt/live/festival-evento.online/chain.pem -caname "Let's Encrypt Authority X3"
+
+
+## End point AWS EC2
+  18.221.80.86:80
+        /api/evento/auth/register  --- {   "email": "ricardo.com",   "senha": "asd" }
+       /api/evento/auth/login  --- {   "email": "ricardo.com",   "senha": "asd" }    

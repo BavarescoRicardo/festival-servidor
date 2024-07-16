@@ -9,9 +9,9 @@ import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor
-public class CalculoNotaServices {
+public class CalculoNotaService {
 
-    private final NotaServices notaDB;
+    private final NotaService notaDB;
 
     public Optional<Nota> encontrarPorId(Long id){        
         return notaDB.encontrarPorId(id);
