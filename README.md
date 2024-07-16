@@ -25,6 +25,12 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
        sudo docker-compose down
        sudo docker-compose build
        sudo docker-compose up
+  ./mvnw install -DskipTests
+   comandos para executar container
+     docker-compose pull
+     docker-compose down
+     docker-compose build
+     docker-compose up
 
 ## End points do docker
 http://localhost:3034
