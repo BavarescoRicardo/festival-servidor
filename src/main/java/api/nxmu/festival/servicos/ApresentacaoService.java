@@ -26,21 +26,19 @@ public class ApresentacaoService {
     private final CategoriaService categoriaService;
 
     private static ApresentacaoDto getApresentacaoDto(Apresentacao apresentacao) {
-        return ApresentacaoDto
-                .builder()
-                .codigo(apresentacao.getId())
-                .musica(apresentacao.getMusica())
-                .nomeartistico(apresentacao.getNomeartistico())
-                .tom(apresentacao.getTom())
-                .gravacao(apresentacao.getGravacao())
-                .autor(apresentacao.getAutor())
-                .cidade(apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade())
-                .idEndereco(apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId())
-                .ordem(apresentacao.getOrdem())
-                .senha(apresentacao.getSenha())
-                .categoriaTitulo(apresentacao.getCategoria().getTitulo()).build();
+        return new ApresentacaoDto(
+                apresentacao.getId(),
+                apresentacao.getMusica(),
+                apresentacao.getNomeartistico(),
+                apresentacao.getTom(),
+                apresentacao.getGravacao(),
+                apresentacao.getAutor(),
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(),
+                apresentacao.getOrdem(),
+                apresentacao.getSenha(),
+                apresentacao.getCategoria().getTitulo()
+        );
     }
-
     public Optional<Apresentacao> encontrarPorId(Long id) {
         return apresentacaoDB.findById(id);
     }
@@ -59,6 +57,10 @@ public class ApresentacaoService {
 
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for (Apresentacao apresentacao : apresentacoes) {
+        	if (apresentacao.getParticipantes().isEmpty()) {
+        		continue;
+        	}        	
+
             listaDto.add(
                     getApresentacaoDto(apresentacao)
             );
@@ -74,6 +76,9 @@ public class ApresentacaoService {
                 findAllFiltrado(
                         filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
         for (Apresentacao apresentacao : listaFiltrada) {
+        	if (apresentacao.getParticipantes().isEmpty()) {
+        		continue;
+        	}
             listaDto.add(
                     getApresentacaoDto(apresentacao)
             );
@@ -128,20 +133,19 @@ public class ApresentacaoService {
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
 
         for (Apresentacao apresentacao : apresentacaoDB.findAllByCategoria(codCategoria)) {
-            listaDto.add(
-                    ApresentacaoDto.builder()
-                            .codigo(apresentacao.getId())
-                            .musica(apresentacao.getMusica())
-                            .nomeartistico(apresentacao.getNomeartistico())
-                            .tom(apresentacao.getTom())
-                            .gravacao(apresentacao.getGravacao())
-                            .autor(apresentacao.getAutor())
-                            .cidade(apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade())
-                            .idEndereco(apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId())
-                            .categoriaTitulo(apresentacao.getCategoria().getTitulo())
-                            .categoria(apresentacao.getCategoria().getId())
-                            .build()
-            );
+            listaDto.add(new ApresentacaoDto(
+                    apresentacao.getId(),
+                    apresentacao.getMusica(),
+                    apresentacao.getNomeartistico(),
+                    apresentacao.getTom(),
+                    apresentacao.getGravacao(),
+                    apresentacao.getAutor(),
+                    apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(),
+                    apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(),
+                    apresentacao.getOrdem(),
+                    apresentacao.getSenha(),
+                    apresentacao.getCategoria().getTitulo()
+            ));
         }
 
         return listaDto;

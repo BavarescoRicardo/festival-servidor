@@ -219,20 +219,19 @@ public class EnderecoService {
             for (ImportacaoDto importacao : importacoes) {
                 // Salvar a apresentacao de cada importacao
                 long idApre = apresentacaoService.salvarImport(
-                        ApresentacaoDto.builder()
-                                .codigo(Long.valueOf(0))
-                                .musica(importacao.getMusica())
-                                .nomeartistico(importacao.getNomeArtistico())
-                                .tom(importacao.getTom())
-                                .gravacao(importacao.getGravacao())
-                                .autor(importacao.getAutor())
-                                .linkmusica(importacao.getLinkmusica())
-                                .ordem(importacao.getOrdem())
-                                .senha(importacao.getSenha())
-                                .cidade(importacao.getCidade())
-                                .idEndereco(Long.valueOf("0"))
-                                .categoria(importacao.getCategoria())
-                                .build()
+                    new ApresentacaoDto(
+                        Long.valueOf(0),
+                        importacao.getMusica(),
+                        importacao.getNomeArtistico(),
+                        importacao.getTom(),
+                        importacao.getGravacao(),
+                        importacao.getAutor(),
+                        importacao.getCidade(),
+                        Long.valueOf(0),
+                        importacao.getOrdem(),
+                        importacao.getSenha(),
+                        importacao.getCategoria()
+                    )
                 );
                 long idPart = participanteService.salvar(
                         new ParticipanteDto(
