@@ -23,6 +23,9 @@ public class ParticipanteDto {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private String pix;
+    private String agencia;
+    private String conta;
     private Long apresentacao;
     private byte[] fotoPerfil;
 }
