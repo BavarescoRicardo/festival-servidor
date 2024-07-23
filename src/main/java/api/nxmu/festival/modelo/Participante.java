@@ -38,6 +38,8 @@ public class Participante {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private String pix;
+    private String conta;
     private int ativo;
     private byte[] fotoPerfil;
     private byte[] fotoDocumento;
@@ -50,7 +52,7 @@ public class Participante {
     private List<Endereco> enderecos;
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade, Apresentacao apresentacao) {
+            String documentorg, String email, String necessidade, String descrinescessidade, String pix, String conta, Apresentacao apresentacao) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -129,5 +131,17 @@ public class Participante {
     }
     public void setFotoDocumento(byte[] fotoDocumento) {
         this.fotoDocumento = fotoDocumento;
+    }    
+    public String getPix() {
+        return this.pix;
+    }
+    public void setPix(String pix) {
+        this.pix = pix;
+    }
+    public String getConta() {
+        return this.conta;
+    }
+    public void setConta(String conta) {
+        this.conta = conta;
     }    
 }

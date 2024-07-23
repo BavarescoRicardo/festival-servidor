@@ -18,7 +18,7 @@ Utiliza segurança spring security e Tokens JWT para garantir autenticidade do
    sudo apt install -y openjdk-17-jre
 ### Primeiro deve se rodar o maven para criar o jar do aplicativo
   sudo chmod +x mvnw
-  ./ mvnw install -DskipTests
+  ./mvnw install -DskipTests
 #### Instalar docker e executar imagem  
     sudo snap install docker
        sudo docker-compose pull
