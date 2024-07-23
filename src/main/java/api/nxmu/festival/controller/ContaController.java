@@ -2,14 +2,7 @@ package api.nxmu.festival.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
-
+import org.springframework.web.bind.annotation.*;
 import api.nxmu.festival.dto.ImportacaoEntradaDto;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
@@ -45,12 +38,10 @@ public class ContaController {
     }
     
 
-    @RequestMapping(value = "/testaapi", method =  RequestMethod.POST)
-	public ResponseEntity<?> testeApi(
-    @RequestBody ImportacaoEntradaDto arquivo)
+    @GetMapping("/testaapi")
+	public ResponseEntity<?> testeApi()
     {
         try {
-            enderecoService.importar(arquivo.getSes());
             return ResponseEntity.ok().body("Executadas açoes com sucesso absoluto!");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());
