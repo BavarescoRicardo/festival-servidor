@@ -1,6 +1,5 @@
 package api.nxmu.festival.servicos;
 
-import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.EnderecoDto;
 import api.nxmu.festival.dto.InscricaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
@@ -9,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -17,7 +15,6 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Collection;
-import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -86,6 +83,10 @@ public class InscricaoService {
                         background-color: #f4f4f4;
                         font-weight: bold;
                     }
+                    .bank-info {
+                        margin-top: 5px;
+                        border: 2px solid #000000;
+                    }
                     h4 {
                         color: #333333;
                     }
@@ -148,6 +149,20 @@ public class InscricaoService {
                             <td>%s</td>
                         </tr>
                     </table>
+                    <table class="info-table bank-info">
+                        <tr>
+                            <td class="label">PIX:</td>
+                            <td>%s</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Agência:</td>
+                            <td>%s</td>
+                        </tr>
+                        <tr>
+                            <td class="label">Conta:</td>
+                            <td>%s</td>
+                        </tr>
+                    </table>
                     <h4>Segue anexo o documento do participante para validação.</h4>
                 </div>
             </body>
@@ -165,11 +180,15 @@ public class InscricaoService {
                 inscricaoDto.getApresentacao().getTom(),
                 inscricaoDto.getApresentacao().getGravacao(),
                 inscricaoDto.getApresentacao().getAutor(),
-                getParticipantesStr(inscricaoDto.getParticipantes())
+                getParticipantesStr(inscricaoDto.getParticipantes()),
+                parcitipantePrincipal.getPix(),
+                parcitipantePrincipal.getAgencia(),
+                parcitipantePrincipal.getConta()
         );
         this.emailService.sendMessageWithAttachment("[Inscrição FIMUSI 2024]", content, "foto_documento.png", getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoDocumento()));
-
     }
+
+
 
     private String montarEndereco(EnderecoDto enderecoDto) {
         return "%s, %s, %s, %s.".formatted(enderecoDto.getEndereco(), enderecoDto.getCidade(), enderecoDto.getEstado(), enderecoDto.getCep());

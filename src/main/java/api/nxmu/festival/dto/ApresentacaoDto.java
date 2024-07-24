@@ -210,6 +210,9 @@ public class ApresentacaoDto {
 		this.categoria = codCategoria;
 	}	
 		
+	public ApresentacaoDto( ) {
+		
+	}
 	
 	
 }
