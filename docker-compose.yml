@@ -19,8 +19,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8443:443'
-      - '443:443'
+      - '8443:443'  # Expose only 8443 e a 443 o ngix configura
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
       - SPRING_DATASOURCE_USERNAME=admin
