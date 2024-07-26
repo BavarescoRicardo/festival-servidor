@@ -191,7 +191,7 @@ public class InscricaoService {
 
 
     private String montarEndereco(EnderecoDto enderecoDto) {
-        return "%s, %s, %s, %s.".formatted(enderecoDto.getCidade(), enderecoDto.getEstado(), enderecoDto.getCep());
+        return "%s, %s, %s.".formatted(enderecoDto.getCidade(), enderecoDto.getEstado(), enderecoDto.getCep());
     }
 
     private String getParticipantesStr(Collection<ParticipanteDto> participantes) {
