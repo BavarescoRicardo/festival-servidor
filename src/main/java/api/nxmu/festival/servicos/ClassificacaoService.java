@@ -1,16 +1,17 @@
 package api.nxmu.festival.servicos;
-
-import java.util.List;
-import java.util.Optional;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Optional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.AtualizaClassificacaoDto;
@@ -22,6 +23,8 @@ import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.modelo.Classificacao;
 import api.nxmu.festival.modelo.NotaFinal;
 import api.nxmu.festival.repositorio.ClassificacaoRepositorio;
+import jakarta.persistence.EntityManager;
+import jakarta.persistence.PersistenceContext;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -30,6 +33,9 @@ public class ClassificacaoService {
 
     @Autowired
     private ClassificacaoRepositorio classificacaoDB;
+    
+    @PersistenceContext
+    private EntityManager entityManager;
 
     private final CategoriaService categoriaService;
     private final ApresentacaoService apresentacaoService;
@@ -43,70 +49,68 @@ public class ClassificacaoService {
         return classificacaoDB.findByIdApresentacao(id);
     }
 
-    public List<ClassificacaoListaDto> encontrar(){
-        BigDecimal bd;
-        List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
-        
-        // Converte a lista de objetos da entidade em objetos dto para transferencia
-        for(Classificacao classificacao: classificacaoDB.findAll()) {
-            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
-            listaDto.add(new ClassificacaoListaDto(
-                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
-                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico()));
+    @Transactional
+    public List<ClassificacaoListaDto> encontrar() {
+        List<Classificacao> classificacoes = classificacaoDB.findAll();
+        List<ClassificacaoListaDto> listaDto = new ArrayList<>();
+
+        for (Classificacao classificacao : classificacoes) {
+            // Check if apresentacao is not null before accessing its properties
+            if (classificacao.getApresentacao() != null) {
+                BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
+                listaDto.add(new ClassificacaoListaDto(
+                    classificacao.getId(),
+                    bd.doubleValue(),
+                    classificacao.getCategoria().getDescricao(),
+                    classificacao.getApresentacao().getMusica(),
+                    classificacao.getApresentacao().getNomeartistico()
+                ));
+            } else {
+                // Optionally handle cases where apresentacao is null
+                System.out.println("Classificacao with id " + classificacao.getId() + " has a null apresentacao");
+            }
         }
 
         return listaDto;
     }
 
     public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
-        BigDecimal bd;
-        List<ClassificacaoListaDto> listaDto = new ArrayList<ClassificacaoListaDto>();
+        List<ClassificacaoListaDto> listaDto = new ArrayList<>();
         Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
         List<Classificacao> listaFiltrada = classificacaoDB.
-            findAllFiltrado(
-                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+            findAllFiltrado(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
         
-        // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: listaFiltrada) {
-            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
+            BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoListaDto(
                 classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
                 classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico()));
         }
-
         return listaDto;
     } 
-    
-    public List<ClassificacaoRelDto> encontrarRel(FiltroClassificacaoDto filtro){
-        BigDecimal bd;
-        List<ClassificacaoRelDto> listaDto = new ArrayList<ClassificacaoRelDto>();
-        Pageable pageable = null; 
 
-        List<Classificacao> listaFiltrada = null;
-            pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
-            listaFiltrada = classificacaoDB.findAllFiltrado(
-                    filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+    public List<ClassificacaoRelDto> encontrarRel(FiltroClassificacaoDto filtro){
+        List<ClassificacaoRelDto> listaDto = new ArrayList<>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
+        List<Classificacao> listaFiltrada = classificacaoDB.findAllFiltrado(
+                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
         
-        // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Classificacao classificacao: listaFiltrada) {
-            bd = new BigDecimal(classificacao.getNotafinal()).setScale(2,RoundingMode.HALF_DOWN);
+            BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoRelDto(
                 classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
                 classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico(), "Cidade x"));
         }
-
         return listaDto;
     }     
 
     public boolean salvar(ClassificacaoDto classificacao){
         try {
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Classificacao e = new Classificacao(
                 classificacao.getNotafinal(), 
                 categoriaService.encontrarPorId(classificacao.getCategoria()).get(),
                 apresentacaoService.encontrarPorId(classificacao.getApresentacao()).get());
-
-            this.classificacaoDB.save(e);    
+            classificacaoDB.save(e);    
         } catch (Exception e) {
             return false;
         }
@@ -115,11 +119,9 @@ public class ClassificacaoService {
 
     public AtualizaClassificacaoDto atualizar(AtualizaClassificacaoDto classificacao, long id){
         try {
-            // Encontra objeto salvo pelo id e depois atualiza
-            Classificacao clas = this.encontrarPorId(id).get();
+            Classificacao clas = this.encontrarPorId(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
             clas.setNotafinal(classificacao.getNotafinal());
-
-            this.classificacaoDB.save(clas);
+            classificacaoDB.save(clas);
             return classificacao;
         } catch (Exception e) {
             return null;
@@ -128,57 +130,46 @@ public class ClassificacaoService {
     
     public ResponseEntity<String> remover(long id){
         try {
-            
-            Classificacao clas = this.encontrarPorId(id).get();
-            this.classificacaoDB.delete(clas);            
-
+            Classificacao clas = this.encontrarPorId(id).orElseThrow(() -> new IllegalArgumentException("Invalid id: " + id));
+            classificacaoDB.delete(clas);
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {
             return ResponseEntity.notFound().build();
         }
     }   
 
-    public void calcularClassificacao(long codigoCategoria){
-        // Retornar lista de notas finais pertencentes a categoria
+    @Transactional
+    public void calcularClassificacao(long codigoCategoria) {
         List<ApresentacaoDto> apresentacoes = apresentacaoService.encontrarPorCategoria(codigoCategoria);
-        if(!(apresentacoes.size() > 0))
+        if (apresentacoes.isEmpty())
             return;
 
-        // Itera por todas as notas pertencentes a mesma categoria   --- não diferencia jurados nem quesitos nem apresentações        
         double media = 0;
 
-        for (ApresentacaoDto apresentacao : apresentacoes) { 
+        for (ApresentacaoDto apresentacao : apresentacoes) {
             List<NotaFinal> notasApresentacao = notaFinalService.encontrarPorApresentacao(apresentacao.getCodigo());
-            
-            // Caso não existe nota final para esta apresentação pula para a proxima
-            if(notasApresentacao.isEmpty())
+
+            if (notasApresentacao.isEmpty())
                 continue;
 
             for (NotaFinal notaApresentacao : notasApresentacao) {
-                media  += notaApresentacao.getNotaFinal();        
+                media += notaApresentacao.getNotaFinal();
             }
 
-            System.out.println(media);
-            media = (media / notasApresentacao.size());            
+            media = (media / notasApresentacao.size());
 
-            // Após media calcula monta o objeto classificação
             Apresentacao apr = apresentacaoService.encontrarPorId(apresentacao.getCodigo()).get();
-//            Classificacao classificacao = Classificacao.builder()
-//            .notafinal(media)   
-//            .categoria(categoriaServices.encontrarPorId(apresentacao.getCategoria()).get()) 
-//            .apresentacao(apr)
-//            .build();
-            
-            Classificacao classificacao = new Classificacao(media, apr.getCategoria(), apr);
-            
-            if (!this.encontrarPorApresentacao(apresentacao.getCodigo()).isEmpty()){
-                classificacao.setId(this.encontrarPorApresentacao(apresentacao.getCodigo()).get().getId());
-            }
 
-            classificacaoDB.save(classificacao); 
+            // Ensure Apresentacao is attached to the current persistence context
+            apr = entityManager.merge(apr);
+
+            Classificacao classificacao = new Classificacao(media, apr.getCategoria(), apr);
+
+            Optional<Classificacao> existingClassificacao = this.encontrarPorApresentacao(apresentacao.getCodigo());
+            existingClassificacao.ifPresent(classificacao1 -> classificacao.setId(classificacao1.getId()));
+
+            classificacaoDB.save(classificacao);
             media = 0;
         }
-
     }
-    
 }

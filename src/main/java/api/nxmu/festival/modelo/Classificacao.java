@@ -7,7 +7,6 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import jakarta.persistence.MapsId;
 import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,12 +16,12 @@ import jakarta.persistence.CascadeType;
 import jakarta.persistence.PrimaryKeyJoinColumn;
 import lombok.ToString;
 
+@Entity
+@Getter
 @ToString
 @EqualsAndHashCode
 @Builder
 @AllArgsConstructor
-@Entity
-@Getter
 public class Classificacao {
 
     @Id
@@ -31,13 +30,11 @@ public class Classificacao {
     private double notafinal;
     private int ativo;
 
-    // ainda restam ligações fk
-    // n - 1 categoria
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     @PrimaryKeyJoinColumn
     private Apresentacao apresentacao;
     
@@ -47,16 +44,14 @@ public class Classificacao {
         this.apresentacao = apresentacao;
     }
 
-    public Classificacao(){
-        
+    public Classificacao() {
     }
 
-	public void setNotafinal(double notafinal) {
-		this.notafinal = notafinal;		
-	}
+    public void setNotafinal(double notafinal) {
+        this.notafinal = notafinal;
+    }
 
-	public void setId(Long id) {
-		this.id = id;		
-	}
-
+    public void setId(Long id) {
+        this.id = id;
+    }
 }
