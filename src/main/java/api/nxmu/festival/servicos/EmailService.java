@@ -21,25 +21,23 @@ public class EmailService {
     @Value("${mail.remetente}")
     private String remetente;
 
-    @Value("${mail.destinatario}")
-    private String destinatario;
+    // Note: destinatario property is removed since it is not needed for multiple recipients
 
-    public void sendSimpleMessage(String subject, String text) {
+    public void sendSimpleMessage(String subject, String text, String[] destinatarios) {
         SimpleMailMessage message = new SimpleMailMessage();
         message.setFrom(remetente);
-        message.setTo(destinatario);
+        message.setTo(destinatarios);
         message.setSubject(subject);
         message.setText(text);
         emailSender.send(message);
     }
 
-    public void sendMessageWithAttachment(String assunto, String html, String fileName,  String pathToAttachment) throws MessagingException, FileNotFoundException {
+    public void sendMessageWithAttachment(String assunto, String html, String fileName, String pathToAttachment, String[] destinatarios) throws MessagingException, FileNotFoundException {
         MimeMessage message = emailSender.createMimeMessage();
-
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
         helper.setFrom(remetente);
-        helper.setTo(destinatario);
+        helper.setTo(destinatarios);
         helper.setSubject(assunto);
         helper.setText(html, true);
 
