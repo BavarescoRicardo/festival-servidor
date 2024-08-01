@@ -16,4 +16,5 @@ public class InscricaoDto {
     private Collection<ParticipanteDto> participantes;
     private EnderecoDto endereco;
     private String fotoDocumento;
+    private String fotoTermo;
 }

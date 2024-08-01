@@ -32,7 +32,7 @@ public class EmailService {
         emailSender.send(message);
     }
 
-    public void sendMessageWithAttachment(String assunto, String html, String fileName, String pathToAttachment, String[] destinatarios) throws MessagingException, FileNotFoundException {
+    public void sendMessageWithAttachment(String assunto, String html, String fileName, String pathToAttachment, String pathToAttachment2, String[] destinatarios) throws MessagingException, FileNotFoundException {
         MimeMessage message = emailSender.createMimeMessage();
         MimeMessageHelper helper = new MimeMessageHelper(message, true);
 
@@ -47,6 +47,15 @@ public class EmailService {
         }
 
         helper.addAttachment(fileName, file);
+        
+        if(!pathToAttachment2.isEmpty()) {
+            FileSystemResource file2 = new FileSystemResource(new File(pathToAttachment2));
+            if (!file.exists()) {
+                throw new FileNotFoundException("Arquivo não encontrado: " + pathToAttachment2);
+            }
+
+            helper.addAttachment(fileName, file2);        	
+        }
 
         emailSender.send(message);
     }
