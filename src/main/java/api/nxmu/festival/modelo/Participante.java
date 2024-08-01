@@ -44,6 +44,7 @@ public class Participante {
     private int ativo;
     private byte[] fotoPerfil;
     private byte[] fotoDocumento;
+    private byte[] fotoTermo;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "apresentacao_id")
@@ -136,6 +137,12 @@ public class Participante {
     }
     public void setFotoDocumento(byte[] fotoDocumento) {
         this.fotoDocumento = fotoDocumento;
+    }    
+    public byte[] getFotoTermo() {
+        return fotoTermo;
+    }
+    public void setFotoTermo(byte[] fotoTermo) {
+        this.fotoTermo = fotoTermo;
     }    
     public String getPix() {
         return this.pix;

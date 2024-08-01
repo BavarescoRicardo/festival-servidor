@@ -141,6 +141,10 @@ public class InscricaoService {
                             <td>%s</td>
                         </tr>
                         <tr>
+                            <td class="label">Link da música:</td>
+                            <td>%s</td>
+                        </tr>                        
+                        <tr>
                             <td class="label">Autor:</td>
                             <td>%s</td>
                         </tr>
@@ -179,6 +183,7 @@ public class InscricaoService {
                 parcitipantePrincipal.getDocumentorg(),
                 inscricaoDto.getApresentacao().getTom(),
                 inscricaoDto.getApresentacao().getGravacao(),
+                inscricaoDto.getApresentacao().getLinkmusica(),
                 inscricaoDto.getApresentacao().getAutor(),
                 getParticipantesStr(inscricaoDto.getParticipantes()),
                 parcitipantePrincipal.getPix(),
