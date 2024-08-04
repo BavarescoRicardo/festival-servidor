@@ -386,10 +386,10 @@ public class NotaService {
 				);
 		
 		    // atribui cada quesito ao historico 0 - 3 por apresentacao  + (idx*4)
-			historicoNotas.setNotaAfinacao(notasApresentacao.get(0 + (idx*4)).getNota());        
-			historicoNotas.setNotaRitmo(notasApresentacao.get(1 + (idx*4)).getNota());
-			historicoNotas.setNotaInterpretacao(notasApresentacao.get(2 + (idx*4)).getNota());
-			historicoNotas.setNotaDiccao(notasApresentacao.get(3 + (idx*4)).getNota());
+		    historicoNotas.setNotaInterpretacao(notasApresentacao.get(0 + (idx*4)).getNota());
+		    historicoNotas.setNotaRitmo(notasApresentacao.get(1 + (idx*4)).getNota());
+		    historicoNotas.setNotaDiccao(notasApresentacao.get(2 + (idx*4)).getNota());
+			historicoNotas.setNotaAfinacao(notasApresentacao.get(3 + (idx*4)).getNota());        
 		    
 			listaHistoricoNotas.add(historicoNotas);        
 	    }
