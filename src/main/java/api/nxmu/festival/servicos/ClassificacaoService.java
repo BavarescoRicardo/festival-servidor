@@ -140,14 +140,14 @@ public class ClassificacaoService {
 
     @Transactional
     public void calcularClassificacao(long codigoCategoria) {
-        List<ApresentacaoDto> apresentacoes = apresentacaoService.encontrarPorCategoria(codigoCategoria);
+        List<Apresentacao> apresentacoes = apresentacaoService.encontrarPorCategoria(codigoCategoria);
         if (apresentacoes.isEmpty())
             return;
 
         double media = 0;
 
-        for (ApresentacaoDto apresentacao : apresentacoes) {
-            List<NotaFinal> notasApresentacao = notaFinalService.encontrarPorApresentacao(apresentacao.getCodigo());
+        for (Apresentacao apresentacao : apresentacoes) {
+            List<NotaFinal> notasApresentacao = notaFinalService.encontrarPorApresentacao(apresentacao.getId());
 
             if (notasApresentacao.isEmpty())
                 continue;
@@ -157,16 +157,12 @@ public class ClassificacaoService {
             }
 
             media = (media / notasApresentacao.size());
+            Classificacao classificacao = new Classificacao(media, apresentacao.getCategoria(), apresentacao);
 
-            Apresentacao apr = apresentacaoService.encontrarPorId(apresentacao.getCodigo()).get();
-
-            // Ensure Apresentacao is attached to the current persistence context
-            apr = entityManager.merge(apr);
-
-            Classificacao classificacao = new Classificacao(media, apr.getCategoria(), apr);
-
-            Optional<Classificacao> existingClassificacao = this.encontrarPorApresentacao(apresentacao.getCodigo());
-            existingClassificacao.ifPresent(classificacao1 -> classificacao.setId(classificacao1.getId()));
+            Optional<Classificacao> existingClassificacao = this.encontrarPorApresentacao(apresentacao.getId());
+            if(!existingClassificacao.isEmpty()) {
+            	classificacao.setId(existingClassificacao.get().getId());
+            }
 
             classificacaoDB.save(classificacao);
             media = 0;

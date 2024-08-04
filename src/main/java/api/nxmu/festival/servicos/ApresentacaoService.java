@@ -129,7 +129,7 @@ public class ApresentacaoService {
         return listaDto;
     }
 
-    public List<ApresentacaoDto> encontrarPorCategoria(long codCategoria) {
+    public List<ApresentacaoDto> encontrarDtoPorCategoria(long codCategoria) {
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
 
         for (Apresentacao apresentacao : apresentacaoDB.findAllByCategoria(codCategoria)) {
@@ -150,6 +150,17 @@ public class ApresentacaoService {
 
         return listaDto;
     }
+    
+    public List<Apresentacao> encontrarPorCategoria(long codCategoria) {
+    	List<Apresentacao> apresentacoes = null;
+    	try {
+    		apresentacoes = apresentacaoDB.findAllByCategoria(codCategoria);
+		} catch (Exception e) {
+			return null;
+		}
+    	
+    	return apresentacoes;
+    }    
 
     @Transactional
     public Long salvar(ApresentacaoDto apresentacaoDto) throws Exception {

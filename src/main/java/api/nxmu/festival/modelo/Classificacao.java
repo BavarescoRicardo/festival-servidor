@@ -35,7 +35,7 @@ public class Classificacao {
     private Categoria categoria;
 
     @OneToOne(fetch = FetchType.EAGER)
-    @PrimaryKeyJoinColumn
+    @JoinColumn(name = "apresentacao_id")  // Corrected annotation
     private Apresentacao apresentacao;
     
     public Classificacao(double notafinal, Categoria categoria, Apresentacao apresentacao) {
