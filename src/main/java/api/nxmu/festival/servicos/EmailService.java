@@ -41,22 +41,22 @@ public class EmailService {
         helper.setSubject(assunto);
         helper.setText(html, true);
 
-        FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
-        if (!file.exists()) {
-            throw new FileNotFoundException("Arquivo não encontrado: " + pathToAttachment);
+        if(pathToAttachment != null && !pathToAttachment.isEmpty()) {
+	        FileSystemResource file = new FileSystemResource(new File(pathToAttachment));
+	        if (file.exists()) {
+	        	helper.addAttachment(fileName, file);
+	        }
+	        
         }
 
-        helper.addAttachment(fileName, file);
         
-        if(!pathToAttachment2.isEmpty()) {
+        if(pathToAttachment2 != null && !pathToAttachment2.isEmpty()) {
             FileSystemResource file2 = new FileSystemResource(new File(pathToAttachment2));
-            if (!file.exists()) {
-                throw new FileNotFoundException("Arquivo não encontrado: " + pathToAttachment2);
-            }
-
-            helper.addAttachment(fileName, file2);        	
+            if (file2.exists()) {
+            	helper.addAttachment(fileName, file2);
+            }                    	
         }
-
         emailSender.send(message);
+
     }
 }

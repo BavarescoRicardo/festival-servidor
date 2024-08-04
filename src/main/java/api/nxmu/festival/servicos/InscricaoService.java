@@ -28,19 +28,25 @@ public class InscricaoService {
 
     @Transactional
     public void salvarInscricao(InscricaoDto inscricaoDto) throws Exception {
-        var apresentacaoSalvaId = apresentacaoService.salvar(inscricaoDto.getApresentacao());
-        var enderecoDto = inscricaoDto.getEndereco();
-        for (var participanteDto : inscricaoDto.getParticipantes()) {
+        Long apresentacaoSalvaId = apresentacaoService.salvar(inscricaoDto.getApresentacao());
+        EnderecoDto enderecoDto = inscricaoDto.getEndereco();
+        for (ParticipanteDto participanteDto : inscricaoDto.getParticipantes()) {
             participanteDto.setApresentacao(apresentacaoSalvaId);
-            var participanteSalvoId = participanteService.salvar(participanteDto);
+            Long participanteSalvoId = participanteService.salvar(participanteDto);
             enderecoDto.setParticipante(participanteSalvoId);
             enderecoService.salvar(enderecoDto);
         }
-        enviarEmail(inscricaoDto);
+        // Envio de email não deve impedir o progresso da inscricao
+        try {
+        	enviarEmail(inscricaoDto);
+		} catch (Exception e) {
+			// TODO: handle exception
+			// deveria gerar log de erro ao enviar email
+		}
     }
 
     private void enviarEmail(InscricaoDto inscricaoDto) throws MessagingException, IOException {
-        var parcitipantePrincipal = inscricaoDto.getParticipantes().stream().findFirst().get();
+    	ParticipanteDto parcitipantePrincipal = inscricaoDto.getParticipantes().stream().findFirst().get();
 
         var content = """
             <!DOCTYPE html>
@@ -208,6 +214,9 @@ public class InscricaoService {
     }
 
     private String getFileToSend(String emailIdentificador, String base64String) throws IOException {
+    	if (base64String.isEmpty()) {
+    		return null;
+    	}
         String[] parts = base64String.split(",");
         String imageString = parts[1];
 
