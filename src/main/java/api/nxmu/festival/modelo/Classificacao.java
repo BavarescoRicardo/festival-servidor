@@ -34,7 +34,7 @@ public class Classificacao {
     @JoinColumn(name = "categoria_id")
     private Categoria categoria;
 
-    @OneToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @OneToOne(fetch = FetchType.EAGER)
     @PrimaryKeyJoinColumn
     private Apresentacao apresentacao;
     
