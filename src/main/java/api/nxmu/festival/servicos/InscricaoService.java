@@ -161,9 +161,17 @@ public class InscricaoService {
                     </table>
                     <table class="info-table bank-info">
                         <tr>
+                            <td class="label">CPF:</td>
+                            <td>%s</td>
+                        </tr>                    
+                        <tr>
                             <td class="label">PIX:</td>
                             <td>%s</td>
                         </tr>
+                        <tr>
+                            <td class="label">Código do banco:</td>
+                            <td>%s</td>
+                        </tr>                        
                         <tr>
                             <td class="label">Agência:</td>
                             <td>%s</td>
@@ -192,7 +200,9 @@ public class InscricaoService {
                 inscricaoDto.getApresentacao().getLinkmusica(),
                 inscricaoDto.getApresentacao().getAutor(),
                 getParticipantesStr(inscricaoDto.getParticipantes()),
+                parcitipantePrincipal.getCpf(),
                 parcitipantePrincipal.getPix(),
+                parcitipantePrincipal.getBanco(),
                 parcitipantePrincipal.getAgencia(),
                 parcitipantePrincipal.getConta()
         );

@@ -35,7 +35,7 @@ public class ParticipanteService {
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
-                participante.getPix(), participante.getAgencia(), participante.getConta(),
+                participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 participante.getApresentacao().getId(), new byte[0]));
         }
 
@@ -51,7 +51,7 @@ public class ParticipanteService {
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
-                participante.getPix(), participante.getAgencia(), participante.getConta(),
+                participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 participante.getApresentacao().getId(), new byte[0]));
         }
 
@@ -65,8 +65,8 @@ public class ParticipanteService {
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(),
                 participante.getDocumentorg(), participante.getEmail(), 
-                participante.getNecessidade(), participante.getDescrinescessidade(),
-                participante.getPix(), participante.getAgencia(), participante.getConta(),
+                participante.getNecessidade(), participante.getDescrinescessidade(), participante.getCpf(),
+                participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 apresentacaoService.encontrarPorId(participante.getApresentacao()).get()
             );
 
