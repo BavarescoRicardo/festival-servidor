@@ -28,11 +28,24 @@ public class CategoriaService {
         for(Categoria categoria: categoriaDB.findAll()) {
             listaDto.add(new CategoriaDto(
                 categoria.getId(), categoria.getTitulo(), categoria.getDescricao(), 
-                categoria.getDataInicial(), categoria.getDataFinal()));
+                categoria.getDataInicial(), categoria.getDataFinal(), categoria.getAtivo()));
         }
 
         return listaDto;
     }
+    
+    public List<CategoriaDto> encontrarAtivas(){
+        List<CategoriaDto> listaDto = new ArrayList<CategoriaDto>();
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Categoria categoria: categoriaDB.findAllAtivos()) {
+            listaDto.add(new CategoriaDto(
+                categoria.getId(), categoria.getTitulo(), categoria.getDescricao(), 
+                categoria.getDataInicial(), categoria.getDataFinal()));
+        }
+
+        return listaDto;
+    }    
 
     public CategoriaDto salvar(CategoriaDto categoria){        
         try {
@@ -47,17 +60,18 @@ public class CategoriaService {
         }        
     }
 
-    public CategoriaDto atualizar(CategoriaDto categoria, long id){
+    public CategoriaDto atualizar(CategoriaDto categoriaDto, long id){
         try {
             // Encontra objeto salvo pelo id e depois atualiza
             Categoria cat = this.encontrarPorId(id).get();
-            cat.setTitulo(categoria.getTitulo());
-            cat.setDescricao(categoria.getDescricao());
-            cat.setDataInicial(categoria.getDataInicial());
-            cat.setDataFinal(categoria.getDataFinal());
+            cat.setTitulo(categoriaDto.getTitulo());
+            cat.setDescricao(categoriaDto.getDescricao());
+            cat.setDataInicial(categoriaDto.getDataInicial());
+            cat.setDataFinal(categoriaDto.getDataFinal());
+            cat.setAtivo(categoriaDto.getAtivo());
 
             this.categoriaDB.save(cat);
-            return categoria;    
+            return categoriaDto;    
         } catch (Exception e) {
             return null;
         }
