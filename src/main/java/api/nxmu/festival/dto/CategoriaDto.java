@@ -9,6 +9,7 @@ public class CategoriaDto {
     private String descricao;
     private LocalDate dataInicial;
     private LocalDate dataFinal;
+    private int ativo;
     private Long eventoCodigo;
 
     public CategoriaDto(Long codigo, String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal) {
@@ -18,6 +19,16 @@ public class CategoriaDto {
         this.dataInicial = dataInicial;
         this.dataFinal = dataFinal;
     }
+    
+    public CategoriaDto(Long codigo, String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal,
+    		int ativo) {
+        this.codigo = codigo;
+        this.titulo = titulo;
+        this.descricao = descricao;
+        this.dataInicial = dataInicial;
+        this.dataFinal = dataFinal;
+        this.setAtivo(ativo);
+    }    
 
     public CategoriaDto() {
         
@@ -69,5 +80,13 @@ public class CategoriaDto {
 
     public void setDataFinal(LocalDate dataFinal) {
         this.dataFinal = dataFinal;
-    }    
+    }
+
+	public int getAtivo() {
+		return ativo;
+	}
+
+	public void setAtivo(int ativo) {
+		this.ativo = ativo;
+	}    
 }
