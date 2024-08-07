@@ -43,6 +43,7 @@ public class SecurityConfiguration {
         return new String[]{
                 "/api/evento/auth/**",
                 "/api/categorias",
+                "/api/categoriasativa",
                 "/api/apresentacoescartao",
                 "/api/evento/salvaparticipante",
                 "/api/salvaapresentacao",

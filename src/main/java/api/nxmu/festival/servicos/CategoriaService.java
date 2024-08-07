@@ -33,6 +33,19 @@ public class CategoriaService {
 
         return listaDto;
     }
+    
+    public List<CategoriaDto> encontrarAtivas(){
+        List<CategoriaDto> listaDto = new ArrayList<CategoriaDto>();
+        
+        // Converte a lista de objetos da entidade em objetos dto para transferencia
+        for(Categoria categoria: categoriaDB.findAllAtivos()) {
+            listaDto.add(new CategoriaDto(
+                categoria.getId(), categoria.getTitulo(), categoria.getDescricao(), 
+                categoria.getDataInicial(), categoria.getDataFinal()));
+        }
+
+        return listaDto;
+    }    
 
     public CategoriaDto salvar(CategoriaDto categoria){        
         try {

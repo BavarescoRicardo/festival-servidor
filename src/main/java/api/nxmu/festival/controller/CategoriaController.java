@@ -31,7 +31,17 @@ public class CategoriaController {
             return ResponseEntity.internalServerError().body(
             		RespostaErrorDto.builder().mensagem("Não foi possível salvar " + e.getMessage()));
         }         
-    }    
+    }
+    
+    @RequestMapping(value = "/categoriasativa", method =  RequestMethod.GET)
+    public ResponseEntity<?> getCategoriasAtivas(){        
+        try {
+            return ResponseEntity.ok().body(categoriaService.encontrarAtivas());
+        } catch (Exception e) {
+            return ResponseEntity.internalServerError().body(
+            		RespostaErrorDto.builder().mensagem("Não foi possível salvar " + e.getMessage()));
+        }         
+    }     
 
     @RequestMapping(value = "/salvacategoria", method =  RequestMethod.POST)
 	public ResponseEntity<?> salvarCategoria(@RequestBody CategoriaDto categoria)
