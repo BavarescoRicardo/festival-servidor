@@ -38,7 +38,9 @@ public class Participante {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private String cpf;
     private String pix;
+    private String banco;
     private String agencia;
     private String conta;
     private int ativo;
@@ -55,7 +57,7 @@ public class Participante {
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
             String documentorg, String email, String necessidade, String descrinescessidade, String pix, 
-            String agencia, String conta, Apresentacao apresentacao) {
+            String cpf, String banco, String agencia, String conta, Apresentacao apresentacao) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
@@ -64,7 +66,9 @@ public class Participante {
         this.email = email;
         this.necessidade = necessidade;
         this.descrinescessidade = descrinescessidade;
+        this.cpf = cpf;
         this.pix = pix;
+        this.banco = banco;
         this.agencia = agencia;
         this.conta = conta;
         this.apresentacao = apresentacao;

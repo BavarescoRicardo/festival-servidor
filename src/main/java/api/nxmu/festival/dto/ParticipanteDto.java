@@ -14,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class ParticipanteDto {
-    private Long codigo;
+	private Long codigo;
     private String nomeArtistico;
     private String nomeResponsavel;
     private String genero;
@@ -23,9 +23,11 @@ public class ParticipanteDto {
     private String email;
     private String necessidade;
     private String descrinescessidade;
+    private String cpf;
     private String pix;
+    private String banco;
     private String agencia;
     private String conta;
     private Long apresentacao;
-    private byte[] fotoPerfil;
+    private byte[] fotoPerfil;  
 }
