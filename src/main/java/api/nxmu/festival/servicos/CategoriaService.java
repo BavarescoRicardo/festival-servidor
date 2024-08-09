@@ -56,7 +56,7 @@ public class CategoriaService {
             this.categoriaDB.save(e);
             return categoria;    
         } catch (Exception e) {
-            return null;
+            throw e;
         }        
     }
 
