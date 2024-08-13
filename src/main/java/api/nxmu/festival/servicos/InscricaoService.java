@@ -206,7 +206,7 @@ public class InscricaoService {
                 parcitipantePrincipal.getAgencia(),
                 parcitipantePrincipal.getConta()
         );
-        String[] recipients = {parcitipantePrincipal.getEmail(), "ricardo.bav17@gmail.com"};
+        String[] recipients = {parcitipantePrincipal.getEmail(), "fimusi2024@gmail.com"};
         this.emailService.sendMessageWithAttachment("[Inscrição FIMUSI 2024]", content, "foto_documento.png", 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoDocumento()), 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoTermo()),
