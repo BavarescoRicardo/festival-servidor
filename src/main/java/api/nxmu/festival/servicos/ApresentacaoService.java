@@ -182,7 +182,7 @@ public class ApresentacaoService {
                 .tom(apresentacaoDto.getTom())
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
-                .linkmusica("")
+                .linkmusica(apresentacaoDto.getLinkmusica())
                 .individuos(1)
                 .categoria(categoriaService.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
@@ -219,22 +219,22 @@ public class ApresentacaoService {
                     categoria = 1L;
                     break;
                 case "juvenil":
-                    categoria = 2L;
+                    categoria = 20L;
                     break;
                 case "popular":
-                    categoria = 3L;
+                    categoria = 2L;
                     break;
                 case "sertaneja":
-                    categoria = 4L;
+                    categoria = 3L;
                     break;
                 case "gospel":
-                    categoria = 5L;
+                    categoria = 1L;
                     break;
                 case "final popular":
                     categoria = 6L;
                     break;
                 case "final sertaneja":
-                    categoria = 7L;
+                    categoria = 5L;
                     break;
 
                 default:
