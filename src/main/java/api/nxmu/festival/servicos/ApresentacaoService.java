@@ -219,16 +219,16 @@ public class ApresentacaoService {
                     categoria = 1L;
                     break;
                 case "juvenil":
-                    categoria = 2L;
+                    categoria = 52L;
                     break;
                 case "popular":
-                    categoria = 3L;
+                    categoria = 2L;
                     break;
                 case "sertaneja":
-                    categoria = 4L;
+                    categoria = 53L;
                     break;
                 case "gospel":
-                    categoria = 5L;
+                    categoria = 50L;
                     break;
                 case "final popular":
                     categoria = 6L;
