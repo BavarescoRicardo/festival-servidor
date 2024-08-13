@@ -182,7 +182,7 @@ public class ApresentacaoService {
                 .tom(apresentacaoDto.getTom())
                 .gravacao(apresentacaoDto.getGravacao())
                 .autor(apresentacaoDto.getAutor())
-                .linkmusica("")
+                .linkmusica(apresentacaoDto.getLinkmusica())
                 .individuos(1)
                 .categoria(categoriaService.encontrarPorId(apresentacaoDto.getCategoria()).get())
                 .build();
