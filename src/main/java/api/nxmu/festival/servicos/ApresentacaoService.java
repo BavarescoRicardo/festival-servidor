@@ -33,6 +33,7 @@ public class ApresentacaoService {
                 apresentacao.getTom(),
                 apresentacao.getGravacao(),
                 apresentacao.getAutor(),
+                apresentacao.getLinkmusica(),
                 apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(),
                 apresentacao.getOrdem(),
                 apresentacao.getSenha(),
@@ -249,6 +250,7 @@ public class ApresentacaoService {
             apresentacao.setTom(apresentacaoDto.getTom());
             apresentacao.setGravacao(apresentacaoDto.getGravacao());
             apresentacao.setAutor(apresentacaoDto.getAutor());
+            apresentacao.setLinkmusica(apresentacaoDto.getLinkmusica());
             // Verifica se deve alterar categoria
             if ((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 7))
                 apresentacao.setCategoria(categoriaService.encontrarPorId(categoria).get());
