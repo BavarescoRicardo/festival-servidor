@@ -72,7 +72,7 @@ public class ApresentacaoService {
 
     public List<ApresentacaoDto> encontrarFiltrado(FiltroApresentacaoDto filtro) {
         List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 60, Sort.by(filtro.getOrdem()));
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 80, Sort.by(filtro.getOrdem()));
         List<Apresentacao> listaFiltrada = apresentacaoDB.
                 findAllFiltrado(
                         filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
@@ -90,7 +90,7 @@ public class ApresentacaoService {
 
     public List<ApresentacaoRelDto> encontrarRel(FiltroApresentacaoDto filtro) {
         List<ApresentacaoRelDto> listaDto = new ArrayList<ApresentacaoRelDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 60, Sort.by(filtro.getOrdem()));
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 80, Sort.by(filtro.getOrdem()));
         List<Apresentacao> listaFiltrada = null;
         if (filtro.getTextoFiltro().length() > 1) { // findAllFiltradoEnsaio
             listaFiltrada = apresentacaoDB.findAllFiltradoEnsaio(
@@ -114,7 +114,7 @@ public class ApresentacaoService {
 
     public List<ApresentacaoRelDto> encontrarRelBanda(FiltroApresentacaoDto filtro) {
         List<ApresentacaoRelDto> listaDto = new ArrayList<ApresentacaoRelDto>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 200, Sort.by(filtro.getOrdem()));
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 80, Sort.by(filtro.getOrdem()));
         List<Apresentacao> listaFiltrada = apresentacaoDB.
                 findAllFiltrado(
                         filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
