@@ -148,6 +148,7 @@ public class ApresentacaoDto {
 		this.linkmusica = linkmusica;
 		this.ordem = ordem;
 		this.senha = senha;
+		this.idEndereco = idEndereco;
 		this.cidade = cidade;
 		this.categoria = categoria;
 	}
@@ -183,7 +184,7 @@ public class ApresentacaoDto {
 	
 	
 	public ApresentacaoDto(Long codigo, String musica, String nomeartistico, String tom, String gravacao, String autor,
-			String linkmusica, String cidade, int ordem, int senha,  String categoriaTitulo) {
+			String linkmusica, String cidade,  Long idEndereco, int ordem, int senha,  String categoriaTitulo) {
 		this.codigo = codigo;
 		this.musica = musica;
 		this.nomeartistico = nomeartistico;
@@ -192,6 +193,7 @@ public class ApresentacaoDto {
 		this.autor = autor;
 		this.linkmusica = linkmusica;
 		this.cidade = cidade;
+		this.idEndereco = idEndereco;
 		this.ordem = ordem;
 		this.senha = senha;
 		this.categoriaTitulo = categoriaTitulo;
