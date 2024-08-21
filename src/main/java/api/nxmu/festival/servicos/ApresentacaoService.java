@@ -35,6 +35,7 @@ public class ApresentacaoService {
                 apresentacao.getAutor(),
                 apresentacao.getLinkmusica(),
                 apresentacao.getParticipantes().get(0).getEnderecos().get(0).getCidade(),
+                apresentacao.getParticipantes().get(0).getEnderecos().get(0).getId(),
                 apresentacao.getOrdem(),
                 apresentacao.getSenha(),
                 apresentacao.getCategoria().getTitulo()
