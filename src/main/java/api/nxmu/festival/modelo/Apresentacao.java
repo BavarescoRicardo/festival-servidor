@@ -2,6 +2,8 @@ package api.nxmu.festival.modelo;
 
 import java.util.List;
 
+import org.springframework.util.CollectionUtils;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;
@@ -200,7 +202,15 @@ public class Apresentacao {
 
 	public void setNotasfinais(List<NotaFinal> notasfinais) {
 		this.notasfinais = notasfinais;
-	}   
+	} 
+	
+	public String getCidade() {
+		if(!CollectionUtils.isEmpty(this.getParticipantes()) && !CollectionUtils.isEmpty(this.getParticipantes().get(0).getEnderecos())) {			
+			return this.getParticipantes().get(0).getEnderecos().get(0).getCidade();
+		}
+		return "Cidade local";
+	}
+
     
     
 

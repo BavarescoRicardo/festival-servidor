@@ -99,7 +99,8 @@ public class ClassificacaoService {
             BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoRelDto(
                 classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
-                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico(), "Cidade x"));
+                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico(), 
+                classificacao.getApresentacao().getCidade()));
         }
         return listaDto;
     }     
