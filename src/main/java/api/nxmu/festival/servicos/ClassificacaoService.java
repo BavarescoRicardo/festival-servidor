@@ -77,8 +77,14 @@ public class ClassificacaoService {
     public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
         List<ClassificacaoListaDto> listaDto = new ArrayList<>();
         Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
-        List<Classificacao> listaFiltrada = classificacaoDB.
-            findAllFiltrado(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
+        List<Classificacao> listaFiltrada = null;
+        if (filtro.getTextoFiltro().equals("true")) {
+            listaFiltrada = classificacaoDB.
+                    findAllFiltrado(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        	
+        } else {
+	        listaFiltrada = classificacaoDB.
+	            findAllFiltrado(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
+        }
         
         for(Classificacao classificacao: listaFiltrada) {
             BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
@@ -92,8 +98,14 @@ public class ClassificacaoService {
     public List<ClassificacaoRelDto> encontrarRel(FiltroClassificacaoDto filtro){
         List<ClassificacaoRelDto> listaDto = new ArrayList<>();
         Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 100);
-        List<Classificacao> listaFiltrada = classificacaoDB.findAllFiltrado(
-                filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        
+        List<Classificacao> listaFiltrada = null;
+        if (filtro.getTextoFiltro().equals("true")) {
+            listaFiltrada = classificacaoDB.
+                    findAllFiltradoAlfabetico(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();        	
+        } else {
+	        listaFiltrada = classificacaoDB.
+	            findAllFiltrado(filtro.getCodCategoria(), filtro.getTextoFiltro(), pageable).getContent();
+        }      
         
         for(Classificacao classificacao: listaFiltrada) {
             BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);

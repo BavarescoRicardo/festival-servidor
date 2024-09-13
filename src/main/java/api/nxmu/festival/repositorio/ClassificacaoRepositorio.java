@@ -16,4 +16,7 @@ public interface ClassificacaoRepositorio extends JpaRepository<Classificacao, L
 
     @Query("select u from Classificacao u where (u.categoria.id = ?1) order by notafinal desc")
     Page<Classificacao> findAllFiltrado(long codCategoria, String textoFiltro, Pageable p);    
+    
+    @Query("select u from Classificacao u where (u.categoria.id = ?1) order by u.apresentacao.nomeartistico")
+    Page<Classificacao> findAllFiltradoAlfabetico(long codCategoria, String textoFiltro, Pageable p);    
 }
