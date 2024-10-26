@@ -3,7 +3,6 @@ package api.nxmu.festival.modelo;
 import java.util.Date;
 import java.util.List;
 
-import api.nxmu.festival.usuario.Usuario;
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

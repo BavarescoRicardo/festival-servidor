@@ -7,12 +7,14 @@ import api.nxmu.festival.servicos.ParticipanteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -32,11 +34,16 @@ public class ParticipanteController {
     public List<ParticipanteDto> getParticipantes(){
         return participanteService.encontrar();
     }
+    
+    @RequestMapping(value = "/participante", method =  RequestMethod.GET)
+    public ParticipanteDto getParticipante(@RequestParam long idParticipante){
+        return participanteService.encontrarParticipante(idParticipante);
+    }    
 
     @RequestMapping(value = "/salvaparticipante", method = RequestMethod.POST)
-    public ResponseEntity<Long> salvarParticipante(@RequestBody ParticipanteDto participante) {
+    public ResponseEntity<Long> salvarParticipante(Authentication auth, @RequestBody ParticipanteDto participante) {
         try {
-            return ResponseEntity.ok(participanteService.salvar(participante));
+            return ResponseEntity.ok(participanteService.salvar(auth, participante));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

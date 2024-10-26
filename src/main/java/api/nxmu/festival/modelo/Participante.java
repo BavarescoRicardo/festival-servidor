@@ -11,6 +11,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.EqualsAndHashCode;
@@ -54,6 +55,9 @@ public class Participante {
 
     @OneToMany(fetch = FetchType.EAGER, mappedBy = "participante")
     private List<Endereco> enderecos;
+    
+    @OneToOne(mappedBy = "participante")
+    private Usuario usuario;    
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
             String documentorg, String email, String necessidade, String descrinescessidade, String pix, 
@@ -72,7 +76,27 @@ public class Participante {
         this.agencia = agencia;
         this.conta = conta;
         this.apresentacao = apresentacao;
-    }    
+    }   
+    
+    public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
+            String documentorg, String email, String necessidade, String descrinescessidade, String pix, 
+            String cpf, String banco, String agencia, String conta, Apresentacao apresentacao, Usuario usuario) {
+        this.nomeArtistico = nomeArtistico;
+        this.nomeResponsavel = nomeResponsavel;
+        this.genero = genero;
+        this.nascimento = nascimento;
+        this.documentorg = documentorg;
+        this.email = email;
+        this.necessidade = necessidade;
+        this.descrinescessidade = descrinescessidade;
+        this.cpf = cpf;
+        this.pix = pix;
+        this.banco = banco;
+        this.agencia = agencia;
+        this.conta = conta;
+        this.apresentacao = apresentacao;
+        this.usuario = usuario;
+    }      
 
     public Participante() {
     }

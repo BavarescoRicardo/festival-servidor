@@ -5,6 +5,8 @@ import api.nxmu.festival.dto.InscricaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -27,12 +29,12 @@ public class InscricaoService {
     private final EmailService emailService;
 
     @Transactional
-    public void salvarInscricao(InscricaoDto inscricaoDto) throws Exception {
+    public void salvarInscricao(Authentication auth, InscricaoDto inscricaoDto) throws Exception {
         Long apresentacaoSalvaId = apresentacaoService.salvar(inscricaoDto.getApresentacao());
         EnderecoDto enderecoDto = inscricaoDto.getEndereco();
         for (ParticipanteDto participanteDto : inscricaoDto.getParticipantes()) {
             participanteDto.setApresentacao(apresentacaoSalvaId);
-            Long participanteSalvoId = participanteService.salvar(participanteDto);
+            Long participanteSalvoId = participanteService.salvar(auth, participanteDto);
             enderecoDto.setParticipante(participanteSalvoId);
             enderecoService.salvar(enderecoDto);
         }
