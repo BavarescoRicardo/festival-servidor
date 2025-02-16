@@ -36,10 +36,7 @@ public class Evento {
     private byte[] fotoEvento;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "evento")
-    private List<Categoria> categorias;
-    
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "evento")
-    private List<Jurado> jurados; 
+    private List<Categoria> categorias; 
 
     public Evento(){
 
@@ -57,7 +54,7 @@ public class Evento {
     public String toString() {
         return "Evento [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", dataInicial=" + dataInicial
                 + ", dataFinal=" + dataFinal + ", local=" + local + ", fotoEvento=" + Arrays.toString(fotoEvento)
-                + ", categorias=" + categorias + ", jurados=" + jurados + "]";
+                + ", categorias=" + categorias + ";";
     }
 
     
