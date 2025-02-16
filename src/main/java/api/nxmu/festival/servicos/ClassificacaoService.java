@@ -61,7 +61,6 @@ public class ClassificacaoService {
                 listaDto.add(new ClassificacaoListaDto(
                     classificacao.getId(),
                     bd.doubleValue(),
-                    classificacao.getCategoria().getDescricao(),
                     classificacao.getApresentacao().getMusica(),
                     classificacao.getApresentacao().getNomeartistico()
                 ));
@@ -89,8 +88,9 @@ public class ClassificacaoService {
         for(Classificacao classificacao: listaFiltrada) {
             BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoListaDto(
-                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
-                classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico()));
+                classificacao.getId(), bd.doubleValue(),  
+                classificacao.getApresentacao().getMusica(), 
+                classificacao.getApresentacao().getNomeartistico()));
         }
         return listaDto;
     } 
@@ -110,7 +110,7 @@ public class ClassificacaoService {
         for(Classificacao classificacao: listaFiltrada) {
             BigDecimal bd = new BigDecimal(classificacao.getNotafinal()).setScale(2, RoundingMode.HALF_DOWN);
             listaDto.add(new ClassificacaoRelDto(
-                classificacao.getId(), bd.doubleValue(), classificacao.getCategoria().getDescricao(), 
+                classificacao.getId(), bd.doubleValue(),  
                 classificacao.getApresentacao().getMusica(), classificacao.getApresentacao().getNomeartistico(), 
                 classificacao.getApresentacao().getCidade()));
         }
@@ -121,7 +121,6 @@ public class ClassificacaoService {
         try {
             Classificacao e = new Classificacao(
                 classificacao.getNotafinal(), 
-                categoriaService.encontrarPorId(classificacao.getCategoria()).get(),
                 apresentacaoService.encontrarPorId(classificacao.getApresentacao()).get());
             classificacaoDB.save(e);    
         } catch (Exception e) {
@@ -170,7 +169,7 @@ public class ClassificacaoService {
             }
 
             media = (media / notasApresentacao.size());
-            Classificacao classificacao = new Classificacao(media, apresentacao.getCategoria(), apresentacao);
+            Classificacao classificacao = new Classificacao(media, apresentacao);
 
             Optional<Classificacao> existingClassificacao = this.encontrarPorApresentacao(apresentacao.getId());
             if(!existingClassificacao.isEmpty()) {

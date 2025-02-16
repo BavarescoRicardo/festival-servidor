@@ -4,7 +4,6 @@ public class ClassificacaoRelDto {
 
     private Long codigo;
     private double notafinal;
-    private String categoria;
     private String apresentacao;
     private String nomeArtistico;
     private String cidadeUf;    
@@ -13,19 +12,17 @@ public class ClassificacaoRelDto {
         
     }
 
-    public ClassificacaoRelDto(Long codigo, double notafinal, String categoria, 
+    public ClassificacaoRelDto(Long codigo, double notafinal,  
         String apresentacao, String nomeArtistico, String cidadeUf) {
             this.codigo = codigo;
             this.notafinal = notafinal;
-            this.categoria = categoria;
             this.apresentacao = apresentacao;
             this.nomeArtistico = nomeArtistico;
             this.cidadeUf = cidadeUf;
     }
 
-    public ClassificacaoRelDto(double notafinal, String categoria, String apresentacao) {
+    public ClassificacaoRelDto(double notafinal, String apresentacao) {
         this.notafinal = notafinal;
-        this.categoria = categoria;
         this.apresentacao = apresentacao;
     }
     
@@ -45,13 +42,6 @@ public class ClassificacaoRelDto {
         this.notafinal = notafinal;
     }
 
-    public String getCategoria() {
-        return categoria;
-    }
-
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
-    }
 
     public String getApresentacao() {
         return apresentacao;
