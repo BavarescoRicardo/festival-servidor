@@ -30,7 +30,6 @@ public class NotaService {
     private final NotaFinalRepositorio notaFinalDB;    
     private final NotaFinalService notaFinalService;
 
-    private final CategoriaService categoriaService;
     private final JuradoService juradoService;
     private final ApresentacaoService apresentacaoService;
     private final QuesitoService quesitoService;
@@ -45,7 +44,7 @@ public class NotaService {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Nota nota: notaDB.findAllByOrderByIdDesc()) {
             listaDto.add(new TabelaNotaDto(
-                nota.getId(), nota.getNota(), nota.getCategoria().getDescricao(), 
+                nota.getId(), nota.getNota(),  
                 nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
                 nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
@@ -63,7 +62,7 @@ public class NotaService {
         // Converte a lista de objetos da entidade em objetos dto para transferencia
         for(Nota nota: listaFiltrada) {
             listaDto.add(new TabelaNotaDto(
-                nota.getId(), nota.getNota(), nota.getCategoria().getDescricao(), 
+                nota.getId(), nota.getNota(),  
                 nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
                 nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
@@ -87,7 +86,6 @@ public class NotaService {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNota())
-                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoService.encontrarPorId(notaDto.getQuesito()).get()).build();
@@ -167,7 +165,6 @@ public class NotaService {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaAfinacao())
-                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoService.encontrarPorId(1L).get()).build();
@@ -203,7 +200,6 @@ public class NotaService {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaDiccao())
-                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoService.encontrarPorId(2L).get()).build();
@@ -239,7 +235,6 @@ public class NotaService {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaRitmo())
-                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoService.encontrarPorId(3L).get()).build();
@@ -275,7 +270,6 @@ public class NotaService {
             // Define objeto  participante para salvar no banco de dados a partir do dto recebido
             Nota e =  Nota.builder()
                 .nota(notaDto.getNotaInterpretacao())
-                .categoria(categoriaService.encontrarPorId(notaDto.getCategoria()).get())
                 .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
                 .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
                 .quesito(quesitoService.encontrarPorId(4L).get()).build();
@@ -356,7 +350,6 @@ public class NotaService {
         // Após media calcula monta o objeto nota final
         NotaFinal notaFinal = NotaFinal.builder()
         .notaFinal(media)   
-        .categoria(notasApresentacao.get(0).getCategoria()) 
         .jurado(notasApresentacao.get(0).getJurado())    
         .apresentacao(notasApresentacao.get(0).getApresentacao())
         .build();
@@ -380,7 +373,6 @@ public class NotaService {
 	    List<HistoricoNotaDto> listaHistoricoNotas = new ArrayList();
 	    for(int idx = 0; idx < notasApresentacao.size() / 4; idx ++ ) {
 		    HistoricoNotaDto historicoNotas = new HistoricoNotaDto(
-		    		notasApresentacao.get(idx*4).getCategoria().getDescricao(),
 		    		notasApresentacao.get(idx*4).getJurado().getNome(),
 		    		notasApresentacao.get(idx*4).getApresentacao().getMusica()
 				);

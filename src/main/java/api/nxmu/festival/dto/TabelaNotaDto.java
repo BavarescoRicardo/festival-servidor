@@ -4,25 +4,22 @@ public class TabelaNotaDto {
     
     private long codigo;
     private double nota;
-    private String categoria;
     private String participante;
     private String jurado;
     private String apresentacao;
     private String quesito;
 
-    public TabelaNotaDto(long codigo, double nota, String categoria, String participante, String jurado, String apresentacao, String quesito) {
+    public TabelaNotaDto(long codigo, double nota, String participante, String jurado, String apresentacao, String quesito) {
         this.codigo = codigo;
         this.nota = nota;
-        this.categoria = categoria;
         this.participante = participante;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
         this.quesito = quesito;
     }    
 
-    public TabelaNotaDto(double nota, String categoria, String participante, String jurado, String apresentacao, String quesito) {
+    public TabelaNotaDto(double nota, String participante, String jurado, String apresentacao, String quesito) {
         this.nota = nota;
-        this.categoria = categoria;
         this.participante = participante;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
@@ -45,12 +42,6 @@ public class TabelaNotaDto {
     }
     public void setNota(double nota) {
         this.nota = nota;
-    }
-    public String getCategoria() {
-        return categoria;
-    }
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
     public String getParticipante() {
         return participante;
