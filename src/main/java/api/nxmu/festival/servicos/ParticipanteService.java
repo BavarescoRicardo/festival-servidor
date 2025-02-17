@@ -92,8 +92,8 @@ public class ParticipanteService {
                     .email(participante.getEmail())        
                     .senha(passwordEncoder.encode(
                     		participante.getSenha() == null || participante.getSenha().isBlank() ? 
-                    				participante.getSenha() : 
-                    					participante.getDocumentorg()))
+                    				participante.getDocumentorg() : 
+                    					participante.getSenha()))
                     .role(Role.USER)
                     .build();
             usuarioDB.save(user);

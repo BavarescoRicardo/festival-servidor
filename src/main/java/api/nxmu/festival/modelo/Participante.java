@@ -79,24 +79,25 @@ public class Participante {
     }   
     
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade, String pix, 
-            String cpf, String banco, String agencia, String conta, Apresentacao apresentacao, Usuario usuario) {
-        this.nomeArtistico = nomeArtistico;
-        this.nomeResponsavel = nomeResponsavel;
-        this.genero = genero;
-        this.nascimento = nascimento;
-        this.documentorg = documentorg;
-        this.email = email;
-        this.necessidade = necessidade;
-        this.descrinescessidade = descrinescessidade;
-        this.cpf = cpf;
-        this.pix = pix;
-        this.banco = banco;
-        this.agencia = agencia;
-        this.conta = conta;
-        this.apresentacao = apresentacao;
-        this.usuario = usuario;
-    }      
+            String documentorg, String email, String necessidade, String descrinescessidade,
+            String cpf, String pix, String banco, String agencia, String conta,
+            Apresentacao apresentacao, Usuario usuario) {
+			this.nomeArtistico = nomeArtistico;
+			this.nomeResponsavel = nomeResponsavel;
+			this.genero = genero;
+			this.nascimento = nascimento;
+			this.documentorg = documentorg;
+			this.email = email;
+			this.necessidade = necessidade;
+			this.descrinescessidade = descrinescessidade;
+			this.cpf = cpf;
+			this.pix = pix;
+			this.banco = banco;
+			this.agencia = agencia;
+			this.conta = conta;
+			this.apresentacao = apresentacao;
+			this.usuario = usuario;
+    }    
 
     public Participante() {
     }
