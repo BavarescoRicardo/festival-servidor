@@ -41,7 +41,9 @@ public class SecurityConfiguration {
 
     private String[] whiteList() {
         return new String[]{
-                "/api/evento/auth/**"
+                "/api/evento/auth/**",
+        		"/api/categoriasativa",
+        		"/inscricoes"
         };
     }
 

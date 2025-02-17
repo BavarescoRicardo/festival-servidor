@@ -43,7 +43,7 @@ public class ParticipanteController {
     @RequestMapping(value = "/salvaparticipante", method = RequestMethod.POST)
     public ResponseEntity<Long> salvarParticipante(Authentication auth, @RequestBody ParticipanteDto participante) {
         try {
-            return ResponseEntity.ok(participanteService.salvar(auth, participante));
+            return ResponseEntity.ok(participanteService.salvar(participante));
 
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

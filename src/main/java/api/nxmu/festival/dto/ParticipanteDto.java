@@ -29,5 +29,49 @@ public class ParticipanteDto {
     private String agencia;
     private String conta;
     private Long apresentacao;
-    private byte[] fotoPerfil;  
+    private String senha;
+    private byte[] fotoPerfil;
+    
+	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
+			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
+			String banco, String agencia, String conta, Long apresentacao, byte[] fotoPerfil) {
+		this.codigo = codigo;
+		this.nomeArtistico = nomeArtistico;
+		this.nomeResponsavel = nomeResponsavel;
+		this.genero = genero;
+		this.nascimento = nascimento;
+		this.documentorg = documentorg;
+		this.email = email;
+		this.necessidade = necessidade;
+		this.descrinescessidade = descrinescessidade;
+		this.cpf = cpf;
+		this.pix = pix;
+		this.banco = banco;
+		this.agencia = agencia;
+		this.conta = conta;
+		this.apresentacao = apresentacao;
+		this.fotoPerfil = fotoPerfil;
+	}
+
+	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
+			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
+			String banco, String agencia, String conta, Long apresentacao, String senha) {
+		this.codigo = codigo;
+		this.nomeArtistico = nomeArtistico;
+		this.nomeResponsavel = nomeResponsavel;
+		this.genero = genero;
+		this.nascimento = nascimento;
+		this.documentorg = documentorg;
+		this.email = email;
+		this.necessidade = necessidade;
+		this.descrinescessidade = descrinescessidade;
+		this.cpf = cpf;
+		this.pix = pix;
+		this.banco = banco;
+		this.agencia = agencia;
+		this.conta = conta;
+		this.apresentacao = apresentacao;
+		this.senha = senha;
+	}   
+    
 }

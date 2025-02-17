@@ -18,9 +18,9 @@ public class InscricaoController {
     private final InscricaoService inscricaoService;
 
     @PostMapping()
-    public ResponseEntity<String> salvarInscricao(Authentication auth, @RequestBody InscricaoDto inscricaoDto) {
+    public ResponseEntity<String> salvarInscricao(@RequestBody InscricaoDto inscricaoDto) {
         try {
-            inscricaoService.salvarInscricao(auth, inscricaoDto);
+            inscricaoService.salvarInscricao(inscricaoDto);
             return ResponseEntity.ok("Ok");
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());

@@ -32,11 +32,11 @@ public class AuthenticationService {
         .build();
   }
   
-  public AuthenticationResponse registerMaster(RegisterRequest request) {
+  public AuthenticationResponse registerComum(RegisterRequest request) {
 	    var user = Usuario.builder()
 	        .email(request.getEmail())        
 	        .senha(passwordEncoder.encode(request.getSenha()))
-	        .role(Role.MASTER)
+	        .role(Role.USER)
 	        .build();
 	    repository.save(user);
 	    var jwtToken = jwtService.generateToken(user);

@@ -7,11 +7,13 @@ import java.util.ArrayList;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
+import api.nxmu.festival.modelo.Role;
 import api.nxmu.festival.modelo.Usuario;
 import api.nxmu.festival.repositorio.ParticipanteRepositorio;
 import api.nxmu.festival.repositorio.UsuarioRepositorio;
@@ -26,6 +28,7 @@ public class ParticipanteService {
     private final ParticipanteRepositorio participanteDB;
     private final UsuarioRepositorio usuarioDB;
     private final ApresentacaoService apresentacaoService;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<Participante> encontrarPorId(Long id){        
         return participanteDB.findById(id);
@@ -83,12 +86,17 @@ public class ParticipanteService {
     }    
 
     @Transactional
-    public Long salvar(Authentication auth, ParticipanteDto participante) throws Exception{
+    public Long salvar(ParticipanteDto participante) throws Exception{
         try {           
-        	// Exigir login para salvar participoante
-        	// Assim requisicao post precisa ter token e entao posso pegar o usuario do token e vincular ao participante salvo
-            UserDetails userd = (UserDetails)auth.getPrincipal();
-            Usuario user = usuarioDB.findByEmail(userd.getUsername()).orElse(null);
+            var user = Usuario.builder()
+                    .email(participante.getEmail())        
+                    .senha(passwordEncoder.encode(
+                    		participante.getSenha() == null || participante.getSenha().isBlank() ? 
+                    				participante.getSenha() : 
+                    					participante.getDocumentorg()))
+                    .role(Role.USER)
+                    .build();
+            usuarioDB.save(user);
         	
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), 
