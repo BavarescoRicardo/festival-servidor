@@ -41,7 +41,7 @@ public class ParticipanteController {
     }    
 
     @RequestMapping(value = "/salvaparticipante", method = RequestMethod.POST)
-    public ResponseEntity<Long> salvarParticipante(Authentication auth, @RequestBody ParticipanteDto participante) {
+    public ResponseEntity<Long> salvarParticipante(@RequestBody ParticipanteDto participante) {
         try {
             return ResponseEntity.ok(participanteService.salvar(participante));
 
