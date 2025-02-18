@@ -49,7 +49,7 @@ public class Participante {
     private byte[] fotoDocumento;
     private byte[] fotoTermo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "apresentacao_id")
     private Apresentacao apresentacao;    
 

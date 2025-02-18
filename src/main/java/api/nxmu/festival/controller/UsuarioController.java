@@ -6,6 +6,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 import api.nxmu.festival.dto.ImportacaoEntradaDto;
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.dto.PerfilDto;
 import api.nxmu.festival.modelo.Usuario;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
@@ -42,10 +43,10 @@ public class UsuarioController {
     }
 
     @RequestMapping(value = "/selusuario", method =  RequestMethod.GET)
-	public ParticipanteDto selecionaUsuario(Authentication auth)
+	public PerfilDto selecionaUsuario(Authentication auth)
     {
         try {
-            return usuarioService.selecionaParticipanteAtual(auth);
+            return usuarioService.selecionaPerfil(auth);
         } catch (Exception e) {
             return null;
         }               

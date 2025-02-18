@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import api.nxmu.festival.dto.EnderecoDto;
 import api.nxmu.festival.dto.ImportacaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.dto.PerfilDto;
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.modelo.Endereco;
 import api.nxmu.festival.modelo.Participante;
@@ -49,21 +50,21 @@ public class UsuarioService
         return usuarioDB.findByEmail(userd.getUsername()).orElse(new Usuario("Não encontrado"));
     }
     
-    public ParticipanteDto selecionaParticipanteAtual(Authentication auth){
-    	ParticipanteDto dto = null;
+    public PerfilDto selecionaPerfil(Authentication auth){
+    	PerfilDto dto = null;
     	try {
             UserDetails userd = (UserDetails)auth.getPrincipal();
-            Participante p = participanteDB.findByEmail(userd.getUsername()).orElse(null);
+            Participante p = participanteDB.findByEmail(userd.getUsername());
 
-            dto = new ParticipanteDto(
-                p.getId(), p.getNomeArtistico(), p.getNomeResponsavel(), 
+            dto = new PerfilDto(
+                p.getId(), p.getApresentacao().getNomeartistico(), p.getNomeResponsavel(), 
                 p.getGenero(), p.getNascimento(), p.getDocumentorg(), 
                 p.getEmail(), p.getNecessidade(), p.getDescrinescessidade(),
                 p.getCpf(), p.getPix(), p.getBanco(), p.getAgencia(), p.getConta(),
-                p.getApresentacao().getId(), new byte[0]);			
+                p.getApresentacao().getMusica(), p.getEnderecos().get(0).getEndereco(), new byte[0]);			
 		} catch (Exception e) {
 			// TODO: handle exception
-			return null;
+			throw e;
 		}
         return dto;
     }    
