@@ -12,17 +12,15 @@ public class ClassificacaoListaDto {
         
     }
 
-    public ClassificacaoListaDto(Long codigo, double notafinal, String categoria, String apresentacao, String nomeArtistico) {
+    public ClassificacaoListaDto(Long codigo, double notafinal, String apresentacao, String nomeArtistico) {
         this.codigo = codigo;
         this.notafinal = notafinal;
-        this.categoria = categoria;
         this.apresentacao = apresentacao;
         this.nomeArtistico = nomeArtistico;
     }
 
-    public ClassificacaoListaDto(double notafinal, String categoria, String apresentacao) {
+    public ClassificacaoListaDto(double notafinal, String apresentacao) {
         this.notafinal = notafinal;
-        this.categoria = categoria;
         this.apresentacao = apresentacao;
     }
     

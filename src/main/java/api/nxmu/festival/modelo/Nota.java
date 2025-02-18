@@ -31,12 +31,6 @@ public class Nota {
     private double nota;
     private int ativo;
 
-    // ainda restam ligações fk    
-    // n - 1 categoria 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-
     // n - 1 jurado
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "jurado_id")

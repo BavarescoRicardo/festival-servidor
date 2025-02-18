@@ -43,17 +43,8 @@ public class Categoria {
     private Evento evento;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-    private List<Apresentacao> apresentacoes;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-    private List<Classificacao> classificacaoes;    
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-    private List<Nota> notas;    
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria")
-    private List<NotaFinal> notasfinais;        
-
+    private List<Apresentacao> apresentacoes;    
+       
     public Categoria(String titulo, String descricao, LocalDate dataInicial, LocalDate dataFinal, Evento evento) {
         this.titulo = titulo;
         this.descricao = descricao;

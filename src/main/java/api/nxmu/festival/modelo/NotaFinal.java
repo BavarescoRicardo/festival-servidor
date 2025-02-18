@@ -32,11 +32,6 @@ public class NotaFinal {
     private double notaFinal;
     private int ativo;
 
-    // n - 1 categoria 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
-
     // n - 1 jurado
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "jurado_id")

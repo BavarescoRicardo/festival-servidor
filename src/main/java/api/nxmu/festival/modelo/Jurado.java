@@ -35,10 +35,6 @@ public class Jurado {
     private String observacao;
     private int ativo;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "evento_id")
-    private Evento evento;
-
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "jurado")
     private List<Nota> notas;
 

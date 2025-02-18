@@ -1,4 +1,4 @@
-package api.nxmu.festival.usuario;
+package api.nxmu.festival.modelo;
 
 public enum Role {
     USER,

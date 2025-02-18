@@ -13,7 +13,7 @@ import lombok.Setter;
 @NoArgsConstructor
 @Getter
 @Setter
-public class ParticipanteDto {
+public class PerfilDto {
 	private Long codigo;
     private String nomeArtistico;
     private String nomeResponsavel;
@@ -28,34 +28,13 @@ public class ParticipanteDto {
     private String banco;
     private String agencia;
     private String conta;
-    private Long apresentacao;
-    private String senha;
+    private String apresentacao;
+    private String Endereco;
     private byte[] fotoPerfil;
-    
-	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
-			String banco, String agencia, String conta, Long apresentacao, byte[] fotoPerfil) {
-		this.codigo = codigo;
-		this.nomeArtistico = nomeArtistico;
-		this.nomeResponsavel = nomeResponsavel;
-		this.genero = genero;
-		this.nascimento = nascimento;
-		this.documentorg = documentorg;
-		this.email = email;
-		this.necessidade = necessidade;
-		this.descrinescessidade = descrinescessidade;
-		this.cpf = cpf;
-		this.pix = pix;
-		this.banco = banco;
-		this.agencia = agencia;
-		this.conta = conta;
-		this.apresentacao = apresentacao;
-		this.fotoPerfil = fotoPerfil;
-	}
 
-	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
+	public PerfilDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
 			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
-			String banco, String agencia, String conta, Long apresentacao, String senha) {
+			String banco, String agencia, String conta, String apresentacao, String endereco) {
 		this.codigo = codigo;
 		this.nomeArtistico = nomeArtistico;
 		this.nomeResponsavel = nomeResponsavel;
@@ -71,7 +50,7 @@ public class ParticipanteDto {
 		this.agencia = agencia;
 		this.conta = conta;
 		this.apresentacao = apresentacao;
-		this.senha = senha;
+		this.Endereco = endereco;
 	}   
     
 }

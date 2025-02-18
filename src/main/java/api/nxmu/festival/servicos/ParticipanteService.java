@@ -5,12 +5,18 @@ import java.util.Optional;
 import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
+import api.nxmu.festival.modelo.Role;
+import api.nxmu.festival.modelo.Usuario;
 import api.nxmu.festival.repositorio.ParticipanteRepositorio;
+import api.nxmu.festival.repositorio.UsuarioRepositorio;
 import jakarta.persistence.EntityManager;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
@@ -20,7 +26,9 @@ import lombok.RequiredArgsConstructor;
 public class ParticipanteService {
     private final EntityManager entityManager;
     private final ParticipanteRepositorio participanteDB;
+    private final UsuarioRepositorio usuarioDB;
     private final ApresentacaoService apresentacaoService;
+    private final PasswordEncoder passwordEncoder;
 
     public Optional<Participante> encontrarPorId(Long id){        
         return participanteDB.findById(id);
@@ -41,6 +49,25 @@ public class ParticipanteService {
 
         return listaDto;
     }
+    
+    public ParticipanteDto encontrarParticipante(long id){
+    	ParticipanteDto dto = null;
+        try {
+            // Seleciona objeto salvo no banco pelo seu id e depois o atualiza com o dto
+            Participante p = this.encontrarPorId(id).get();
+            dto = new ParticipanteDto(
+	            p.getId(), p.getNomeArtistico(), p.getNomeResponsavel(), 
+	            p.getGenero(), p.getNascimento(), p.getDocumentorg(), 
+	            p.getEmail(), p.getNecessidade(), p.getDescrinescessidade(),
+	            p.getCpf(), p.getPix(), p.getBanco(), p.getAgencia(), p.getConta(),
+	            p.getApresentacao().getId(), new byte[0]);            
+
+            this.participanteDB.save(p);    
+        } catch (Exception e) {
+            return null;
+        }
+        return dto;
+    }    
 
     public List<ParticipanteDto> encontrarPorApresentacaoId(Long idApresentacao){
         List<ParticipanteDto> listaDto = new ArrayList<ParticipanteDto>();
@@ -60,14 +87,24 @@ public class ParticipanteService {
 
     @Transactional
     public Long salvar(ParticipanteDto participante) throws Exception{
-        try {            
+        try {           
+            var user = Usuario.builder()
+                    .email(participante.getEmail())        
+                    .senha(passwordEncoder.encode(
+                    		participante.getSenha() == null || participante.getSenha().isBlank() ? 
+                    				participante.getDocumentorg() : 
+                    					participante.getSenha()))
+                    .role(Role.USER)
+                    .build();
+            usuarioDB.save(user);
+        	
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(),
                 participante.getDocumentorg(), participante.getEmail(), 
                 participante.getNecessidade(), participante.getDescrinescessidade(), participante.getCpf(),
                 participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
-                apresentacaoService.encontrarPorId(participante.getApresentacao()).get()
+                apresentacaoService.encontrarPorId(participante.getApresentacao()).get(), user
             );
 
             entityManager.persist(p);

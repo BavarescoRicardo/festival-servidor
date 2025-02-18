@@ -1,4 +1,4 @@
-package api.nxmu.festival.usuario;
+package api.nxmu.festival.modelo;
 
 import java.util.Collection;
 import java.util.List;
@@ -7,7 +7,6 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import api.nxmu.festival.modelo.Conta;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
 import jakarta.persistence.Enumerated;
@@ -17,6 +16,7 @@ import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
+import jakarta.persistence.OneToOne;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,7 +31,11 @@ import lombok.Setter;
 @Setter
 public class Usuario implements UserDetails {
 
-    @Id
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	@Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
     private String email;
@@ -43,8 +47,17 @@ public class Usuario implements UserDetails {
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "conta_id")
     private Conta conta;
+    
+    @OneToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "participante_id")
+    private Participante participante;    
 
     public Usuario() {
+
+    }
+    
+    public Usuario(String email) {
+    	this.email = email;
 
     }
 

@@ -12,26 +12,22 @@ public class HistoricoNotaDto {
     @NotNull(message = "nota diccao cannot be null")
     private double notaDiccao;
     
-    @NotNull(message = "Categoria cannot be null")
-    private String categoria;
     @NotNull(message = "Jurado cannot be null")
     private String jurado;
     @NotNull(message = "Apresentacao cannot be null")
     private String apresentacao;
 
-    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, String categoria, String jurado, String apresentacao) {
+    public HistoricoNotaDto(double notaAfinacao, double notaRitmo, double notaInterpretacao, double notaDiccao, String jurado, String apresentacao) {
         this.notaAfinacao = notaAfinacao;
         this.notaRitmo = notaRitmo;
         this.notaInterpretacao = notaInterpretacao;
         this.notaDiccao = notaDiccao;
         
-        this.categoria = categoria;
         this.jurado = jurado;
         this.apresentacao = apresentacao;
     }
     
-    public HistoricoNotaDto(String categoria, String jurado, String apresentacao) {        
-        this.categoria = categoria;
+    public HistoricoNotaDto(String jurado, String apresentacao) {        
         this.jurado = jurado;
         this.apresentacao = apresentacao;
     }    
@@ -69,12 +65,6 @@ public class HistoricoNotaDto {
 	}
 
 	public HistoricoNotaDto() {
-    }
-    public String getCategoria() {
-        return categoria;
-    }
-    public void setCategoria(String categoria) {
-        this.categoria = categoria;
     }
     public String getJurado() {
         return jurado;

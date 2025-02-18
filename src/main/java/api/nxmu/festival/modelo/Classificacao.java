@@ -30,17 +30,13 @@ public class Classificacao {
     private double notafinal;
     private int ativo;
 
-    @ManyToOne(fetch = FetchType.EAGER)
-    @JoinColumn(name = "categoria_id")
-    private Categoria categoria;
 
     @OneToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "apresentacao_id")  // Corrected annotation
     private Apresentacao apresentacao;
     
-    public Classificacao(double notafinal, Categoria categoria, Apresentacao apresentacao) {
+    public Classificacao(double notafinal, Apresentacao apresentacao) {
         this.notafinal = notafinal;
-        this.categoria = categoria;
         this.apresentacao = apresentacao;
     }
 

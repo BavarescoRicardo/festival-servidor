@@ -5,6 +5,8 @@ import api.nxmu.festival.dto.InscricaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -206,7 +208,7 @@ public class InscricaoService {
                 parcitipantePrincipal.getAgencia(),
                 parcitipantePrincipal.getConta()
         );
-        String[] recipients = {parcitipantePrincipal.getEmail(), "fimusi2024@gmail.com"};
+        String[] recipients = {parcitipantePrincipal.getEmail(), "bavaresco.ricardo@gmail.com"};
         this.emailService.sendMessageWithAttachment("[Inscrição FIMUSI 2024]", content, "foto_documento.png", 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoDocumento()), 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoTermo()),

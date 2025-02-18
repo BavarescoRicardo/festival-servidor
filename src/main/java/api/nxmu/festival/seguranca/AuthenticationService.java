@@ -6,9 +6,9 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import api.nxmu.festival.modelo.Role;
+import api.nxmu.festival.modelo.Usuario;
 import api.nxmu.festival.repositorio.UsuarioRepositorio;
-import api.nxmu.festival.usuario.Usuario;
-import api.nxmu.festival.usuario.Role;
 import lombok.RequiredArgsConstructor;
 
 @Service
@@ -23,7 +23,7 @@ public class AuthenticationService {
     var user = Usuario.builder()
         .email(request.getEmail())        
         .senha(passwordEncoder.encode(request.getSenha()))
-        .role(Role.MASTER)
+        .role(Role.USER)
         .build();
     repository.save(user);
     var jwtToken = jwtService.generateToken(user);
@@ -31,6 +31,19 @@ public class AuthenticationService {
         .token(jwtToken)
         .build();
   }
+  
+  public AuthenticationResponse registerComum(RegisterRequest request) {
+	    var user = Usuario.builder()
+	        .email(request.getEmail())        
+	        .senha(passwordEncoder.encode(request.getSenha()))
+	        .role(Role.USER)
+	        .build();
+	    repository.save(user);
+	    var jwtToken = jwtService.generateToken(user);
+	    return AuthenticationResponse.builder()
+	        .token(jwtToken)
+	        .build();
+	  }  
 
   public AuthenticationResponse authenticate(AuthenticationRequest request) {
     authenticationManager.authenticate(

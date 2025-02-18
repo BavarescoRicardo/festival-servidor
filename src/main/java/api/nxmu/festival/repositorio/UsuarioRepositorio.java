@@ -3,7 +3,7 @@ import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import api.nxmu.festival.usuario.Usuario;
+import api.nxmu.festival.modelo.Usuario;
 
 public interface UsuarioRepositorio extends JpaRepository<Usuario, Long>{
  
