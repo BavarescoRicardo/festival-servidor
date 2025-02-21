@@ -1,13 +1,15 @@
 package api.nxmu.festival.controller;
 
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
+
 import api.nxmu.festival.dto.InscricaoDto;
-import api.nxmu.festival.servicos.ApresentacaoService;
-import api.nxmu.festival.servicos.EnderecoService;
 import api.nxmu.festival.servicos.InscricaoService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/inscricoes")

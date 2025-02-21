@@ -2,7 +2,6 @@ package api.nxmu.festival.modelo;
 
 import java.util.List;
 
-
 import jakarta.persistence.Entity;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.GeneratedValue;

@@ -3,16 +3,20 @@ package api.nxmu.festival.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
-import org.springframework.web.bind.annotation.*;
-import api.nxmu.festival.dto.ImportacaoEntradaDto;
-import api.nxmu.festival.dto.ParticipanteDto;
+import org.springframework.web.bind.annotation.CrossOrigin;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RestController;
+
 import api.nxmu.festival.dto.PerfilDto;
-import api.nxmu.festival.modelo.Usuario;
 import api.nxmu.festival.seguranca.AuthenticationRequest;
 import api.nxmu.festival.seguranca.AuthenticationResponse;
 import api.nxmu.festival.seguranca.AuthenticationService;
 import api.nxmu.festival.seguranca.RegisterRequest;
-import api.nxmu.festival.servicos.EnderecoService;
 import api.nxmu.festival.servicos.UsuarioService;
 import lombok.RequiredArgsConstructor;
 

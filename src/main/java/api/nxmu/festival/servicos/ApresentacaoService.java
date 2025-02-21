@@ -1,5 +1,17 @@
 package api.nxmu.festival.servicos;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
+
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
+import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Service;
+
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
@@ -9,14 +21,6 @@ import api.nxmu.festival.projections.ApresentacaoProjection;
 import api.nxmu.festival.repositorio.ApresentacaoRepositorio;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
-import org.springframework.data.domain.Sort;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-
-import java.util.*;
 
 @Service
 @RequiredArgsConstructor

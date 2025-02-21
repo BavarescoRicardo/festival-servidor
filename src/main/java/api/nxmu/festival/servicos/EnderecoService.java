@@ -1,18 +1,14 @@
 package api.nxmu.festival.servicos;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.EnderecoDto;
-import api.nxmu.festival.dto.ImportacaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
-import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.modelo.Endereco;
 import api.nxmu.festival.repositorio.EnderecoRepositorio;
 import jakarta.persistence.EntityManager;

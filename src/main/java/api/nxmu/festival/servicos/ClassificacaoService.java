@@ -13,7 +13,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.AtualizaClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoDto;
 import api.nxmu.festival.dto.ClassificacaoListaDto;

@@ -1,15 +1,5 @@
 package api.nxmu.festival.servicos;
 
-import api.nxmu.festival.dto.EnderecoDto;
-import api.nxmu.festival.dto.InscricaoDto;
-import api.nxmu.festival.dto.ParticipanteDto;
-import jakarta.mail.MessagingException;
-import lombok.RequiredArgsConstructor;
-
-import org.springframework.security.core.Authentication;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,6 +8,15 @@ import java.time.format.DateTimeFormatter;
 import java.util.Base64;
 import java.util.Collection;
 import java.util.stream.Collectors;
+
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import api.nxmu.festival.dto.EnderecoDto;
+import api.nxmu.festival.dto.InscricaoDto;
+import api.nxmu.festival.dto.ParticipanteDto;
+import jakarta.mail.MessagingException;
+import lombok.RequiredArgsConstructor;
 
 @Service
 @RequiredArgsConstructor

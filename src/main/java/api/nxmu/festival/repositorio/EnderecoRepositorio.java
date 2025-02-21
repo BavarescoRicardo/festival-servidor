@@ -1,10 +1,10 @@
 package api.nxmu.festival.repositorio;
-import api.nxmu.festival.modelo.Endereco;
-
 import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import api.nxmu.festival.modelo.Endereco;
 
 public interface EnderecoRepositorio extends JpaRepository<Endereco, Long>{
 

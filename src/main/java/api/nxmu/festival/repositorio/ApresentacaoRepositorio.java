@@ -1,16 +1,14 @@
 package api.nxmu.festival.repositorio;
 
-import api.nxmu.festival.modelo.Apresentacao;
-
-import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
-import api.nxmu.festival.projections.ApresentacaoProjection;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import api.nxmu.festival.modelo.Apresentacao;
+import api.nxmu.festival.projections.ApresentacaoProjection;
 
 public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Long> {
 

@@ -1,10 +1,10 @@
 package api.nxmu.festival.repositorio;
-import api.nxmu.festival.modelo.NotaFinal;
-
 import java.util.List;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
+
+import api.nxmu.festival.modelo.NotaFinal;
 
 public interface NotaFinalRepositorio extends JpaRepository<NotaFinal, Long>{ 
 
