@@ -56,15 +56,15 @@ public class UsuarioController {
         }               
 	}    
 
-    @GetMapping("/testaapi")
-	public ResponseEntity<?> testeApi()
+    @PostMapping(value = "/perfil")
+	public PerfilDto atualizarPerfil(PerfilDto pefilDto)
     {
         try {
-            return ResponseEntity.ok().body("Executadas açoes com sucesso absoluto!");
+            return usuarioService.atualizaPerfil(pefilDto);
         } catch (Exception e) {
-            return ResponseEntity.badRequest().body("Erro ao salvar role no banco de dados  " + e.getMessage());
+            return null;
         }               
-	}
+	}    
 
     @RequestMapping(value = "/removeconta/{id}", method =  RequestMethod.DELETE)
 	public ResponseEntity<String> removerConta(@PathVariable long id)
