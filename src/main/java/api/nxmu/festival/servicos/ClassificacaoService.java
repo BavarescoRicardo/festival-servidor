@@ -36,7 +36,6 @@ public class ClassificacaoService {
     @PersistenceContext
     private EntityManager entityManager;
 
-    private final CategoriaService categoriaService;
     private final ApresentacaoService apresentacaoService;
     private final NotaFinalService notaFinalService;
 
