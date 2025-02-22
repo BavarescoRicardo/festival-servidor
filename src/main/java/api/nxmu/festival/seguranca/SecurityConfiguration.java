@@ -25,12 +25,17 @@ public class SecurityConfiguration {
         http
                 .csrf(csrf -> csrf
                         .disable())
-                .authorizeHttpRequests()
-                .requestMatchers(HttpMethod.OPTIONS).permitAll()
-                .requestMatchers(whiteList()).permitAll()
-                .anyRequest()
-                .authenticated()
-                .and()
+                .authorizeHttpRequests(auth -> auth
+                        // Public endpoints (no authentication required)
+                        .requestMatchers(HttpMethod.OPTIONS).permitAll()
+                        .requestMatchers(whiteList()).permitAll()
+
+                        // Endpoints under /api/evento/auth/** require USER or MASTER role
+                        .requestMatchers("/api/evento/auth/**").hasAnyRole("USER", "MASTER")
+
+                        // All other endpoints require MASTER role
+                        .anyRequest().hasRole("MASTER")
+                )
                 .sessionManagement(management -> management
                         .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .authenticationProvider(authenticationProvider)
@@ -41,10 +46,9 @@ public class SecurityConfiguration {
 
     private String[] whiteList() {
         return new String[]{
-                "/api/evento/auth/**",
-        		"/api/categoriasativa",
-        		"/inscricoes"
+                "/api/evento/auth/**", // Authentication endpoints (e.g., login, register)
+                "/api/categoriasativa", // Public endpoint
+                "/inscricoes" // Public endpoint
         };
     }
-
 }
