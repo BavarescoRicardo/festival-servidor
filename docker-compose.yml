@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=festivalr
+      - POSTGRES_DB=festival
     ports:
       - '5443:5432'
     volumes:
@@ -19,17 +19,14 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8443:443'  # Expose only 8443 e a 443 o ngix configura
+      - '8080:8080'  # Map host port 8080 to container port 8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festival
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - psql-db
-    volumes:
-      - ./src/main/resources:/resources 
-      - psql-data:/var/lib/postgresql/data
 
 volumes:
   psql-data:
