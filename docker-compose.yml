@@ -7,7 +7,7 @@ services:
     environment:
       - POSTGRES_USER=admin
       - POSTGRES_PASSWORD=admin
-      - POSTGRES_DB=festival
+      - POSTGRES_DB=festivalr
     ports:
       - '5443:5432'
     volumes:
@@ -21,12 +21,15 @@ services:
     ports:
       - '8080:8080'  # Map host port 8080 to container port 8080
     environment:
-      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festival
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
       - SPRING_DATASOURCE_USERNAME=admin
       - SPRING_DATASOURCE_PASSWORD=admin
       - SPRING_JPA_HIBERNATE_DDL_AUTO=update
     depends_on:
       - psql-db
+    volumes:
+      - ./src/main/resources:/resources 
+      - psql-data:/var/lib/postgresql/data
 
 volumes:
   psql-data:
