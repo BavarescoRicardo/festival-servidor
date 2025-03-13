@@ -32,10 +32,10 @@ public class SecurityConfiguration {
 
                         // Endpoints under /api/evento/auth/** require USER or MASTER role
                         .requestMatchers("/api/evento/auth/**").hasAnyRole("USER", "MASTER")
-                        .requestMatchers("/api/apresentacoes").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/apresentacoesfiltro").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/api/categorias").hasAnyRole("USER", "ADMIN")
-                        .requestMatchers("/evento/auth/perfil").hasAnyRole("USER", "ADMIN")
+                        .requestMatchers("/api/apresentacoes").hasAnyRole("USER", "MASTER")
+                        .requestMatchers("/api/apresentacoesfiltro").hasAnyRole("USER", "MASTER")
+                        .requestMatchers("/api/categorias").hasAnyRole("USER", "MASTER")
+                        .requestMatchers("/evento/auth/perfil").hasAnyRole("USER", "MASTER")
                         
 
                         // All other endpoints require MASTER role
