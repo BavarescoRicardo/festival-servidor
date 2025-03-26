@@ -2,6 +2,7 @@ package api.nxmu.festival.controller;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -15,13 +16,20 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 
+import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
+import api.nxmu.festival.dto.filtros.FiltroParticipanteDto;
 import api.nxmu.festival.servicos.ParticipanteService;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/api/evento/")
+@RequestMapping("/api/")
 @RequiredArgsConstructor
 @CrossOrigin
 public class ParticipanteController {
@@ -70,6 +78,14 @@ public class ParticipanteController {
             return null;
         }
 	}
+    
+    @RequestMapping(value = "/participantesfiltro", method =  RequestMethod.POST)
+    public List<ParticipanteDto> GetArtigoFiltrado(
+    @RequestBody(required = false) Optional<FiltroParticipanteDto> filtro) {        
+
+    	FiltroParticipanteDto filtroRecebido = filtro.get();
+        return participanteService.encontrarFiltrado(filtroRecebido);
+    }       
     
     @PostMapping("/participante/foto")
     public ResponseEntity<Object> savaImagem(int participante, MultipartFile image) throws IOException {

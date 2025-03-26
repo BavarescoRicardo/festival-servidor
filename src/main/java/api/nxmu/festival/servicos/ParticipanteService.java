@@ -4,12 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
+import api.nxmu.festival.dto.filtros.FiltroParticipanteDto;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.modelo.Role;
 import api.nxmu.festival.modelo.Usuario;
@@ -82,6 +86,25 @@ public class ParticipanteService {
 
         return listaDto;
     }    
+    
+    public List<ParticipanteDto> encontrarFiltrado(FiltroParticipanteDto filtro) {
+        List<ParticipanteDto> listaDto = new ArrayList<ParticipanteDto>();
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 80);
+        List<Participante> listaFiltrada = participanteDB.
+                findAllFiltrado(filtro.getCodCategoria(), pageable).getContent();
+        for (Participante participante : listaFiltrada) {
+            listaDto.add(
+            		new ParticipanteDto(
+                            participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
+                            participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                            participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
+                            participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), 
+                            participante.getConta(), participante.getApresentacao().getId(), participante.getFotoPerfil()));
+        }
+
+        return listaDto;
+    }
+    
 
     @Transactional
     public Long salvar(ParticipanteDto participante) throws Exception{
