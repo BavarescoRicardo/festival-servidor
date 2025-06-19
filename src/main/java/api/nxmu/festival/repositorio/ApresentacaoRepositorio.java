@@ -7,6 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
+import api.nxmu.festival.dto.MusicaDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.projections.ApresentacaoProjection;
 
@@ -24,8 +25,15 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
     @Query("select u from Apresentacao u where u.ativo = 0 and u.senha > 0 and u.categoria.id = ?1")
     Page<Apresentacao> findAllFiltradoEnsaio(long codCategoria, String textoFiltro, Pageable p);
 
-    @Query("select u from Apresentacao u")
+    @Query("select u from Apresentacao u where u.ativo = 0")
     Page<Apresentacao> findAllOrdenado(Pageable p);
+    
+    @Query("SELECT new api.nxmu.festival.dto.MusicaDto(u.id, u.musica, u.autor, u.linkmusica, u.categoria.id) " +
+    	       "FROM Apresentacao u " +
+    	       "WHERE u.ativo = 0 AND LOWER(u.musica) = LOWER(?1) AND u.categoria.id = ?2")
+    	List<MusicaDto> findByCategoriaAndMusica(String musica, Long codigoCategoria);
+
+    
 
     @Query(""" 
             select 

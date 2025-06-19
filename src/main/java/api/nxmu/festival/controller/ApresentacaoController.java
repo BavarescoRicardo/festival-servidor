@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RestController;
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
+import api.nxmu.festival.dto.MusicaDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.servicos.ApresentacaoService;
 import lombok.RequiredArgsConstructor;
@@ -111,6 +112,35 @@ public class ApresentacaoController {
         
         FiltroApresentacaoDto filtroRecebido = filtro.get();
         return apresentacaoService.encontrarFiltradoCartao(filtroRecebido);
-    }   
+    }
+    
+    @RequestMapping(value = "/apresentacao/musica/{musica}/{id}", method = RequestMethod.GET)
+    public List<MusicaDto> getMusicaPorCategoria(@PathVariable String musica, @PathVariable long id) {
+        try {
+            return apresentacaoService.encontrarMusicaPorCategoria(musica, id);
+        } catch (Exception e) {
+            return List.of();
+        }
+    }
+
+    // testes requisicoes
+    @RequestMapping(value = "/apresentacao/musica/{musica}", method = RequestMethod.GET)
+    public List<MusicaDto> getMusicaPorCategoriaTeste1(@PathVariable String musica) {
+        try {
+            return apresentacaoService.encontrarMusicaPorCategoria(musica, 1L);
+        } catch (Exception e) {
+            return List.of();
+        }
+    }
+
+    @RequestMapping(value = "/apresentacao/musica/{id}", method = RequestMethod.GET)
+    public List<MusicaDto> getMusicaPorCategoriaTeste2(@PathVariable long id) {
+        try {
+            return apresentacaoService.encontrarMusicaPorCategoria("Borboletas", id);
+        } catch (Exception e) {
+            return List.of();
+        }
+    }
+
 
 }

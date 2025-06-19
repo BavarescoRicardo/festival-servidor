@@ -49,11 +49,13 @@ public class SecurityConfiguration {
         return http.build();
     }
 
+    // Lista para endpoints publicos
     private String[] whiteList() {
         return new String[]{
-                "/api/evento/auth/**", // Authentication endpoints (e.g., login, register)
-                "/api/categoriasativa", // Public endpoint
-                "/inscricoes" // Public endpoint
+                "/api/evento/auth/**", 
+                "/api/apresentacao/musica/**",
+                "/api/categoriasativa", 
+                "/inscricoes"
         };
     }
 }

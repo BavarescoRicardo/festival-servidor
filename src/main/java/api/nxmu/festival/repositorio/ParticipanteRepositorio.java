@@ -17,4 +17,7 @@ public interface ParticipanteRepositorio extends JpaRepository<Participante, Lon
     
     @Query("select u from Participante u where u.apresentacao.categoria.id = ?1")
     Page<Participante> findAllFiltrado(long codCategoria, Pageable p);    
+    
+    @Query("select u from Participante u where u.ativo = 0")
+    List<Participante> findAllOrdenado();    
 }

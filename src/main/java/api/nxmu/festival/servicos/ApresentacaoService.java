@@ -15,6 +15,7 @@ import org.springframework.stereotype.Service;
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ApresentacaoRelDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
+import api.nxmu.festival.dto.MusicaDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.projections.ApresentacaoProjection;
@@ -323,5 +324,16 @@ public class ApresentacaoService {
 
         return listaDto;
     }
+    
+    public List<MusicaDto> encontrarMusicaPorCategoria(String musica, long codCategoria) {
+    	List<MusicaDto> listaMusicas = null;
+    	try {
+    		listaMusicas = apresentacaoDB.findByCategoriaAndMusica(musica, codCategoria);
+		} catch (Exception e) {
+			return null;
+		}
+    	
+    	return listaMusicas;
+    }     
 
 }

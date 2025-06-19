@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import api.nxmu.festival.dto.ParticipanteDto;
 import api.nxmu.festival.dto.filtros.FiltroParticipanteDto;
+import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.modelo.Participante;
 import api.nxmu.festival.modelo.Role;
 import api.nxmu.festival.modelo.Usuario;
@@ -40,7 +41,7 @@ public class ParticipanteService {
         List<ParticipanteDto> listaDto = new ArrayList<ParticipanteDto>();
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
-        for(Participante participante: participanteDB.findAll()) {
+        for(Participante participante: participanteDB.findAllOrdenado()) {
             listaDto.add(new ParticipanteDto(
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
@@ -159,6 +160,9 @@ public class ParticipanteService {
     public ResponseEntity<String> remover(long id){
         try {
             this.participanteDB.deleteById(id);
+            Participante participante = this.encontrarPorId(id).get();
+            participante.setAtivo(1);
+            this.participanteDB.save(participante);
 
             return ResponseEntity.ok().body("Removido objeto de id: "+id);
         } catch (Exception e) {
