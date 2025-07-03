@@ -222,20 +222,6 @@ public class ApresentacaoService {
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id) {
         long categoriaId = 0;
         try {
-        	// deixar troca de Categorias da apresentacao dinamica
-            // Busca a lista de categorias disponíveis
-            List<CategoriaDto> categorias = categoriaService.encontrar();
-
-            // Busca a categoria cujo título (em minúsculas) bate com o recebido no DTO
-            Optional<CategoriaDto> categoriaEncontrada = categorias.stream()
-                .filter(c -> c.getTitulo().equalsIgnoreCase(apresentacaoDto.getCategoriaTitulo()))
-                .findFirst();
-
-            if (categoriaEncontrada.isEmpty()) {
-                throw new RuntimeException("Categoria não encontrada: " + apresentacaoDto.getCategoriaTitulo());
-            }
-
-            categoriaId = categoriaEncontrada.get().getCodigo();
             Apresentacao apresentacao = this.encontrarPorId(id).get();
 
             // Atualizar modelo com campos do objeto dto
@@ -246,8 +232,8 @@ public class ApresentacaoService {
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setLinkmusica(apresentacaoDto.getLinkmusica());
             // Verifica se deve alterar categoria
-            if (apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0)
-                apresentacao.setCategoria(categoriaService.encontrarPorId(categoriaId).get());
+            if (apresentacaoDto.getCategoriaTitulo() != null && !apresentacaoDto.getCategoriaTitulo().equalsIgnoreCase(apresentacao.getCategoria().getTitulo()))
+            	apresentacao = this.trocarCategoria(apresentacao, apresentacaoDto.getCategoriaTitulo());                
             // Verificações se deve alterar ordem e/ou senha
             if (apresentacaoDto.getOrdem() > 0)
                 apresentacao.setOrdem(apresentacaoDto.getOrdem());
@@ -322,6 +308,24 @@ public class ApresentacaoService {
 		}
     	
     	return listaMusicas;
-    }     
+    }
+    
+    private Apresentacao trocarCategoria(Apresentacao apresentacao, String categoriaTitulo) {
+        // Busca a lista de categorias disponíveis
+        List<CategoriaDto> categorias = categoriaService.encontrar();
+
+        // Busca a categoria cujo título (em minúsculas) bate com o recebido no DTO
+        Optional<CategoriaDto> categoriaEncontrada = categorias.stream()
+            .filter(c -> c.getTitulo().equalsIgnoreCase(categoriaTitulo))
+            .findFirst();
+
+        if (categoriaEncontrada.isEmpty()) {
+            throw new RuntimeException("Categoria não encontrada: " + apresentacao.getCategoria().getDescricao());
+        }
+
+        long categoriaId = categoriaEncontrada.get().getCodigo();
+        apresentacao.setCategoria(categoriaService.encontrarPorId(categoriaId).get());
+        return apresentacao;
+    }
 
 }
