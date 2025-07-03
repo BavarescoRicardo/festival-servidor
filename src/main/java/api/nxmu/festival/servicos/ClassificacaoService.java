@@ -73,7 +73,7 @@ public class ClassificacaoService {
 
     public List<ClassificacaoListaDto> encontrarFiltrado(FiltroClassificacaoDto filtro){
         List<ClassificacaoListaDto> listaDto = new ArrayList<>();
-        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 10, Sort.by("notafinal").descending());
+        Pageable pageable = PageRequest.of(Integer.parseInt(filtro.getPg()), 80, Sort.by("notafinal").descending());
         List<Classificacao> listaFiltrada = null;
         if (filtro.getTextoFiltro().equals("true")) {
             listaFiltrada = classificacaoDB.
