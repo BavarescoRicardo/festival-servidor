@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 
 import api.nxmu.festival.dto.ApresentacaoDto;
 import api.nxmu.festival.dto.ApresentacaoRelDto;
+import api.nxmu.festival.dto.CategoriaDto;
 import api.nxmu.festival.dto.ListaCartaoApresentacaoDto;
 import api.nxmu.festival.dto.MusicaDto;
 import api.nxmu.festival.dto.filtros.FiltroApresentacaoDto;
@@ -219,35 +220,22 @@ public class ApresentacaoService {
 
 
     public ApresentacaoDto atualizar(ApresentacaoDto apresentacaoDto, long id) {
-        long categoria = 0;
+        long categoriaId = 0;
         try {
-            switch (apresentacaoDto.getCategoriaTitulo().toLowerCase()) {
-                case "infantil":
-                    categoria = 1L;
-                    break;
-                case "juvenil":
-                    categoria = 52L;
-                    break;
-                case "popular":
-                    categoria = 2L;
-                    break;
-                case "sertaneja":
-                    categoria = 53L;
-                    break;
-                case "gospel":
-                    categoria = 50L;
-                    break;
-                case "final popular":
-                    categoria = 6L;
-                    break;
-                case "final sertaneja":
-                    categoria = 7L;
-                    break;
+        	// deixar troca de Categorias da apresentacao dinamica
+            // Busca a lista de categorias disponíveis
+            List<CategoriaDto> categorias = categoriaService.encontrar();
 
-                default:
-                    break;
+            // Busca a categoria cujo título (em minúsculas) bate com o recebido no DTO
+            Optional<CategoriaDto> categoriaEncontrada = categorias.stream()
+                .filter(c -> c.getTitulo().equalsIgnoreCase(apresentacaoDto.getCategoriaTitulo()))
+                .findFirst();
+
+            if (categoriaEncontrada.isEmpty()) {
+                throw new RuntimeException("Categoria não encontrada: " + apresentacaoDto.getCategoriaTitulo());
             }
-            // Encontra objeto salvo pelo id e depois atualiza
+
+            categoriaId = categoriaEncontrada.get().getCodigo();
             Apresentacao apresentacao = this.encontrarPorId(id).get();
 
             // Atualizar modelo com campos do objeto dto
@@ -258,8 +246,8 @@ public class ApresentacaoService {
             apresentacao.setAutor(apresentacaoDto.getAutor());
             apresentacao.setLinkmusica(apresentacaoDto.getLinkmusica());
             // Verifica se deve alterar categoria
-            if ((apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0) || (categoria > 0 && categoria <= 7))
-                apresentacao.setCategoria(categoriaService.encontrarPorId(categoria).get());
+            if (apresentacaoDto.getCategoria() != null && apresentacaoDto.getCategoria() > 0)
+                apresentacao.setCategoria(categoriaService.encontrarPorId(categoriaId).get());
             // Verificações se deve alterar ordem e/ou senha
             if (apresentacaoDto.getOrdem() > 0)
                 apresentacao.setOrdem(apresentacaoDto.getOrdem());
