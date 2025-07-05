@@ -45,7 +45,7 @@ public class NotaService {
         List<TabelaNotaDto> listaDto = new ArrayList<TabelaNotaDto>();
         
         // Converte a lista de objetos da entidade em objetos dto para transferencia
-        for(Nota nota: notaDB.findAllByOrderByQuesito()) {
+        for(Nota nota: notaDB.findAllOrderByIdDesc()) {
             listaDto.add(new TabelaNotaDto(
                 nota.getId(), nota.getNota(),  
                 nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), nota.getApresentacao().getCategoria().getTitulo(), 
