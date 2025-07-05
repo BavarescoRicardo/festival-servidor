@@ -60,7 +60,8 @@ public class ClassificacaoService {
                     classificacao.getId(),
                     bd.doubleValue(),
                     classificacao.getApresentacao().getMusica(),
-                    classificacao.getApresentacao().getNomeartistico()
+                    classificacao.getApresentacao().getNomeartistico(),
+                    classificacao.getApresentacao().getCategoria().getTitulo()
                 ));
             } else {
                 // Optionally handle cases where apresentacao is null
@@ -88,7 +89,8 @@ public class ClassificacaoService {
             listaDto.add(new ClassificacaoListaDto(
                 classificacao.getId(), bd.doubleValue(),  
                 classificacao.getApresentacao().getMusica(), 
-                classificacao.getApresentacao().getNomeartistico()));
+                classificacao.getApresentacao().getNomeartistico(),
+        		classificacao.getApresentacao().getCategoria().getTitulo()));
         }
         return listaDto;
     } 

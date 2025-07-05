@@ -2,6 +2,8 @@ package api.nxmu.festival.servicos;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.data.domain.PageRequest;
@@ -18,6 +20,7 @@ import api.nxmu.festival.dto.filtros.FiltroNotaDto;
 import api.nxmu.festival.modelo.Apresentacao;
 import api.nxmu.festival.modelo.Nota;
 import api.nxmu.festival.modelo.NotaFinal;
+import api.nxmu.festival.modelo.Quesito;
 import api.nxmu.festival.repositorio.NotaFinalRepositorio;
 import api.nxmu.festival.repositorio.NotaRepositorio;
 import lombok.RequiredArgsConstructor;
@@ -105,189 +108,41 @@ public class NotaService {
         return true;
     }
 
-    public boolean salvarNotas(NotasDto notaDto){
+    public boolean salvarNotas(NotasDto notaDto) {
         try {
-        	// Verifica se a apresentacao pertence a categoria informada        	
-        	Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
-        	if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-        		throw new Exception("Esta apresentacao nao pertence a esta categoria");
-        	}
-        	
-        	// Valida cada quesito        	
-        	// Salva afinacao
-        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
-        	if(notaDto.getNotaAfinacao() < 5 || notaDto.getNotaAfinacao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-        	
-        	this.salvarAfinacao(notaDto);
-        	
-        	// salva diccao
-        	if(notaDto.getNotaDiccao() < 5 || notaDto.getNotaDiccao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-        	
-        	this.salvarDiccao(notaDto);        	
-        	
-        	// salva ritmo
-        	if(notaDto.getNotaRitmo() < 5 || notaDto.getNotaRitmo() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-        	
-        	this.salvarRitmo(notaDto);        	
-        	
-        	// salva interpretacao
-        	if(notaDto.getNotaInterpretacao() < 5 || notaDto.getNotaInterpretacao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-        	
-        	this.salvarInterpretacao(notaDto);
-        	
+            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).orElseThrow();
+            if (apresentacao.getCategoria().getId() != notaDto.getCategoria()) {
+                throw new Exception("Esta apresentacao nao pertence a esta categoria");
+            }
+
+            notaDto.getNotasPorQuesito().forEach((idQuesito, valorNota) -> {
+                if (valorNota < 5 || valorNota > 10) {
+                    throw new RuntimeException("Nota fora do intervalo permitido (5 a 10)");
+                }
+
+                Nota nota = Nota.builder()
+                        .nota(valorNota)
+                        .jurado(juradoService.encontrarPorId(notaDto.getJurado()).orElseThrow())
+                        .apresentacao(apresentacao)
+                        .quesito(quesitoService.encontrarPorId(idQuesito).orElseThrow())
+                        .build();
+
+                // Atualiza nota existente, se houver
+                var existentes = encontrarPorApresentacaoeJuradoQuesito(apresentacao.getId(), notaDto.getJurado(), idQuesito);
+                if (!existentes.isEmpty()) {
+                    nota.setId(existentes.get(0).getId());
+                }
+
+                notaDB.save(nota);
+            });
+
         } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }    
-    
-    public boolean salvarAfinacao(NotasDto notaDto){
-        try {
-            // Validações
-        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
-        	if(notaDto.getNotaAfinacao() < 5 || notaDto.getNotaAfinacao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-            // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
-            if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-            	throw new Exception("Esta apresentacao nao pertence a esta categoria");
-            }
-
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Nota e =  Nota.builder()
-                .nota(notaDto.getNotaAfinacao())
-                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoService.encontrarPorId(1L).get()).build();
-
-            // Confere se ja existe nota para esta apresentacao este jurado e quesito
-            long apr = notaDto.getApresentacao(); 
-            long jur = notaDto.getJurado(); 
-            final long ques = 0; 
-            if (this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).size() > 0){
-                e.setId(this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).get(0).getId());
-            }
-
-            this.notaDB.save(e);    
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }     
-    
-    public boolean salvarDiccao(NotasDto notaDto){
-        try {
-            // Validações
-        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
-        	if(notaDto.getNotaDiccao() < 5 || notaDto.getNotaDiccao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-            // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
-            if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-            	throw new Exception("Esta apresentacao nao pertence a esta categoria");
-            }
-
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Nota e =  Nota.builder()
-                .nota(notaDto.getNotaDiccao())
-                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoService.encontrarPorId(2L).get()).build();
-
-            // Confere se ja existe nota para esta apresentacao este jurado e quesito
-            long apr = notaDto.getApresentacao(); 
-            long jur = notaDto.getJurado(); 
-            final long ques = 0; 
-            if (this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).size() > 0){
-                e.setId(this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).get(0).getId());
-            }
-
-            this.notaDB.save(e);    
-        } catch (Exception e) {
+            e.printStackTrace();
             return false;
         }
         return true;
     }
-    
-    public boolean salvarRitmo(NotasDto notaDto){
-        try {
-            // Validações
-        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
-        	if(notaDto.getNotaRitmo() < 5 || notaDto.getNotaRitmo() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-            // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
-            if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-            	throw new Exception("Esta apresentacao nao pertence a esta categoria");
-            }
 
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Nota e =  Nota.builder()
-                .nota(notaDto.getNotaRitmo())
-                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoService.encontrarPorId(3L).get()).build();
-
-            // Confere se ja existe nota para esta apresentacao este jurado e quesito
-            long apr = notaDto.getApresentacao(); 
-            long jur = notaDto.getJurado(); 
-            final long ques = 0; 
-            if (this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).size() > 0){
-                e.setId(this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).get(0).getId());
-            }
-
-            this.notaDB.save(e);    
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
-    
-    public boolean salvarInterpretacao(NotasDto notaDto){
-        try {
-            // Validações
-        	// Verifica se nota esta entre o maximo e o minimo valor da nota estipulado pelo festival
-        	if(notaDto.getNotaInterpretacao() < 5 || notaDto.getNotaInterpretacao() > 10) {
-        		throw new Exception("Nota com valor fora dos limites deste evento");
-        	}
-            // Verifica se a apresentacao pertence a categoria informada        	
-            Apresentacao apresentacao = apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get();
-            if(apresentacao.getCategoria().getId() != notaDto.getCategoria()){
-            	throw new Exception("Esta apresentacao nao pertence a esta categoria");
-            }
-
-            // Define objeto  participante para salvar no banco de dados a partir do dto recebido
-            Nota e =  Nota.builder()
-                .nota(notaDto.getNotaInterpretacao())
-                .jurado(juradoService.encontrarPorId(notaDto.getJurado()).get())
-                .apresentacao(apresentacaoService.encontrarPorId(notaDto.getApresentacao()).get())
-                .quesito(quesitoService.encontrarPorId(4L).get()).build();
-
-            // Confere se ja existe nota para esta apresentacao este jurado e quesito
-            long apr = notaDto.getApresentacao(); 
-            long jur = notaDto.getJurado(); 
-            final long ques = 0; 
-            if (this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).size() > 0){
-                e.setId(this.encontrarPorApresentacaoeJuradoQuesito(apr, jur, ques).get(0).getId());
-            }
-
-            this.notaDB.save(e);    
-        } catch (Exception e) {
-            return false;
-        }
-        return true;
-    }
     
     public AtualizaNotaDto atualizar(AtualizaNotaDto notaDto, long id){
         try {
