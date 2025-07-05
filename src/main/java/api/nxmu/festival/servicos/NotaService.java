@@ -218,29 +218,42 @@ public class NotaService {
         notaFinalDB.save(notaFinal);
     }    
 
-    public List<HistoricoNotaDto> encontrarHistoricoNotas(){       
+    public List<HistoricoNotaDto> encontrarHistoricoNotas() {
+        List<Nota> notas = notaDB.encontrarhistoricoNotas(); // Ordenado por apresentacao, jurado, quesito
+        if (notas.isEmpty()) return List.of();
 
-	        // Retornar lista de notas pertencentes a apresentação
-	    List<Nota> notasApresentacao = notaDB.encontrarhistoricoNotas();
-	    if(!(notasApresentacao.size() > 0))
-	        return null;
-	
-	    List<HistoricoNotaDto> listaHistoricoNotas = new ArrayList();
-	    for(int idx = 0; idx < notasApresentacao.size() / 4; idx ++ ) {
-		    HistoricoNotaDto historicoNotas = new HistoricoNotaDto(
-		    		notasApresentacao.get(idx*4).getJurado().getNome(),
-		    		notasApresentacao.get(idx*4).getApresentacao().getMusica()
-				);
-		
-		    // atribui cada quesito ao historico 0 - 3 por apresentacao  + (idx*4)
-		    historicoNotas.setNotaInterpretacao(notasApresentacao.get(0 + (idx*4)).getNota());
-		    historicoNotas.setNotaRitmo(notasApresentacao.get(1 + (idx*4)).getNota());
-		    historicoNotas.setNotaDiccao(notasApresentacao.get(2 + (idx*4)).getNota());
-			historicoNotas.setNotaAfinacao(notasApresentacao.get(3 + (idx*4)).getNota());        
-		    
-			listaHistoricoNotas.add(historicoNotas);        
-	    }
-	    
-	    return listaHistoricoNotas;
-    }      
+        List<HistoricoNotaDto> listaHistoricoNotas = new ArrayList<>();
+
+        Long juradoAtualId = null;
+        Long apresentacaoAtualId = null;
+        HistoricoNotaDto historico = null;
+
+        for (Nota nota : notas) {
+            Long juradoId = nota.getJurado().getId();
+            Long apresentacaoId = nota.getApresentacao().getId();
+
+            if (!Objects.equals(juradoId, juradoAtualId) || !Objects.equals(apresentacaoId, apresentacaoAtualId)) {
+                if (historico != null) {
+                    listaHistoricoNotas.add(historico);
+                }
+                historico = new HistoricoNotaDto(
+                    nota.getJurado().getNome(),
+                    nota.getApresentacao().getMusica(),
+                    nota.getApresentacao().getCategoria().getTitulo()
+                );
+                juradoAtualId = juradoId;
+                apresentacaoAtualId = apresentacaoId;
+            }
+
+            // Adiciona a nota dinamicamente pelo nome do quesito
+            historico.adicionarNota(nota.getQuesito().getDescricao(), nota.getNota());
+        }
+
+        if (historico != null) {
+            listaHistoricoNotas.add(historico);
+        }
+
+        return listaHistoricoNotas;
+    }
+      
 }
