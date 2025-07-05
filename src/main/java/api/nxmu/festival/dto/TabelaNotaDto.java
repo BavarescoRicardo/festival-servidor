@@ -6,22 +6,25 @@ public class TabelaNotaDto {
     private double nota;
     private String participante;
     private String jurado;
+    private String categoria;
     private String apresentacao;
     private String quesito;
 
-    public TabelaNotaDto(long codigo, double nota, String participante, String jurado, String apresentacao, String quesito) {
+    public TabelaNotaDto(long codigo, double nota, String participante, String jurado, String categoria, String apresentacao, String quesito) {
         this.codigo = codigo;
         this.nota = nota;
         this.participante = participante;
         this.jurado = jurado;
+        this.categoria = categoria;
         this.apresentacao = apresentacao;
         this.quesito = quesito;
     }    
 
-    public TabelaNotaDto(double nota, String participante, String jurado, String apresentacao, String quesito) {
+    public TabelaNotaDto(double nota, String participante, String jurado, String categoria, String apresentacao, String quesito) {
         this.nota = nota;
         this.participante = participante;
         this.jurado = jurado;
+        this.categoria = categoria;
         this.apresentacao = apresentacao;
         this.quesito = quesito;
     }
@@ -55,6 +58,12 @@ public class TabelaNotaDto {
     public void setJurado(String jurado) {
         this.jurado = jurado;
     }
+    public String getCategoria() {
+        return categoria;
+    }
+    public void setCategoria(String categoria) {
+        this.categoria = categoria;
+    }    
     public String getApresentacao() {
         return apresentacao;
     }

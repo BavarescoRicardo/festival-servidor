@@ -48,7 +48,7 @@ public class NotaService {
         for(Nota nota: notaDB.encontrarhistoricoNotas()) {
             listaDto.add(new TabelaNotaDto(
                 nota.getId(), nota.getNota(),  
-                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
+                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), nota.getApresentacao().getCategoria().getTitulo(), 
                 nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
 
@@ -66,7 +66,7 @@ public class NotaService {
         for(Nota nota: listaFiltrada) {
             listaDto.add(new TabelaNotaDto(
                 nota.getId(), nota.getNota(),  
-                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), 
+                nota.getApresentacao().getNomeartistico(), nota.getJurado().getNome(), nota.getApresentacao().getCategoria().getTitulo(), 
                 nota.getApresentacao().getMusica(), nota.getQuesito().getDescricao()));
         }
 
