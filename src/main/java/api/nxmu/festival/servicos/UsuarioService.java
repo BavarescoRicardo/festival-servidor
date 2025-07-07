@@ -39,42 +39,74 @@ public class UsuarioService
     }
     
     public PerfilDto selecionaPerfil(Authentication auth){
-    	PerfilDto dto = null;
-    	try {
-            UserDetails userd = (UserDetails)auth.getPrincipal();
+        PerfilDto dto = null;
+        try {
+            UserDetails userd = (UserDetails) auth.getPrincipal();
             Participante p = participanteDB.findByEmail(userd.getUsername());
 
-            dto = new PerfilDto(
-                p.getId(), p.getApresentacao().getNomeartistico(), p.getNomeResponsavel(), 
-                p.getGenero(), p.getNascimento(), p.getDocumentorg(), 
-                p.getEmail(), p.getNecessidade(), p.getDescrinescessidade(),
-                p.getCpf(), p.getPix(), p.getBanco(), p.getAgencia(), p.getConta(),
-                p.getApresentacao().getMusica(), p.getEnderecos().get(0).getEndereco(), p.getFotoPerfil());			
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+            dto = PerfilDto.builder()
+                .codigo(p.getId())
+                .nomeArtistico(p.getApresentacao().getNomeartistico())
+                .nomeResponsavel(p.getNomeResponsavel())
+                .genero(p.getGenero())
+                .nascimento(p.getNascimento())
+                .documentorg(p.getDocumentorg())
+                .email(p.getEmail())
+                .necessidade(p.getNecessidade())
+                .descrinescessidade(p.getDescrinescessidade())
+                .cpf(p.getCpf())
+                .pix(p.getPix())
+                .banco(p.getBanco())
+                .agencia(p.getAgencia())
+                .conta(p.getConta())
+                .apresentacao(p.getApresentacao().getMusica())
+                .endereco(p.getEnderecos().get(0).getEndereco())
+                .fotoPerfil(p.getFotoPerfil())
+
+                // Adições abaixo:
+                .status("Ativo")
+                .classificacao("#12")
+                .progressoPerfil(calculaProgresso(p))
+                .apresentacoes(null)
+                .build();
+        } catch (Exception e) {
+            throw e;
+        }
         return dto;
     }
     
     public PerfilDto atualizaPerfil(PerfilDto perfilDto){
-        // Convert base64 string to byte array
-        byte[] fotoPerfil = Base64.getDecoder().decode(perfilDto.getFotoPerfil());
-        perfilDto.setFotoPerfil(fotoPerfil);
-        
-    	try {
-            Participante p = participanteDB.findById(perfilDto.getCodigo()).get();
+        try {
+            byte[] fotoPerfil = Base64.getDecoder().decode(perfilDto.getFotoPerfil());
+            perfilDto.setFotoPerfil(fotoPerfil);
 
-            // atualizar foto perfil
-            p.setFotoPerfil(perfilDto.getFotoPerfil());            
-        	participanteDB.save(p);
-		} catch (Exception e) {
-			// TODO: handle exception
-			throw e;
-		}
+            Participante p = participanteDB.findById(perfilDto.getCodigo()).get();
+            p.setFotoPerfil(fotoPerfil);
+            participanteDB.save(p);
+        } catch (Exception e) {
+            throw e;
+        }
         return perfilDto;
-    }   
+    }
+
     
+    private int calculaProgresso(Participante p) {
+        int total = 10;
+        int preenchidos = 0;
+
+        if (p.getNomeResponsavel() != null) preenchidos++;
+        if (p.getEmail() != null) preenchidos++;
+        if (p.getPix() != null) preenchidos++;
+        if (p.getApresentacao() != null && p.getApresentacao().getMusica() != null) preenchidos++;
+        if (p.getApresentacao().getNomeartistico() != null) preenchidos++;
+        if (p.getDocumentorg() != null) preenchidos++;
+        if (p.getEnderecos() != null && !p.getEnderecos().isEmpty()) preenchidos++;
+        if (p.getFotoPerfil() != null) preenchidos++;
+        if (p.getConta() != null) preenchidos++;
+        if (p.getBanco() != null) preenchidos++;
+
+        return (int) ((preenchidos / (double) total) * 100);
+    }    
 
 }
 

@@ -1,5 +1,7 @@
 package api.nxmu.festival.dto;
 
+import java.util.List;
+
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -14,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 public class PerfilDto {
-	private Long codigo;
+    private Long codigo;
     private String nomeArtistico;
     private String nomeResponsavel;
     private String genero;
@@ -29,8 +31,12 @@ public class PerfilDto {
     private String agencia;
     private String conta;
     private String apresentacao;
-    private String Endereco;
+    private String endereco;
     private byte[] fotoPerfil;
+    private String status;             
+    private String classificacao;    
+    private Integer progressoPerfil;   
+    private List<ApresentacaoDto> apresentacoes;
 
 	public PerfilDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
 			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
@@ -50,7 +56,7 @@ public class PerfilDto {
 		this.agencia = agencia;
 		this.conta = conta;
 		this.apresentacao = apresentacao;
-		this.Endereco = endereco;
-	}   
+		this.endereco = endereco;
+	}
     
 }
