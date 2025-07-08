@@ -168,6 +168,22 @@ public class ApresentacaoService {
 		}
     	
     	return apresentacoes;
+    }
+    
+    public List<ApresentacaoDto> encontrarPorParticipante(Long idParticipante) {
+        List<ApresentacaoDto> listaDto = new ArrayList<ApresentacaoDto>();
+        List<Apresentacao> listaFiltrada = apresentacaoDB.
+        		findAllByParticipante(idParticipante);
+        for (Apresentacao apresentacao : listaFiltrada) {
+        	if (apresentacao.getParticipantes().isEmpty()) {
+        		continue;
+        	}
+            listaDto.add(
+                    getApresentacaoDto(apresentacao)
+            );
+        }
+
+        return listaDto;
     }    
 
     @Transactional

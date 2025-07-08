@@ -43,7 +43,7 @@ public class UsuarioService
         try {
             UserDetails userd = (UserDetails) auth.getPrincipal();
             Participante p = participanteDB.findByEmail(userd.getUsername());
-
+            
             dto = PerfilDto.builder()
                 .codigo(p.getId())
                 .nomeArtistico(p.getApresentacao().getNomeartistico())
@@ -65,9 +65,8 @@ public class UsuarioService
 
                 // Adições abaixo:
                 .status("Ativo")
-                .classificacao("#12")
+                .classificacao("#-#")
                 .progressoPerfil(calculaProgresso(p))
-                .apresentacoes(null)
                 .build();
         } catch (Exception e) {
             throw e;

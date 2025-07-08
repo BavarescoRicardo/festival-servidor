@@ -37,6 +37,7 @@ public class SecurityConfiguration {
                         .requestMatchers("/api/categorias").hasAnyRole("USER", "MASTER")
                         .requestMatchers("/evento/auth/perfil").hasAnyRole("USER", "MASTER")
                         .requestMatchers("/api/evento/auth/selusuario").hasAnyRole("USER", "MASTER")
+                        .requestMatchers("/api/apresentacoesparticipante/*").hasAnyRole("USER", "MASTER")
                         
 
                         // All other endpoints require MASTER role

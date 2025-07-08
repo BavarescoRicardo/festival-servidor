@@ -36,7 +36,6 @@ public class PerfilDto {
     private String status;             
     private String classificacao;    
     private Integer progressoPerfil;   
-    private List<ApresentacaoDto> apresentacoes;
 
 	public PerfilDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
 			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,

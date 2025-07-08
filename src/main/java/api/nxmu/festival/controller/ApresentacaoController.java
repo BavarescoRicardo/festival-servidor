@@ -56,7 +56,12 @@ public class ApresentacaoController {
 
         FiltroApresentacaoDto filtroRecebido = filtro.get();
         return apresentacaoService.encontrarFiltrado(filtroRecebido);
-    }    
+    }
+    
+    @RequestMapping(value = "/apresentacoesparticipante/{id}", method =  RequestMethod.GET)
+    public List<ApresentacaoDto> GetApresentacoesbyParticipante(@PathVariable long id) {      
+        return apresentacaoService.encontrarPorParticipante(102L);
+    }        
 
     @RequestMapping(value = "/salvaapresentacao", method =  RequestMethod.POST)
     public ResponseEntity<Long> salvarParticipante(@RequestBody ApresentacaoDto apresentacaoDto) {
@@ -118,25 +123,6 @@ public class ApresentacaoController {
     public List<MusicaDto> getMusicaPorCategoria(@PathVariable String musica, @PathVariable long id) {
         try {
             return apresentacaoService.encontrarMusicaPorCategoria(musica, id);
-        } catch (Exception e) {
-            return List.of();
-        }
-    }
-
-    // testes requisicoes
-    @RequestMapping(value = "/apresentacao/musica/{musica}", method = RequestMethod.GET)
-    public List<MusicaDto> getMusicaPorCategoriaTeste1(@PathVariable String musica) {
-        try {
-            return apresentacaoService.encontrarMusicaPorCategoria(musica, 1L);
-        } catch (Exception e) {
-            return List.of();
-        }
-    }
-
-    @RequestMapping(value = "/apresentacao/musica/{id}", method = RequestMethod.GET)
-    public List<MusicaDto> getMusicaPorCategoriaTeste2(@PathVariable long id) {
-        try {
-            return apresentacaoService.encontrarMusicaPorCategoria("Borboletas", id);
         } catch (Exception e) {
             return List.of();
         }

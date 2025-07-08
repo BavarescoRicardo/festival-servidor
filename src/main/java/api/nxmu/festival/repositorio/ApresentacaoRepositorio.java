@@ -15,6 +15,9 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
 
     @Query("select u from Apresentacao u where u.ativo = 0 and u.categoria.id = ?1")
     List<Apresentacao> findAllByCategoria(Long codigoCategoria);
+    
+    @Query("select u from Apresentacao u join u.participantes p where u.ativo = 0 and p.id = ?1")
+    List<Apresentacao> findAllByParticipante(Long codigoParticipante);    
 
     @Query("select u from Apresentacao u where u.ativo = 0 and (u.categoria.id = ?1)")
     Page<Apresentacao> findAllFiltrado(long codCategoria, String textoFiltro, Pageable p);
@@ -31,7 +34,7 @@ public interface ApresentacaoRepositorio extends JpaRepository<Apresentacao, Lon
     @Query("SELECT new api.nxmu.festival.dto.MusicaDto(u.id, u.musica, u.autor, u.linkmusica, u.categoria.id) " +
     	       "FROM Apresentacao u " +
     	       "WHERE u.ativo = 0 AND LOWER(u.musica) = LOWER(?1) AND u.categoria.id = ?2")
-    	List<MusicaDto> findByCategoriaAndMusica(String musica, Long codigoCategoria);
+	List<MusicaDto> findByCategoriaAndMusica(String musica, Long codigoCategoria);
 
     
 
