@@ -60,7 +60,7 @@ public class ApresentacaoController {
     
     @RequestMapping(value = "/apresentacoesparticipante/{id}", method =  RequestMethod.GET)
     public List<ApresentacaoDto> GetApresentacoesbyParticipante(@PathVariable long id) {      
-        return apresentacaoService.encontrarPorParticipante(102L);
+        return apresentacaoService.encontrarPorParticipante(id);
     }        
 
     @RequestMapping(value = "/salvaapresentacao", method =  RequestMethod.POST)
