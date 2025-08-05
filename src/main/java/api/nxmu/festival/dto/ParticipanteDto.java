@@ -19,7 +19,6 @@ public class ParticipanteDto {
     private String nomeResponsavel;
     private String genero;
     private String nascimento;
-    private String documentorg;
     private String email;
     private String necessidade;
     private String descrinescessidade;
@@ -33,14 +32,13 @@ public class ParticipanteDto {
     private byte[] fotoPerfil;
     
 	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
+			String email, String necessidade, String descrinescessidade, String cpf, String pix,
 			String banco, String agencia, String conta, Long apresentacao, byte[] fotoPerfil) {
 		this.codigo = codigo;
 		this.nomeArtistico = nomeArtistico;
 		this.nomeResponsavel = nomeResponsavel;
 		this.genero = genero;
 		this.nascimento = nascimento;
-		this.documentorg = documentorg;
 		this.email = email;
 		this.necessidade = necessidade;
 		this.descrinescessidade = descrinescessidade;
@@ -54,14 +52,13 @@ public class ParticipanteDto {
 	}
 
 	public ParticipanteDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
+			String email, String necessidade, String descrinescessidade, String cpf, String pix,
 			String banco, String agencia, String conta, Long apresentacao, String senha) {
 		this.codigo = codigo;
 		this.nomeArtistico = nomeArtistico;
 		this.nomeResponsavel = nomeResponsavel;
 		this.genero = genero;
 		this.nascimento = nascimento;
-		this.documentorg = documentorg;
 		this.email = email;
 		this.necessidade = necessidade;
 		this.descrinescessidade = descrinescessidade;

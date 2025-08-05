@@ -195,7 +195,6 @@ public class InscricaoService {
                 inscricaoDto.getEndereco().getTelefone(),
                 categoriaService.encontrarPorId(inscricaoDto.getApresentacao().getCategoria()).get().getDescricao(),
                 inscricaoDto.getApresentacao().getMusica(),
-                parcitipantePrincipal.getDocumentorg(),
                 inscricaoDto.getApresentacao().getTom(),
                 inscricaoDto.getApresentacao().getGravacao(),
                 inscricaoDto.getApresentacao().getLinkmusica(),

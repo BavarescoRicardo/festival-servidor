@@ -50,7 +50,6 @@ public class UsuarioService
                 .nomeResponsavel(p.getNomeResponsavel())
                 .genero(p.getGenero())
                 .nascimento(p.getNascimento())
-                .documentorg(p.getDocumentorg())
                 .email(p.getEmail())
                 .necessidade(p.getNecessidade())
                 .descrinescessidade(p.getDescrinescessidade())
@@ -98,7 +97,6 @@ public class UsuarioService
         if (p.getPix() != null) preenchidos++;
         if (p.getApresentacao() != null && p.getApresentacao().getMusica() != null) preenchidos++;
         if (p.getApresentacao().getNomeartistico() != null) preenchidos++;
-        if (p.getDocumentorg() != null) preenchidos++;
         if (p.getEnderecos() != null && !p.getEnderecos().isEmpty()) preenchidos++;
         if (p.getFotoPerfil() != null) preenchidos++;
         if (p.getConta() != null) preenchidos++;

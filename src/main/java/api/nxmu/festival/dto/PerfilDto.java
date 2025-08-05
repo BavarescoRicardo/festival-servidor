@@ -21,7 +21,6 @@ public class PerfilDto {
     private String nomeResponsavel;
     private String genero;
     private String nascimento;
-    private String documentorg;
     private String email;
     private String necessidade;
     private String descrinescessidade;
@@ -38,14 +37,13 @@ public class PerfilDto {
     private Integer progressoPerfil;   
 
 	public PerfilDto(Long codigo, String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-			String documentorg, String email, String necessidade, String descrinescessidade, String cpf, String pix,
+			String email, String necessidade, String descrinescessidade, String cpf, String pix,
 			String banco, String agencia, String conta, String apresentacao, String endereco) {
 		this.codigo = codigo;
 		this.nomeArtistico = nomeArtistico;
 		this.nomeResponsavel = nomeResponsavel;
 		this.genero = genero;
 		this.nascimento = nascimento;
-		this.documentorg = documentorg;
 		this.email = email;
 		this.necessidade = necessidade;
 		this.descrinescessidade = descrinescessidade;

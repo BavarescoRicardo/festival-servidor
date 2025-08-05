@@ -44,7 +44,7 @@ public class ParticipanteService {
         for(Participante participante: participanteDB.findAllOrdenado()) {
             listaDto.add(new ParticipanteDto(
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
-                participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                participante.getGenero(), participante.getNascimento(),
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
                 participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 participante.getApresentacao().getId(), new byte[0]));
@@ -60,7 +60,7 @@ public class ParticipanteService {
             Participante p = this.encontrarPorId(id).get();
             dto = new ParticipanteDto(
 	            p.getId(), p.getNomeArtistico(), p.getNomeResponsavel(), 
-	            p.getGenero(), p.getNascimento(), p.getDocumentorg(), 
+	            p.getGenero(), p.getNascimento(), 
 	            p.getEmail(), p.getNecessidade(), p.getDescrinescessidade(),
 	            p.getCpf(), p.getPix(), p.getBanco(), p.getAgencia(), p.getConta(),
 	            p.getApresentacao().getId(), new byte[0]);            
@@ -79,7 +79,7 @@ public class ParticipanteService {
         for(Participante participante: participanteDB.findAll()) {
             listaDto.add(new ParticipanteDto(
                 participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
-                participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                participante.getGenero(), participante.getNascimento(),
                 participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
                 participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 participante.getApresentacao().getId(), new byte[0]));
@@ -97,7 +97,7 @@ public class ParticipanteService {
             listaDto.add(
             		new ParticipanteDto(
                             participante.getId(), participante.getNomeArtistico(), participante.getNomeResponsavel(), 
-                            participante.getGenero(), participante.getNascimento(), participante.getDocumentorg(), 
+                            participante.getGenero(), participante.getNascimento(),
                             participante.getEmail(), participante.getNecessidade(), participante.getDescrinescessidade(),
                             participante.getCpf(), participante.getPix(), participante.getBanco(), participante.getAgencia(), 
                             participante.getConta(), participante.getApresentacao().getId(), participante.getFotoPerfil()));
@@ -114,7 +114,7 @@ public class ParticipanteService {
                     .email(participante.getEmail())        
                     .senha(passwordEncoder.encode(
                     		participante.getSenha() == null || participante.getSenha().isBlank() ? 
-                    				participante.getDocumentorg() : 
+                    				participante.getCpf() : 
                     					participante.getSenha()))
                     .role(Role.USER)
                     .build();
@@ -123,7 +123,7 @@ public class ParticipanteService {
             Participante p = new Participante(
                 participante.getNomeArtistico(), participante.getNomeResponsavel(), 
                 participante.getGenero(), participante.getNascimento(),
-                participante.getDocumentorg(), participante.getEmail(), 
+                participante.getEmail(), 
                 participante.getNecessidade(), participante.getDescrinescessidade(), participante.getCpf(),
                 participante.getPix(), participante.getBanco(), participante.getAgencia(), participante.getConta(),
                 apresentacaoService.encontrarPorId(participante.getApresentacao()).get(), user
@@ -144,7 +144,6 @@ public class ParticipanteService {
             p.setNomeResponsavel(participante.getNomeResponsavel()); 
             p.setGenero(participante.getGenero());
             p.setNascimento(participante.getNascimento());
-            p.setDocumentorg(participante.getDocumentorg()); 
             p.setEmail(participante.getEmail());
             p.setNecessidade(participante.getNecessidade()); 
             p.setDescrinescessidade(participante.getDescrinescessidade());

@@ -34,7 +34,6 @@ public class Participante {
     private String nomeResponsavel;
     private String genero;
     private String nascimento;
-    private String documentorg;
     private String email;
     private String necessidade;
     private String descrinescessidade;
@@ -59,13 +58,12 @@ public class Participante {
     private Usuario usuario;    
 
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade, String pix, 
+            String email, String necessidade, String descrinescessidade, String pix, 
             String cpf, String banco, String agencia, String conta, Apresentacao apresentacao) {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.genero = genero;
         this.nascimento = nascimento;
-        this.documentorg = documentorg;
         this.email = email;
         this.necessidade = necessidade;
         this.descrinescessidade = descrinescessidade;
@@ -78,14 +76,13 @@ public class Participante {
     }   
     
     public Participante(String nomeArtistico, String nomeResponsavel, String genero, String nascimento,
-            String documentorg, String email, String necessidade, String descrinescessidade,
+            String email, String necessidade, String descrinescessidade,
             String cpf, String pix, String banco, String agencia, String conta,
             Apresentacao apresentacao, Usuario usuario) {
 			this.nomeArtistico = nomeArtistico;
 			this.nomeResponsavel = nomeResponsavel;
 			this.genero = genero;
 			this.nascimento = nascimento;
-			this.documentorg = documentorg;
 			this.email = email;
 			this.necessidade = necessidade;
 			this.descrinescessidade = descrinescessidade;
@@ -129,12 +126,6 @@ public class Participante {
     }
     public void setNascimento(String nascimento) {
         this.nascimento = nascimento;
-    }
-    public String getDocumentorg() {
-        return documentorg;
-    }
-    public void setDocumentorg(String documentorg) {
-        this.documentorg = documentorg;
     }
     public String getEmail() {
         return email;

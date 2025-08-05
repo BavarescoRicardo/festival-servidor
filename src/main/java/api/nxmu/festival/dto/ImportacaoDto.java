@@ -17,7 +17,7 @@ public class ImportacaoDto {
 
     public ImportacaoDto(
             String nomeArtistico, String nomeResponsavel, 
-            String nascimento, String documentorg, 
+            String nascimento,
             String email, String telefone, 
             String necessidade, String descrinescessidade, 
             String nomeDupla, String nascimentoDupla, 
@@ -39,7 +39,6 @@ public class ImportacaoDto {
         this.nomeArtistico = nomeArtistico;
         this.nomeResponsavel = nomeResponsavel;
         this.nascimento = nascimento;
-        this.documentorg = documentorg;
         this.email = email;
         this.telefone = telefone;        
         this.necessidade = necessidade;
@@ -75,7 +74,6 @@ public class ImportacaoDto {
     private String nomeResponsavel;
     private String genero;
     private String nascimento;
-    private String documentorg;
     private String email;
     private String telefone;
     private String necessidade;
