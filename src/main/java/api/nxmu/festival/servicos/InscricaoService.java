@@ -136,10 +136,6 @@ public class InscricaoService {
                             <td>%s</td>
                         </tr>
                         <tr>
-                            <td class="label">RG:</td>
-                            <td>%s</td>
-                        </tr>
-                        <tr>
                             <td class="label">Tom:</td>
                             <td>%s</td>
                         </tr>
