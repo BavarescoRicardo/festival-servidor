@@ -1,6 +1,7 @@
 version: "3.8"
 
 services:
+  # banco do festival-evento.online
   psql-db:
     image: postgres:16
     restart: always
@@ -19,7 +20,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - '8080:8080'  # Map host port 8080 to container port 8080
+      - '8080:8080'
     environment:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db:5432/festivalr
       - SPRING_DATASOURCE_USERNAME=admin
@@ -28,9 +29,42 @@ services:
     depends_on:
       - psql-db
     volumes:
-      - ./src/main/resources:/resources 
+      - ./src/main/resources:/resources
       - psql-data:/var/lib/postgresql/data
+
+  # banco do festivalevento.com
+  psql-db-com:
+    image: postgres:16
+    restart: always
+    environment:
+      - POSTGRES_USER=admin
+      - POSTGRES_PASSWORD=admin
+      - POSTGRES_DB=festivalr_com
+    ports:
+      - '5444:5432'
+    volumes:
+      - psql-data-com:/var/lib/postgresql/data
+
+  festival-servidor-com:
+    container_name: festival_app_teste
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '8081:8080'   # outra porta
+    environment:
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://psql-db-com:5432/festivalr_com
+      - SPRING_DATASOURCE_USERNAME=admin
+      - SPRING_DATASOURCE_PASSWORD=admin
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+    depends_on:
+      - psql-db-com
+    volumes:
+      - ./src/main/resources:/resources
+      - psql-data-com:/var/lib/postgresql/data
 
 volumes:
   psql-data:
+    driver: local
+  psql-data-com:
     driver: local
