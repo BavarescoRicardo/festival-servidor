@@ -17,6 +17,7 @@ import api.nxmu.festival.dto.InscricaoDto;
 import api.nxmu.festival.dto.ParticipanteDto;
 import jakarta.mail.MessagingException;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value; 
 
 @Service
 @RequiredArgsConstructor
@@ -26,6 +27,9 @@ public class InscricaoService {
     private final EnderecoService enderecoService;
     private final CategoriaService categoriaService;
     private final EmailService emailService;
+
+    @Value("${mail.destinatario}")
+    private String emailDestinatario;    
 
     @Transactional
     public void salvarInscricao(InscricaoDto inscricaoDto) throws Exception {
@@ -202,7 +206,7 @@ public class InscricaoService {
                 parcitipantePrincipal.getAgencia(),
                 parcitipantePrincipal.getConta()
         );
-        String[] recipients = {parcitipantePrincipal.getEmail(), "fimusi2024@gmail.com"};
+        String[] recipients = {parcitipantePrincipal.getEmail(), emailDestinatario};
         this.emailService.sendMessageWithAttachment("[Inscrição FIMUSI 2024]", content, "foto_documento.png", 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoDocumento()), 
         		getFileToSend(parcitipantePrincipal.getEmail(), inscricaoDto.getFotoTermo()),
