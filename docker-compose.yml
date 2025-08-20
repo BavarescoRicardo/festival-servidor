@@ -46,7 +46,7 @@ services:
     volumes:
       - psql-data-com:/var/lib/postgresql/data
 
-festival-servidor-com:
+  festival-servidor-com:  # CORRIGIDO: Este serviço deve estar dentro do bloco services
     container_name: festival_app_teste
     build:
       context: .
